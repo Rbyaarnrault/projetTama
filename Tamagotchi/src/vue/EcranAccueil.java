@@ -20,8 +20,7 @@ public class EcranAccueil extends JPanel {
         JPanel animationPanel = createAnimationPanel();
         add(animationPanel);
 
-        // Espace vertical
-        add(Box.createVerticalGlue());
+        add(Box.createVerticalGlue()); // Espace vertical
 
         // Conteneur pour les boutons
         JPanel buttonContainer = createButtonContainer();
@@ -48,12 +47,12 @@ public class EcranAccueil extends JPanel {
         JButton nouvellePartieButton = new JButton("Nouvelle Partie");
         JButton chargerPartieButton = new JButton("Charger la Partie");
 
-        // Ajoutez des gestionnaires d'événements aux boutons ici
+        // Gestionnaire d'événements des boutons
         nouvellePartieButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Logique pour créer une nouvelle partie
-                controleur.creerNouvellePartie();
+                // Aller à l'écran de création de la partie
+                controleur.changerDeSalle(1);
             }
         });
 
