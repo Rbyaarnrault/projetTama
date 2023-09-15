@@ -1,7 +1,6 @@
-package controlleur;
-
 import modele.Tamagotchi;
 import vue.TamagotchiFrame;
+import controlleur.TamagotchiControleur;
 
 public class MainApp {
     public static void main(String[] args) throws Exception {

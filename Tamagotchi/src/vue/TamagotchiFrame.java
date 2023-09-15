@@ -21,4 +21,9 @@ public class TamagotchiFrame extends JFrame {
         setVisible(true); // Rend visible la fenêtre;
     }
 
+    public void actualiser(JPanel pan) {
+        this.setContentPane(pan);
+        this.revalidate();
+    }
+
 }

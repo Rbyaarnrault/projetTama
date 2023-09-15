@@ -10,18 +10,12 @@ import vue.*;
 public class TamagotchiControleur {
     private Tamagotchi tamagotchi;
     private TamagotchiFrame fenetre;
-    private EcranCreation ecranCreation;
-    private EcranAccueil ecranAccueil;
-    private EcranSalon ecranSalon;
-    private EcranCuisine ecranCuisine;
-    private EcranJardin ecranJardin;
-    private EcranSalleBain ecranSalleBain;
     private Partie partie;
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
         fenetre = fen;
-        changerDeSalle(0); // Initialisation du panel d'accueil
+        actualiserContenuFenetre(0); // Initialisation du panel d'accueil
         fenetre.display();
     }
 
@@ -30,7 +24,7 @@ public class TamagotchiControleur {
         tamagotchi = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
         partie = new Partie(tamagotchi);
 
-        changerDeSalle(2); // Afficher le salon à l'écran
+        actualiserContenuFenetre(2); // Afficher le salon à l'écran
     }
 
     public void sauvergarderPartie() {
@@ -42,43 +36,40 @@ public class TamagotchiControleur {
     public void chargerSauvegarde() {
         // Logique pour charger une sauvegarde
         // Afficher l'écran de la salle en fonction de l'état sauvegardé
+        // Débuter toujours dans la foret ?
     }
 
-    public void changerDeSalle(int choix) {
+    public void actualiserContenuFenetre(int choix) {
+        fenetre.actualiser(changerDeSalle(choix));
+    }
+
+    public JPanel changerDeSalle(int choix) {
         // Logique pour changer de salle
+        JPanel pan = new JPanel();
         switch (choix) {
             case 0: // Ecran Accueil
-                ecranAccueil = new EcranAccueil(this);
-                fenetre.setContentPane(ecranAccueil);
-                fenetre.revalidate();
+                pan = new EcranAccueil(this);
                 break;
             case 1: // CréationPartie
-                ecranCreation = new EcranCreation(this);
-                fenetre.setContentPane(ecranCreation);
-                fenetre.revalidate();
+                pan = new EcranCreation(this);
                 break;
-            case 2: // Salon
-                ecranSalon = new EcranSalon(this);
-                fenetre.setContentPane(ecranSalon);
-                fenetre.revalidate();
+            case 2: // Foret
+                pan = new EcranForet(this);
                 break;
-            case 3: // Cuisine
-                ecranCuisine = new EcranCuisine(this);
-                fenetre.setContentPane(ecranCuisine);
-                fenetre.revalidate();
+            case 3: // Feu de camp
+                pan = new EcranFeu(this);
                 break;
-            case 4: // jardin
-                ecranJardin = new EcranJardin(this);
-                fenetre.setContentPane(ecranJardin);
-                fenetre.revalidate();
+            case 4: // Tente de survie
+                pan = new EcranTente(this);
                 break;
-            case 5: // Salle de bain
-                ecranSalleBain = new EcranSalleBain(this);
-                fenetre.setContentPane(ecranSalleBain);
-                fenetre.revalidate();
+            case 5: // Rivière
+                pan = new EcranRiviere(this);
+                break;
+            default: // En cas de disfonctionnement
+                pan = new EcranForet(this);
                 break;
         }
-
+        return pan;
     }
 
 }

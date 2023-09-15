@@ -4,10 +4,10 @@ import javax.swing.JPanel;
 
 import controlleur.TamagotchiControleur;
 
-public class EcranCuisine extends JPanel {
+public class EcranForet extends JPanel {
     private TamagotchiControleur controleur;
 
-    public EcranCuisine(TamagotchiControleur controleur) {
+    public EcranForet(TamagotchiControleur controleur) {
         this.controleur = controleur;
     }
 }

@@ -1,21 +1,19 @@
 package vue;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlleur.TamagotchiControleur;
-import javax.swing.Box;
 
 public class EcranCreation extends JPanel {
 
@@ -42,6 +40,37 @@ public class EcranCreation extends JPanel {
         panBoutonComposant.add(createLabelledPanel("Nom:", nomField));
         panBoutonComposant.add(createLabelledPanel("Type:", typeField));
 
+        // Ajout des écouteurs
+        effacerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Supprimer le contenu des champs de texte
+                nomField.setText(null);
+                validerButton.setText(null);
+            }
+        });
+        validerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Valider la création d'une partie
+                if (!nomField.getText().equals("")) {
+
+                    // Si le type est chien, chat ou robot, je crée la partie sinon j'averti
+                    // l'utilisateur
+                    if ((typeField.getText().equals("Chien")) || (typeField.getText().equals("Chat"))
+                            || (typeField.getText().equals("Robot"))) {
+
+                        controleur.creerNouvellePartie(nomField.getText(), typeField.getText());
+                    } else {
+                        afficherFenetreErreur("Le type n'est pas bon !");
+
+                    }
+                } else {
+                    afficherFenetreErreur("Vous devez entrer un nom !");
+                }
+            }
+        });
+
         JPanel boutonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         boutonsPanel.add(effacerButton);
         boutonsPanel.add(validerButton);
@@ -56,6 +85,10 @@ public class EcranCreation extends JPanel {
         panBoutonComposant.add(labelComponent, BorderLayout.WEST);
         panBoutonComposant.add(component, BorderLayout.CENTER);
         return panBoutonComposant;
+    }
+
+    private void afficherFenetreErreur(String message) {
+        JOptionPane.showMessageDialog(this, message);
     }
 
 }
