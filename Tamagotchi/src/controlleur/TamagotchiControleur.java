@@ -43,6 +43,10 @@ public class TamagotchiControleur {
         fenetre.actualiser(changerDeSalle(choix));
     }
 
+    public void supprimerSauvegarde() {
+        // Logique pour supprimer une sauvegarde
+    }
+
     public JPanel changerDeSalle(int choix) {
         // Logique pour changer de salle
         JPanel pan = new JPanel();
@@ -70,6 +74,31 @@ public class TamagotchiControleur {
                 break;
         }
         return pan;
+    }
+
+    // Etat du Tamagotchi
+
+    public void nourrirTama() {
+        // Logique pour la gestion de la faim/nourriture du Tama
+        int n = tamagotchi.manger();
+        // ligne pour agir sur la vue exemple : JProgressBar barFaim.setFill(n)
+    }
+
+    public void dormirTama() {
+        // Logique pour la gestion du sommeil/dodo du Tama
+        int d = tamagotchi.fatigue();
+        // ligne pour agir sur la vue ...
+    }
+
+    public void jouerTama() {
+        // Logique pour la gestion du loisir/jeu du Tama
+        int j = tamagotchi.jouer();
+        // ligne pour agir sur la vue
+    }
+
+    public void laverTama() {
+        // Logique pour la gestion de l'hygiène du Tama
+        int l = tamagotchi.proprete();
     }
 
 }
