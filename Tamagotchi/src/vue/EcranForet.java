@@ -16,10 +16,21 @@ public class EcranForet extends JPanel {
 
         // Initialisation des boutons
 
+        // Quitter
+        JButton btnQuitter = new JButton("Quitter");
+        btnQuitter.setBounds(350, 20, 120, 40);
+        this.add(btnQuitter);
+        // --> ouvrir menu quitter pour save
+
         // Bouton Manger
         JButton btnManger = new JButton("Manger");
         btnManger.setBounds(150, 150, 120, 40);
         this.add(btnManger);
+
+        // Bouton Jouer
+        JButton btnJouer = new JButton("Jouer");
+        btnJouer.setBounds(220, 300, 120, 40);
+        this.add(btnJouer);
 
         // Bouton aller dans la tente
         JButton btnTente = new JButton("Tente");
@@ -58,11 +69,11 @@ public class EcranForet extends JPanel {
             }
         });
 
-        // Aller à la rivière
-        btnRiviere.addActionListener(new ActionListener() {
+        // Jouer
+        btnJouer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.actualiserContenuFenetre(5);
+                controleur.jouerTama();
             }
         });
 
