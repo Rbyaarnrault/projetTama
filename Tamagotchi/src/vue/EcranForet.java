@@ -14,11 +14,19 @@ public class EcranForet extends JPanel {
         this.controleur = controleur;
         this.setLayout(null);
 
-        // Initialisation des boutons
+        // Initialisation des barres d'attributs ??????
+        int a = controleur.getVieTama();
+        int b = controleur.getNourritureTama();
+        int c = controleur.getSommeilTama();
+        int d = controleur.getHygieneTama();
+        int e = controleur.getLoisirTama();
+        PanelProgressBar panBarre = new PanelProgressBar(a, b, c, d, e);
+        this.add(panBarre);
 
+        // -----Initialisation des boutons-----
         // Quitter
         JButton btnQuitter = new JButton("Quitter");
-        btnQuitter.setBounds(350, 20, 120, 40);
+        btnQuitter.setBounds(150, 20, 120, 40);
         this.add(btnQuitter);
         // --> ouvrir menu quitter pour save
 
@@ -42,8 +50,7 @@ public class EcranForet extends JPanel {
         btnRiviere.setBounds(30, 50, 120, 40);
         this.add(btnRiviere);
 
-        // gestion des écouteurs
-
+        // -----Gestion des écouteurs-----
         // Aller à la rivière
         btnRiviere.addActionListener(new ActionListener() {
             @Override

@@ -1,4 +1,3 @@
-import modele.Tamagotchi;
 import vue.TamagotchiFrame;
 import controlleur.TamagotchiControleur;
 

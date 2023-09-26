@@ -1,16 +1,15 @@
 package controlleur;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import modele.Partie;
+//import modele.Partie;
 import modele.Tamagotchi;
 import vue.*;
 
 public class TamagotchiControleur {
     private Tamagotchi tamagotchi;
     private TamagotchiFrame fenetre;
-    private Partie partie;
+    // private Partie partie;
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
@@ -22,7 +21,7 @@ public class TamagotchiControleur {
     public void creerNouvellePartie(String n, String t) {
         // Logique pour créer une nouvelle partie
         tamagotchi = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
-        partie = new Partie(tamagotchi);
+        // partie = new Partie(tamagotchi);
 
         actualiserContenuFenetre(2); // Afficher le salon à l'écran
     }
@@ -80,25 +79,45 @@ public class TamagotchiControleur {
 
     public void nourrirTama() {
         // Logique pour la gestion de la faim/nourriture du Tama
-        int n = tamagotchi.manger();
+        tamagotchi.manger();
         // ligne pour agir sur la vue exemple : JProgressBar barFaim.setFill(n)
     }
 
     public void dormirTama() {
         // Logique pour la gestion du sommeil/dodo du Tama
-        int d = tamagotchi.fatigue();
+        tamagotchi.fatigue();
         // ligne pour agir sur la vue ...
     }
 
     public void jouerTama() {
         // Logique pour la gestion du loisir/jeu du Tama
-        int j = tamagotchi.jouer();
+        tamagotchi.jouer();
         // ligne pour agir sur la vue
     }
 
     public void laverTama() {
         // Logique pour la gestion de l'hygiène du Tama
-        int l = tamagotchi.proprete();
+        tamagotchi.proprete();
     }
 
+    // -----Getters des constantes-----
+    public int getVieTama() {
+        return tamagotchi.getVie();
+    }
+
+    public int getNourritureTama() {
+        return tamagotchi.getFaim();
+    }
+
+    public int getSommeilTama() {
+        return tamagotchi.getSommeil();
+    }
+
+    public int getHygieneTama() {
+        return tamagotchi.getHygiene();
+    }
+
+    public int getLoisirTama() {
+        return tamagotchi.getLoisir();
+    }
 }

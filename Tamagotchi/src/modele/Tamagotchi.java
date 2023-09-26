@@ -14,10 +14,10 @@ public class Tamagotchi {
             this.type = type;
             this.dureeVie = 0; // Départ du compteur de durée de vie
             this.vie = 100;
-            this.hygiene = 100;
-            this.faim = 100;
-            this.sommeil = 100;
-            this.loisir = 100;
+            this.hygiene = 80;
+            this.faim = 60;
+            this.sommeil = 50;
+            this.loisir = 50;
 
         } else {
             JFrame f = new JFrame();
@@ -102,6 +102,10 @@ public class Tamagotchi {
 
     public int getSommeil() {
         return sommeil;
+    }
+
+    public int getLoisir() {
+        return loisir;
     }
 
     // -----Setters-----
