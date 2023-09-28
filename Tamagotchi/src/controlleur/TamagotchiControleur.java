@@ -2,14 +2,14 @@ package controlleur;
 
 import javax.swing.JPanel;
 
-//import modele.Partie;
+import modele.Partie;
 import modele.Tamagotchi;
 import vue.*;
 
 public class TamagotchiControleur {
     private Tamagotchi tamagotchi;
     private TamagotchiFrame fenetre;
-    // private Partie partie;
+    private Partie partie;
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
@@ -21,7 +21,7 @@ public class TamagotchiControleur {
     public void creerNouvellePartie(String n, String t) {
         // Logique pour créer une nouvelle partie
         tamagotchi = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
-        // partie = new Partie(tamagotchi);
+        partie = new Partie(tamagotchi);
 
         actualiserContenuFenetre(2); // Afficher le salon à l'écran
     }
