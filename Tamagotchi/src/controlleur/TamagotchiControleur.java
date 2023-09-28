@@ -2,14 +2,15 @@ package controlleur;
 
 import javax.swing.JPanel;
 
-//import modele.Partie;
+import modele.Partie;
 import modele.Tamagotchi;
 import vue.*;
 
 public class TamagotchiControleur {
     private Tamagotchi tamagotchi;
     private TamagotchiFrame fenetre;
-    // private Partie partie;
+    private Partie partie;
+    private int tmpFenActive; // tmp sert à repérer l'écran actif avant l'ouverture de cet écran quitter
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
@@ -21,15 +22,14 @@ public class TamagotchiControleur {
     public void creerNouvellePartie(String n, String t) {
         // Logique pour créer une nouvelle partie
         tamagotchi = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
-        // partie = new Partie(tamagotchi);
+        partie = new Partie(tamagotchi);
 
         actualiserContenuFenetre(2); // Afficher le salon à l'écran
     }
 
     public void sauvergarderPartie() {
-        // Logique pour sauvegarder les données, les attributs
-
-        // partie exportée ?
+        partie.sauvergarderPartie();
+        actualiserContenuFenetre(0);
     }
 
     public void chargerSauvegarde() {
@@ -58,6 +58,7 @@ public class TamagotchiControleur {
                 break;
             case 2: // Foret
                 pan = new EcranForet(this);
+                tmpFenActive = 2;
                 break;
             case 3: // Feu de camp
                 pan = new EcranFeu(this);
@@ -67,6 +68,9 @@ public class TamagotchiControleur {
                 break;
             case 5: // Rivière
                 pan = new EcranRiviere(this);
+                break;
+            case 6: // Ecran quitter
+                pan = new EcranQuitter(this);
                 break;
             default: // En cas de disfonctionnement
                 pan = new EcranForet(this);
@@ -98,6 +102,15 @@ public class TamagotchiControleur {
     public void laverTama() {
         // Logique pour la gestion de l'hygiène du Tama
         tamagotchi.proprete();
+    }
+
+    public void quitterPartie() {
+        // Logique pour quitter la partie
+        actualiserContenuFenetre(6);
+    }
+
+    public int getTmpFenActive() {
+        return tmpFenActive;
     }
 
     // -----Getters des constantes-----

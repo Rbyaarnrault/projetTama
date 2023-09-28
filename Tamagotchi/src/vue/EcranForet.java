@@ -84,5 +84,13 @@ public class EcranForet extends JPanel {
             }
         });
 
+        // Quitter
+        btnQuitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controleur.quitterPartie();
+            }
+        });
+
     }
 }
