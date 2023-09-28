@@ -2,6 +2,8 @@ package modele;
 
 import javax.swing.Timer;
 
+import controlleur.SauvegarderPartie;
+
 public class Partie {
 
     private Tamagotchi tamagotchi;
@@ -18,5 +20,9 @@ public class Partie {
 
     public Timer getTimer() {
         return timer;
+    }
+
+    public void sauvergarderPartie() {
+        SauvegarderPartie sauvegarde = new SauvegarderPartie();
     }
 }
