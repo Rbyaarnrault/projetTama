@@ -1,10 +1,12 @@
 package controlleur;
 
 import javax.swing.JPanel;
-
 import modele.Partie;
 import modele.Tamagotchi;
 import vue.*;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TamagotchiControleur {
     private Tamagotchi tamagotchi;
@@ -17,6 +19,17 @@ public class TamagotchiControleur {
         fenetre = fen;
         actualiserContenuFenetre(0); // Initialisation du panel d'accueil
         fenetre.display();
+
+        Timer timer = new Timer(432000, new ActionListener() { // Correspond à 1/100% de 12h
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Mise à jour de l'animation Swing ici si nécessaire
+
+            }
+        });
+
+        // Démarrez le minuteur
+        timer.start();
     }
 
     public void creerNouvellePartie(String n, String t) {
@@ -109,7 +122,7 @@ public class TamagotchiControleur {
         actualiserContenuFenetre(6);
     }
 
-    public int getTmpFenActive() {
+    public int getTmpFenActive() { // Permet de repérer le dernier écran actif avant sauvegarde
         return tmpFenActive;
     }
 

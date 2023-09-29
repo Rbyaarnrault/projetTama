@@ -9,6 +9,7 @@ import controlleur.TamagotchiControleur;
 
 public class EcranForet extends JPanel {
     private TamagotchiControleur controleur;
+    private PanelProgressBar panBarre;
 
     public EcranForet(TamagotchiControleur controleur) {
         this.controleur = controleur;
@@ -20,7 +21,7 @@ public class EcranForet extends JPanel {
         int c = controleur.getSommeilTama();
         int d = controleur.getHygieneTama();
         int e = controleur.getLoisirTama();
-        PanelProgressBar panBarre = new PanelProgressBar(a, b, c, d, e);
+        panBarre = new PanelProgressBar(a, b, c, d, e);
         this.add(panBarre);
 
         // -----Initialisation des boutons-----
@@ -91,6 +92,11 @@ public class EcranForet extends JPanel {
                 controleur.quitterPartie();
             }
         });
+    }
 
+    // ------
+    // Getter du panel des JprogressBar
+    public PanelProgressBar getPanelBarres() {
+        return panBarre;
     }
 }
