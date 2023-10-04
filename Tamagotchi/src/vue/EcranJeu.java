@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 import controlleur.TamagotchiControleur;
 
-public class EcranForet extends JPanel {
+public class EcranJeu extends JPanel {
     private TamagotchiControleur controleur;
     private PanelProgressBar panBarre;
 
-    public EcranForet(TamagotchiControleur controleur) {
+    public EcranJeu(TamagotchiControleur controleur) {
         this.controleur = controleur;
         this.setLayout(null);
 
@@ -27,28 +27,28 @@ public class EcranForet extends JPanel {
         // -----Initialisation des boutons-----
         // Quitter
         JButton btnQuitter = new JButton("Quitter");
-        btnQuitter.setBounds(150, 20, 120, 40);
+        btnQuitter.setBounds(400, 260, 120, 40);
         this.add(btnQuitter);
         // --> ouvrir menu quitter pour save
 
         // Bouton Manger
         JButton btnManger = new JButton("Manger");
-        btnManger.setBounds(150, 150, 120, 40);
+        btnManger.setBounds(200, 40, 120, 40);
         this.add(btnManger);
 
         // Bouton Jouer
         JButton btnJouer = new JButton("Jouer");
-        btnJouer.setBounds(220, 300, 120, 40);
+        btnJouer.setBounds(200, 100, 120, 40);
         this.add(btnJouer);
 
         // Bouton aller dans la tente
         JButton btnTente = new JButton("Tente");
-        btnTente.setBounds(300, 200, 120, 40);
+        btnTente.setBounds(200, 160, 120, 40);
         this.add(btnTente);
 
         // Bouton aller à la rivière
         JButton btnRiviere = new JButton("Rivière");
-        btnRiviere.setBounds(30, 50, 120, 40);
+        btnRiviere.setBounds(200, 220, 120, 40);
         this.add(btnRiviere);
 
         // -----Gestion des écouteurs-----
@@ -56,7 +56,7 @@ public class EcranForet extends JPanel {
         btnRiviere.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.actualiserContenuFenetre(5);
+
             }
         });
 
@@ -73,7 +73,7 @@ public class EcranForet extends JPanel {
         btnTente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.actualiserContenuFenetre(4);
+
             }
         });
 
@@ -89,7 +89,7 @@ public class EcranForet extends JPanel {
         btnQuitter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.quitterPartie();
+                controleur.changerEcran(4);
             }
         });
     }

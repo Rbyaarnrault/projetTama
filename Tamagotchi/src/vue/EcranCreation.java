@@ -46,7 +46,7 @@ public class EcranCreation extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Supprimer le contenu des champs de texte
                 nomField.setText(null);
-                validerButton.setText(null);
+                typeField.setText(null);
             }
         });
         validerButton.addActionListener(new ActionListener() {

@@ -34,6 +34,14 @@ public class PanelProgressBar extends JPanel {
         // Place les JprogressBar aux valeurs voulues
         actualiserConstantes(valueVie, valueNourriture, valueSommeil, valueHygiene, valueLoisir);
 
+        // Afficher le pourcentage des JProgressBar
+        barreVie.setStringPainted(true);
+        barreNourriture.setStringPainted(true);
+        barreSommeil.setStringPainted(true);
+        barreHygiene.setStringPainted(true);
+        barreLoisir.setStringPainted(true);
+
+        // Ajout à l'écran
         this.add(lab1);
         this.add(barreVie);
         this.add(lab2);
@@ -56,6 +64,7 @@ public class PanelProgressBar extends JPanel {
         setValueBarreSommeil(k);
         setValueBarreHygiene(l);
         setValueBarreLoisir(m);
+        this.revalidate();
     }
 
     // getters des JprogressBar

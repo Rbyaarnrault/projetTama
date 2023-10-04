@@ -40,7 +40,8 @@ public class EcranQuitter extends JPanel {
         btnAnnuler.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.actualiserContenuFenetre(controleur.getTmpFenActive());
+                // Permet de revenir à l'écran de jeu
+                controleur.changerEcran(3);
             }
         });
     }

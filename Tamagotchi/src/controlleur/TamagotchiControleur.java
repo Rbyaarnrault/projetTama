@@ -1,5 +1,6 @@
 package controlleur;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modele.Partie;
 import modele.Tamagotchi;
@@ -11,25 +12,14 @@ import java.awt.event.ActionListener;
 public class TamagotchiControleur {
     private Tamagotchi tamagotchi;
     private TamagotchiFrame fenetre;
+    private EcranJeu panJeu;
     private Partie partie;
-    private int tmpFenActive;
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
         fenetre = fen;
-        actualiserContenuFenetre(0); // Initialisation du panel d'accueil
+        changerEcran(0); // Initialisation du panel d'accueil
         fenetre.display();
-
-        Timer timer = new Timer(432000, new ActionListener() { // Correspond à 1/100% de 12h
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Mise à jour de l'animation Swing ici si nécessaire
-
-            }
-        });
-
-        // Démarrez le minuteur
-        timer.start();
     }
 
     public void creerNouvellePartie(String n, String t) {
@@ -37,13 +27,52 @@ public class TamagotchiControleur {
         tamagotchi = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
         partie = new Partie(tamagotchi);
 
-        actualiserContenuFenetre(2); // Afficher le salon à l'écran
+        // RAJOUTER DEUX 0 AU TIMER, ENLEVE POUR LA DEMO PLUS RAPIDE (432000= 7min env.)
+        Timer timer = new Timer(43200 / 6, new ActionListener() { // Correspond à 1/100% de 12h
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Mise à jour des constantes selon le timer
+
+                // A MODIFIER SELON LES ENVIES
+                tamagotchi.setVie(getVieTama() - 5);
+                tamagotchi.setFaim(getNourritureTama() - 5);
+                tamagotchi.setSommeil(getLoisirTama() - 5);
+                tamagotchi.setHygiene(getHygieneTama() - 1);
+                tamagotchi.setLoisir(getLoisirTama() - 2);
+                panJeu.getPanelBarres().actualiserConstantes(getVieTama(), getSommeilTama(), getNourritureTama(),
+                        getHygieneTama(), getLoisirTama());
+
+                // Condition tamagotchi mort -> Fin de partie
+                if (tamagotchi.getVie() <= 0) {
+                    JOptionPane.showMessageDialog(fenetre,
+                            " Votre tamagotchi " + tamagotchi.getNom() + " est mort.  Fin de partie!");
+                    // Revenir à l'écran d'accueil
+                    changerEcran(0);
+
+                    // Rajouter le fait de sauvegarder la partie et la "fermer" sinon message erreur
+                    // s'affiche sur l'accueil
+                }
+            }
+
+            /// VOIR SI COMPATIBLE AVEC LA SAUVEGARDE ET SI CA NE VA PAS POSER DE PROBLEME
+            /// ET COUPER LE TIMER QUAND ON JOUE PAS. LES CONSTANTES DOIVENT QUAND MEME
+            /// BAISSER VOIR POUR UTILISER ET COMPARER AU TEMPS MACHINE SINON ?
+        });
+
+        // Démarrez le minuteur
+        timer.start();
+
+        // Afficher le salon à l'écran
+        changerEcran(2);
     }
 
     public void sauvergarderPartie() {
         partie.sauvergarderPartie();
-        actualiserContenuFenetre(0);
+        // remettre accueil
+        changerEcran(0);
     }
+
+    // -----Gestion de la sauvegarde-----
 
     public void chargerSauvegarde() {
         // Logique pour charger une sauvegarde
@@ -51,17 +80,14 @@ public class TamagotchiControleur {
         // Débuter toujours dans la foret ?
     }
 
-    public void actualiserContenuFenetre(int choix) {
-        fenetre.actualiser(changerDeSalle(choix));
-    }
-
     public void supprimerSauvegarde() {
         // Logique pour supprimer une sauvegarde
     }
 
-    public JPanel changerDeSalle(int choix) {
-        // Logique pour changer de salle
+    // --------Choix de l'écran----------
+    public void changerEcran(int choix) {
         JPanel pan = new JPanel();
+
         switch (choix) {
             case 0: // Ecran Accueil
                 pan = new EcranAccueil(this);
@@ -69,30 +95,18 @@ public class TamagotchiControleur {
             case 1: // CréationPartie
                 pan = new EcranCreation(this);
                 break;
-            case 2: // Foret
-                pan = new EcranForet(this);
-                tmpFenActive = 2;
+            case 2: // Ecran Jeu
+                panJeu = new EcranJeu(this);
+                pan = panJeu;
                 break;
-            case 3: // Feu de camp
-                pan = new EcranFeu(this);
-                break;
-            case 4: // Tente de survie
-                pan = new EcranTente(this);
-                break;
-            case 5: // Rivière
-                pan = new EcranRiviere(this);
-                break;
-            case 6: // Ecran quitter
+            case 3: // Ecran Quitter
                 pan = new EcranQuitter(this);
                 break;
-            default: // En cas de disfonctionnement
-                pan = new EcranForet(this);
-                break;
         }
-        return pan;
+        fenetre.actualiser(pan); // Affectation du Jpanel à la fenetre
     }
 
-    // Etat du Tamagotchi
+    // -----Action sur le modèle---------
 
     public void nourrirTama() {
         // Logique pour la gestion de la faim/nourriture du Tama
@@ -115,15 +129,6 @@ public class TamagotchiControleur {
     public void laverTama() {
         // Logique pour la gestion de l'hygiène du Tama
         tamagotchi.proprete();
-    }
-
-    public void quitterPartie() {
-        // Logique pour quitter la partie
-        actualiserContenuFenetre(6);
-    }
-
-    public int getTmpFenActive() { // Permet de repérer le dernier écran actif avant sauvegarde
-        return tmpFenActive;
     }
 
     // -----Getters des constantes-----

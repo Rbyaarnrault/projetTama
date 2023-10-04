@@ -129,6 +129,10 @@ public class Tamagotchi {
         sommeil = s;
     }
 
+    public void setLoisir(int l) {
+        loisir = l;
+    }
+
     public void setDureeVie(int d) {
         dureeVie = d;
     }
