@@ -17,14 +17,14 @@ public class EcranAccueil extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Animation de présentation en haut
-        JPanel animationPanel = createAnimationPanel();
-        add(animationPanel);
+        // JPanel animationPanel = createAnimationPanel();
+        // add(animationPanel);
 
         add(Box.createVerticalGlue()); // Espace vertical
 
         // Conteneur pour les boutons
-        JPanel buttonContainer = createButtonContainer();
-        add(buttonContainer);
+        JPanel panelBoutons = creerPanelBoutons();
+        add(panelBoutons);
     }
 
     private JPanel createAnimationPanel() {
@@ -40,9 +40,9 @@ public class EcranAccueil extends JPanel {
         return animationPanel;
     }
 
-    private JPanel createButtonContainer() {
-        JPanel buttonContainer = new JPanel();
-        buttonContainer.setLayout(new BoxLayout(buttonContainer, BoxLayout.Y_AXIS));
+    private JPanel creerPanelBoutons() {
+        JPanel panelBoutons = new JPanel();
+        panelBoutons.setLayout(new BoxLayout(panelBoutons, BoxLayout.Y_AXIS));
 
         JButton nouvellePartieButton = new JButton("Nouvelle Partie");
         JButton chargerPartieButton = new JButton("Charger la Partie");
@@ -68,9 +68,9 @@ public class EcranAccueil extends JPanel {
         nouvellePartieButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         chargerPartieButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        buttonContainer.add(nouvellePartieButton);
-        buttonContainer.add(chargerPartieButton);
+        panelBoutons.add(nouvellePartieButton);
+        panelBoutons.add(chargerPartieButton);
 
-        return buttonContainer;
+        return panelBoutons;
     }
 }

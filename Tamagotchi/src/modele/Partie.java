@@ -20,16 +20,21 @@ public class Partie {
         tempsPartie.start();
     }
 
+    public void sauvergarder() {
+        sauvegarde = new Sauvegarde();
+    }
+
+    public void charger() {
+
+    }
+
+    // ----getters----
     public Tamagotchi getTamagotchi() {
         return tamagotchi;
     }
 
     public Timer getTempsPartie() {
         return tempsPartie;
-    }
-
-    public void sauvergarderPartie() {
-        sauvegarde = new Sauvegarde();
     }
 
     public Sauvegarde getSauvegarde() {

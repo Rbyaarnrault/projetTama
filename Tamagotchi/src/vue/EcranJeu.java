@@ -9,47 +9,56 @@ import controlleur.TamagotchiControleur;
 
 public class EcranJeu extends JPanel {
     private TamagotchiControleur controleur;
-    private PanelProgressBar panBarre;
+    private JPanel panComposants;
+    private PanelProgressBar panBarres;
 
     public EcranJeu(TamagotchiControleur controleur) {
         this.controleur = controleur;
         this.setLayout(null);
 
+        this.add(initialiserPanelProgressBar());
+        this.add(creerPanelComposants());
+    }
+
+    public PanelProgressBar initialiserPanelProgressBar() {
         // Initialisation des barres d'attributs ??????
         int a = controleur.getVieTama();
         int b = controleur.getNourritureTama();
         int c = controleur.getSommeilTama();
         int d = controleur.getHygieneTama();
         int e = controleur.getLoisirTama();
-        panBarre = new PanelProgressBar(a, b, c, d, e);
-        this.add(panBarre);
+        return panBarres = new PanelProgressBar(a, b, c, d, e);
+    }
 
+    public JPanel creerPanelComposants() {
+
+        panComposants = new JPanel();
         // -----Initialisation des boutons-----
         // Quitter
         JButton btnQuitter = new JButton("Quitter");
         btnQuitter.setBounds(400, 260, 120, 40);
-        this.add(btnQuitter);
+        panComposants.add(btnQuitter);
         // --> ouvrir menu quitter pour save
 
         // Bouton Manger
         JButton btnManger = new JButton("Manger");
         btnManger.setBounds(200, 40, 120, 40);
-        this.add(btnManger);
+        panComposants.add(btnManger);
 
         // Bouton Jouer
         JButton btnJouer = new JButton("Jouer");
         btnJouer.setBounds(200, 100, 120, 40);
-        this.add(btnJouer);
+        panComposants.add(btnJouer);
 
         // Bouton aller dans la tente
         JButton btnTente = new JButton("Tente");
         btnTente.setBounds(200, 160, 120, 40);
-        this.add(btnTente);
+        panComposants.add(btnTente);
 
         // Bouton aller à la rivière
         JButton btnRiviere = new JButton("Rivière");
         btnRiviere.setBounds(200, 220, 120, 40);
-        this.add(btnRiviere);
+        panComposants.add(btnRiviere);
 
         // -----Gestion des écouteurs-----
         // Aller à la rivière
@@ -89,14 +98,16 @@ public class EcranJeu extends JPanel {
         btnQuitter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran(4);
+                controleur.changerEcran(3);
             }
         });
+
+        return panComposants;
     }
 
     // ------
     // Getter du panel des JprogressBar
     public PanelProgressBar getPanelBarres() {
-        return panBarre;
+        return panBarres;
     }
 }

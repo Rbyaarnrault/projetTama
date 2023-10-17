@@ -39,7 +39,7 @@ public class Tamagotchi {
         return faim;
     }
 
-    public int fatigue() {
+    public int dormir() {
         // Définition de la constante à ajouter lorsqu'il dort
         int i = 30;
 
@@ -51,7 +51,7 @@ public class Tamagotchi {
         return sommeil;
     }
 
-    public int proprete() {
+    public int laver() {
         // Définition de la constante à ajouter lorsqu'il se lave
         int i = 30;
 

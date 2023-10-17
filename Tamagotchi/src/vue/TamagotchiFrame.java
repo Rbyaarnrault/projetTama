@@ -3,10 +3,7 @@ package vue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import modele.Tamagotchi;
-
 public class TamagotchiFrame extends JFrame {
-    private Tamagotchi tamagotchi;
 
     public TamagotchiFrame() {
 
@@ -17,7 +14,7 @@ public class TamagotchiFrame extends JFrame {
         setLocationRelativeTo(null); // Place la fenêtre au centre de l'écran de l'ordinateur
     }
 
-    public void display() {
+    public void afficher() {
         setVisible(true); // Rend visible la fenêtre;
     }
 

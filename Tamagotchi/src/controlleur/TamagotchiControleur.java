@@ -10,42 +10,46 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TamagotchiControleur {
-    private Tamagotchi tamagotchi;
     private TamagotchiFrame fenetre;
     private EcranJeu panJeu;
     private Partie partie;
+    private Timer timer;
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
         fenetre = fen;
         changerEcran(0); // Initialisation du panel d'accueil
-        fenetre.display();
+        fenetre.afficher();
     }
 
     public void creerNouvellePartie(String n, String t) {
         // Logique pour créer une nouvelle partie
-        tamagotchi = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
-        partie = new Partie(tamagotchi);
+        Tamagotchi tama = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
+        partie = new Partie(tama);
 
         // RAJOUTER DEUX 0 AU TIMER, ENLEVE POUR LA DEMO PLUS RAPIDE (432000= 7min env.)
-        Timer timer = new Timer(43200 / 6, new ActionListener() { // Correspond à 1/100% de 12h
+        timer = new Timer(43200 / 6, new ActionListener() { // Correspond à 1/100% de 12h
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Mise à jour des constantes selon le timer
 
                 // A MODIFIER SELON LES ENVIES
-                tamagotchi.setVie(getVieTama() - 5);
-                tamagotchi.setFaim(getNourritureTama() - 5);
-                tamagotchi.setSommeil(getLoisirTama() - 5);
-                tamagotchi.setHygiene(getHygieneTama() - 1);
-                tamagotchi.setLoisir(getLoisirTama() - 2);
+                partie.getTamagotchi().setVie(getVieTama() - 5);
+                partie.getTamagotchi().setFaim(getNourritureTama() - 5);
+                partie.getTamagotchi().setSommeil(getLoisirTama() - 5);
+                partie.getTamagotchi().setHygiene(getHygieneTama() - 1);
+                partie.getTamagotchi().setLoisir(getLoisirTama() - 2);
                 panJeu.getPanelBarres().actualiserConstantes(getVieTama(), getSommeilTama(), getNourritureTama(),
                         getHygieneTama(), getLoisirTama());
 
                 // Condition tamagotchi mort -> Fin de partie
-                if (tamagotchi.getVie() <= 0) {
+                if (partie.getTamagotchi().getVie() <= 0) {
                     JOptionPane.showMessageDialog(fenetre,
-                            " Votre tamagotchi " + tamagotchi.getNom() + " est mort.  Fin de partie!");
+                            " Votre tamagotchi " + partie.getTamagotchi().getNom() + " est mort.  Fin de partie!");
+
+                    // Arret du timer
+                    timer.stop();
+
                     // Revenir à l'écran d'accueil
                     changerEcran(0);
 
@@ -67,7 +71,7 @@ public class TamagotchiControleur {
     }
 
     public void sauvergarderPartie() {
-        partie.sauvergarderPartie();
+        partie.sauvergarder();
         // remettre accueil
         changerEcran(0);
     }
@@ -110,45 +114,45 @@ public class TamagotchiControleur {
 
     public void nourrirTama() {
         // Logique pour la gestion de la faim/nourriture du Tama
-        tamagotchi.manger();
+        partie.getTamagotchi().manger();
         // ligne pour agir sur la vue exemple : JProgressBar barFaim.setFill(n)
     }
 
     public void dormirTama() {
         // Logique pour la gestion du sommeil/dodo du Tama
-        tamagotchi.fatigue();
+        partie.getTamagotchi().dormir();
         // ligne pour agir sur la vue ...
     }
 
     public void jouerTama() {
         // Logique pour la gestion du loisir/jeu du Tama
-        tamagotchi.jouer();
+        partie.getTamagotchi().jouer();
         // ligne pour agir sur la vue
     }
 
     public void laverTama() {
         // Logique pour la gestion de l'hygiène du Tama
-        tamagotchi.proprete();
+        partie.getTamagotchi().laver();
     }
 
     // -----Getters des constantes-----
     public int getVieTama() {
-        return tamagotchi.getVie();
+        return partie.getTamagotchi().getVie();
     }
 
     public int getNourritureTama() {
-        return tamagotchi.getFaim();
+        return partie.getTamagotchi().getFaim();
     }
 
     public int getSommeilTama() {
-        return tamagotchi.getSommeil();
+        return partie.getTamagotchi().getSommeil();
     }
 
     public int getHygieneTama() {
-        return tamagotchi.getHygiene();
+        return partie.getTamagotchi().getHygiene();
     }
 
     public int getLoisirTama() {
-        return tamagotchi.getLoisir();
+        return partie.getTamagotchi().getLoisir();
     }
 }

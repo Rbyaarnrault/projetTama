@@ -15,15 +15,19 @@ public class EcranQuitter extends JPanel {
     public EcranQuitter(TamagotchiControleur controleur) {
         this.controleur = controleur;
         this.setLayout(null);
+        this.add(creerPanelComposants);
+    }
+
+    public JPanel creerPanelComposants() {
 
         // initialisation des boutons
 
-        // Sauvegarder la partie
+        // Bouton de Sauvegarde
         JButton btnSave = new JButton("Sauvegarder");
         btnSave.setBounds(150, 20, 120, 40);
         this.add(btnSave);
 
-        // Sauvegarder la partie
+        // Bouton de retour
         JButton btnAnnuler = new JButton("Annuler");
         btnAnnuler.setBounds(150, 100, 120, 40);
         this.add(btnAnnuler);
