@@ -28,6 +28,10 @@ public class Partie {
 
     }
 
+    public void supprimer(){
+        
+    }
+
     // ----getters----
     public Tamagotchi getTamagotchi() {
         return tamagotchi;

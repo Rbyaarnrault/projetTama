@@ -11,26 +11,27 @@ import controlleur.TamagotchiControleur;
 
 public class EcranQuitter extends JPanel {
     private TamagotchiControleur controleur;
+    private JPanel panComposants;
 
     public EcranQuitter(TamagotchiControleur controleur) {
         this.controleur = controleur;
         this.setLayout(null);
-        this.add(creerPanelComposants);
+        this.add(creerPanelComposants());
     }
 
-    public JPanel creerPanelComposants() {
+    private JPanel creerPanelComposants() {
 
-        // initialisation des boutons
+        panComposants = new JPanel();
 
         // Bouton de Sauvegarde
         JButton btnSave = new JButton("Sauvegarder");
         btnSave.setBounds(150, 20, 120, 40);
-        this.add(btnSave);
+        panComposants.add(btnSave);
 
         // Bouton de retour
         JButton btnAnnuler = new JButton("Annuler");
         btnAnnuler.setBounds(150, 100, 120, 40);
-        this.add(btnAnnuler);
+        panComposants.add(btnAnnuler);
 
         // Initialisation des écouteurs
         btnSave.addActionListener(new ActionListener() {
@@ -48,5 +49,7 @@ public class EcranQuitter extends JPanel {
                 controleur.changerEcran(3);
             }
         });
+
+        return panComposants;
     }
 }

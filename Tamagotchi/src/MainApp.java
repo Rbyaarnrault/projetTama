@@ -9,6 +9,6 @@ public class MainApp {
         // reliant le modèle
         // à la vue
 
-        tamagotchiFrame.display();
+        tamagotchiFrame.afficher();
     }
 }

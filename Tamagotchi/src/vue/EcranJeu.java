@@ -20,7 +20,7 @@ public class EcranJeu extends JPanel {
         this.add(creerPanelComposants());
     }
 
-    public PanelProgressBar initialiserPanelProgressBar() {
+    private PanelProgressBar initialiserPanelProgressBar() {
         // Initialisation des barres d'attributs ??????
         int a = controleur.getVieTama();
         int b = controleur.getNourritureTama();
@@ -30,7 +30,7 @@ public class EcranJeu extends JPanel {
         return panBarres = new PanelProgressBar(a, b, c, d, e);
     }
 
-    public JPanel creerPanelComposants() {
+    private JPanel creerPanelComposants() {
 
         panComposants = new JPanel();
         // -----Initialisation des boutons-----

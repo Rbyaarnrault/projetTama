@@ -28,7 +28,7 @@ public class EcranCreation extends JPanel {
         this.add(panBoutonComposant);
     }
 
-    public JPanel creerPanelComposant() {
+    private JPanel creerPanelComposant() {
         JPanel panBoutonComposant = new JPanel();
         panBoutonComposant.setLayout(new GridLayout(4, 1, 5, 5)); // Utilisation d'une grille pour l'alignement
 
