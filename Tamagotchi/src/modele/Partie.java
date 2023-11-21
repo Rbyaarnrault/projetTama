@@ -3,21 +3,28 @@ package modele;
 import javax.swing.Timer;
 
 import controlleur.Sauvegarde;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Partie {
 
     private Tamagotchi tamagotchi;
-    private Timer tempsPartie;
+    private Timer timerActions, timerPartie;
+    private int tempsPartie;
     private Sauvegarde sauvegarde;
+    // private int tempsActionTimer;
 
     public Partie(Tamagotchi tamagotchi) {
         this.tamagotchi = tamagotchi;
-        Timer tempsPartie = new Timer(1000, null); // temps en seconde depuis la création de la partie
+
+        // temps en seconde depuis la création de la partie
+        timerPartie = new Timer(1000, new ActionListener() { // Correspond à 1/100% de 12h
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tempsPartie += 1; // Temps en secondes
+            }
+        });
 
         // Démarrez le minuteur
-        tempsPartie.start();
+        timerPartie.start();
     }
 
     public void sauvergarder() {
@@ -28,8 +35,8 @@ public class Partie {
 
     }
 
-    public void supprimer(){
-        
+    public void supprimer() {
+
     }
 
     // ----getters----
@@ -37,8 +44,12 @@ public class Partie {
         return tamagotchi;
     }
 
-    public Timer getTempsPartie() {
+    public int getTempsPartie() {
         return tempsPartie;
+    }
+
+    public Timer getTimerPartie() {
+        return timerPartie;
     }
 
     public Sauvegarde getSauvegarde() {

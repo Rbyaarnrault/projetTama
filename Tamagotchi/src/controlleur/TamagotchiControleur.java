@@ -1,5 +1,6 @@
 package controlleur;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modele.Partie;
@@ -27,47 +28,8 @@ public class TamagotchiControleur {
         Tamagotchi tama = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
         partie = new Partie(tama);
 
-        // RAJOUTER DEUX 0 AU TIMER, ENLEVE POUR LA DEMO PLUS RAPIDE (432000= 7min env.)
-        timer = new Timer(43200 / 6, new ActionListener() { // Correspond à 1/100% de 12h
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Mise à jour des constantes selon le timer
-
-                // A MODIFIER SELON LES ENVIES
-                partie.getTamagotchi().setVie(getVieTama() - 5);
-                partie.getTamagotchi().setFaim(getNourritureTama() - 5);
-                partie.getTamagotchi().setSommeil(getLoisirTama() - 5);
-                partie.getTamagotchi().setHygiene(getHygieneTama() - 1);
-                partie.getTamagotchi().setLoisir(getLoisirTama() - 2);
-                panJeu.getPanelBarres().actualiserConstantes(getVieTama(), getSommeilTama(), getNourritureTama(),
-                        getHygieneTama(), getLoisirTama());
-
-                // Condition tamagotchi mort -> Fin de partie
-                if (partie.getTamagotchi().getVie() <= 0) {
-                    JOptionPane.showMessageDialog(fenetre,
-                            " Votre tamagotchi " + partie.getTamagotchi().getNom() + " est mort.  Fin de partie!");
-
-                    // Arret du timer
-                    timer.stop();
-
-                    // Revenir à l'écran d'accueil
-                    changerEcran(0);
-
-                    // Rajouter le fait de sauvegarder la partie et la "fermer" sinon message erreur
-                    // s'affiche sur l'accueil
-                }
-            }
-
-            /// VOIR SI COMPATIBLE AVEC LA SAUVEGARDE ET SI CA NE VA PAS POSER DE PROBLEME
-            /// ET COUPER LE TIMER QUAND ON JOUE PAS. LES CONSTANTES DOIVENT QUAND MEME
-            /// BAISSER VOIR POUR UTILISER ET COMPARER AU TEMPS MACHINE SINON ?
-        });
-
-        // Démarrez le minuteur
-        timer.start();
-
-        // Afficher le salon à l'écran
         changerEcran(2);
+
     }
 
     public void sauvergarderPartie() {
@@ -154,5 +116,9 @@ public class TamagotchiControleur {
 
     public int getLoisirTama() {
         return partie.getTamagotchi().getLoisir();
+    }
+
+    public JFrame getFrame() {
+        return fenetre;
     }
 }

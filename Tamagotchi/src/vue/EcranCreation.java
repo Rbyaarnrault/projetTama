@@ -33,21 +33,17 @@ public class EcranCreation extends JPanel {
         panBoutonComposant.setLayout(new GridLayout(4, 1, 5, 5)); // Utilisation d'une grille pour l'alignement
 
         // Création des composants
-        JLabel nom = new JLabel("Nom");
+
         JTextField barreNom = new JTextField();
-
-        JButton effacerButton = new JButton("Effacer");
-        JButton validerButton = new JButton("Valider");
-
         String[] especes = { "Chien", "Chat", "Robot", "Lapin" };
         choixEspece = new JComboBox<>(especes);
+        JButton effacerButton = new JButton("Effacer");
+        JButton validerButton = new JButton("Valider");
 
         JPanel panEspece = new JPanel(new FlowLayout());
 
         // Ajout des composants aux JPanels
-        // panBoutonComposant.add(createLabelledPanel("Nom:", barreNom));
-        this.add(nom);
-        this.add(barreNom);
+        panBoutonComposant.add(createLabelledPanel("Nom:", barreNom)); // Ajout d'un label au JTexteField
         panEspece.add(choixEspece);
         this.add(panEspece);
 
@@ -88,15 +84,13 @@ public class EcranCreation extends JPanel {
         return panBoutonComposant;
     }
 
-    /*
-     * private JPanel createLabelledPanel(String label, JComponent component) {
-     * JPanel panBoutonComposant = new JPanel(new BorderLayout());
-     * JLabel labelComponent = new JLabel(label);
-     * panBoutonComposant.add(labelComponent, BorderLayout.WEST);
-     * panBoutonComposant.add(component, BorderLayout.CENTER);
-     * return panBoutonComposant;
-     * }
-     */
+    private JPanel createLabelledPanel(String label, JComponent component) {
+        JPanel panBoutonComposant = new JPanel(new BorderLayout());
+        JLabel labelComponent = new JLabel(label);
+        panBoutonComposant.add(labelComponent, BorderLayout.WEST);
+        panBoutonComposant.add(component, BorderLayout.CENTER);
+        return panBoutonComposant;
+    }
 
     private void afficherFenetreErreur(String message) {
         JOptionPane.showMessageDialog(this, message);

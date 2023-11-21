@@ -27,18 +27,20 @@ public class EcranAccueil extends JPanel {
         add(panelBoutons);
     }
 
-    private JPanel createAnimationPanel() {
-        // appel du JPanel pour l'animation
-        JPanel animationPanel = new JPanel();
-        animationPanel.setLayout(new BorderLayout());
-
-        // Création l'élément TamagotchiAnimation
-        TamagotchiAnimation tamagotchiAnimation = new TamagotchiAnimation();
-
-        animationPanel.add(tamagotchiAnimation);
-
-        return animationPanel;
-    }
+    /*
+     * private JPanel createAnimationPanel() {
+     * // appel du JPanel pour l'animation
+     * JPanel animationPanel = new JPanel();
+     * animationPanel.setLayout(new BorderLayout());
+     * 
+     * // Création l'élément TamagotchiAnimation
+     * TamagotchiAnimation tamagotchiAnimation = new TamagotchiAnimation();
+     * 
+     * animationPanel.add(tamagotchiAnimation);
+     * 
+     * return animationPanel;
+     * }
+     */
 
     private JPanel creerPanelBoutons() {
         JPanel panelBoutons = new JPanel();
