@@ -54,7 +54,7 @@ public class EcranAccueil extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Aller à l'écran de création de la partie
-                controleur.changerEcran(1);
+                controleur.changerEcran("creation");
             }
         });
 

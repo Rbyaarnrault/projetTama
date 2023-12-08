@@ -1,25 +1,27 @@
 package controlleur;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modele.Partie;
 import modele.Tamagotchi;
 import vue.*;
-import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class TamagotchiControleur {
     private TamagotchiFrame fenetre;
-    private EcranJeu panJeu;
+    private EcranForet panForet;
+    private EcranRiviere panRiviere;
+    private EcranFeu panFeu;
+    private EcranTente panTente;
     private Partie partie;
-    private Timer timer;
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
         fenetre = fen;
-        changerEcran(0); // Initialisation du panel d'accueil
+        panForet = new EcranForet(this);
+        panRiviere = new EcranRiviere(this);
+        panFeu = new EcranFeu(this);
+        panTente = new EcranTente(this);
+        changerEcran("accueil"); // Initialisation du panel d'accueil
         fenetre.afficher();
     }
 
@@ -28,14 +30,13 @@ public class TamagotchiControleur {
         Tamagotchi tama = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
         partie = new Partie(tama);
 
-        changerEcran(2);
-
+        changerEcran("feu");
     }
 
     public void sauvergarderPartie() {
         partie.sauvergarder();
         // remettre accueil
-        changerEcran(0);
+        changerEcran("accueil");
     }
 
     // -----Gestion de la sauvegarde-----
@@ -51,25 +52,52 @@ public class TamagotchiControleur {
     }
 
     // --------Choix de l'écran----------
-    public void changerEcran(int choix) {
-        JPanel pan = new JPanel();
+    public void changerEcran(String choix) {
+        JPanel pan = new JPanel(); // Nouveau JPanel temporaire qui va être affecté de l'écran voulu
 
         switch (choix) {
-            case 0: // Ecran Accueil
+            case "accueil": // Ecran Accueil
+                fenetre.setTitle("Accueil");
                 pan = new EcranAccueil(this);
                 break;
-            case 1: // CréationPartie
+
+            case "creation": // CréationPartie
+                fenetre.setTitle("Création Partie");
                 pan = new EcranCreation(this);
                 break;
-            case 2: // Ecran Jeu
-                panJeu = new EcranJeu(this);
-                pan = panJeu;
+
+            case "foret": // Ecran Salle Forêt
+                fenetre.setTitle("Forêt");
+                pan = panForet;
                 break;
-            case 3: // Ecran Quitter
+
+            case "riviere": // Ecran Salle Rivère
+                fenetre.setTitle("Rivière");
+                pan = panRiviere;
+                break;
+
+            case "feu": // Ecran Salle Feu
+                fenetre.setTitle("Feu");
+                pan = panFeu;
+                break;
+
+            case "tente": // Ecran Salle Tente
+                fenetre.setTitle("Tente");
+                pan = panTente;
+                break;
+
+            case "quitter": // Ecran Salle Quitter
+                fenetre.setTitle("Quitter");
                 pan = new EcranQuitter(this);
                 break;
+
+            case "developpeur": // Ecran Mode Développeur
+                fenetre.setTitle("Mode Développeur");
+                pan = new EcranDeveloppeur(this); // LINITIALISER A CURSEUR.SET(TAMA.TIMER) ?
+                break;
         }
-        fenetre.actualiser(pan); // Affectation du Jpanel à la fenetre
+        fenetre.actualiser(pan);
+
     }
 
     // -----Action sur le modèle---------
@@ -77,19 +105,17 @@ public class TamagotchiControleur {
     public void nourrirTama() {
         // Logique pour la gestion de la faim/nourriture du Tama
         partie.getTamagotchi().manger();
-        // ligne pour agir sur la vue exemple : JProgressBar barFaim.setFill(n)
     }
 
     public void dormirTama() {
         // Logique pour la gestion du sommeil/dodo du Tama
         partie.getTamagotchi().dormir();
-        // ligne pour agir sur la vue ...
     }
 
     public void jouerTama() {
         // Logique pour la gestion du loisir/jeu du Tama
         partie.getTamagotchi().jouer();
-        // ligne pour agir sur la vue
+
     }
 
     public void laverTama() {

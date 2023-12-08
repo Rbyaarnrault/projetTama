@@ -1,18 +1,20 @@
 package vue;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 import controlleur.TamagotchiControleur;
 
-public class EcranJeu extends JPanel {
+public class EcranFeu extends JPanel {
+
     private TamagotchiControleur controleur;
     private PanelProgressBar panBarres;
 
-    public EcranJeu(TamagotchiControleur controleur) {
-        this.controleur = controleur;
+    public EcranFeu(TamagotchiControleur contr) {
+        this.controleur = contr;
         this.setLayout(null);
 
         this.add(initialiserPanelProgressBar());
@@ -20,13 +22,8 @@ public class EcranJeu extends JPanel {
     }
 
     private PanelProgressBar initialiserPanelProgressBar() {
-        // Initialisation des barres d'attributs ??????
-        int a = controleur.getVieTama();
-        int b = controleur.getNourritureTama();
-        int c = controleur.getSommeilTama();
-        int d = controleur.getHygieneTama();
-        int e = controleur.getLoisirTama();
-        return panBarres = new PanelProgressBar(a, b, c, d, e);
+        // Initialisation des barres d'attributs
+        return panBarres = new PanelProgressBar();
     }
 
     private void creerPanelComposants() {
@@ -34,8 +31,8 @@ public class EcranJeu extends JPanel {
         // -----Initialisation des boutons-----
 
         // Bouton Mode développeur
-        JButton btnDeveloppeur = new JButton("Rivière");
-        btnDeveloppeur.setBounds(500, 300, 100, 80);
+        JButton btnDeveloppeur = new JButton("Mode Développeur");
+        btnDeveloppeur.setBounds(460, 300, 100, 60);
         this.add(btnDeveloppeur);
 
         // Quitter
@@ -49,10 +46,10 @@ public class EcranJeu extends JPanel {
         btnManger.setBounds(200, 40, 120, 40);
         this.add(btnManger);
 
-        // Bouton Jouer
-        JButton btnJouer = new JButton("Jouer");
-        btnJouer.setBounds(200, 100, 120, 40);
-        this.add(btnJouer);
+        // Bouton aller dans la foret
+        JButton btnForet = new JButton("Forêt");
+        btnForet.setBounds(200, 100, 120, 40);
+        this.add(btnForet);
 
         // Bouton aller dans la tente
         JButton btnTente = new JButton("Tente");
@@ -66,10 +63,10 @@ public class EcranJeu extends JPanel {
 
         // -----Gestion des écouteurs-----
         // Aller au mode développeur
-        btnRiviere.addActionListener(new ActionListener() {
+        btnDeveloppeur.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                controleur.changerEcran("developpeur");
             }
         });
 
@@ -77,7 +74,7 @@ public class EcranJeu extends JPanel {
         btnRiviere.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                controleur.changerEcran("riviere");
             }
         });
 
@@ -86,7 +83,6 @@ public class EcranJeu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controleur.nourrirTama();
-                ;
             }
         });
 
@@ -94,15 +90,15 @@ public class EcranJeu extends JPanel {
         btnTente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                controleur.changerEcran("tente");
             }
         });
 
-        // Jouer
-        btnJouer.addActionListener(new ActionListener() {
+        // Aller à la foret
+        btnForet.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.jouerTama();
+                controleur.changerEcran("foret");
             }
         });
 
@@ -110,11 +106,9 @@ public class EcranJeu extends JPanel {
         btnQuitter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran(3);
+                controleur.changerEcran("quitter");
             }
         });
-
-        // return this;
     }
 
     // ------

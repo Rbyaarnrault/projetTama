@@ -46,7 +46,7 @@ public class EcranQuitter extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Permet de revenir à l'écran de jeu
-                controleur.changerEcran(3);
+                controleur.changerEcran("feu");
             }
         });
 

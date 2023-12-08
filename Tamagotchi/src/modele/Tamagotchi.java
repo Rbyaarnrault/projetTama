@@ -5,6 +5,13 @@ import javax.swing.JOptionPane;
 
 public class Tamagotchi {
 
+    // Constantes pour les valeurs limites maximales
+    private static final int MAX_VIE = 100;
+    private static final int MAX_HYGIENE = 100;
+    private static final int MAX_FAIM = 100;
+    private static final int MAX_SOMMEIL = 100;
+    private static final int MAX_LOISIR = 100;
+    // Atributs
     private String nom, type;
     private int dureeVie, vie, hygiene, faim, sommeil, loisir;
 
@@ -25,53 +32,40 @@ public class Tamagotchi {
         }
     }
 
+    // Méthode utilitaire pour incrémenter une valeur jusqu'à un maximum
+    private int incrementerValeur(int valeur, int increment, int max) {
+        if (valeur <= max - increment) {
+            valeur += increment;
+        } else {
+            valeur = max;
+        }
+        return valeur;
+    }
+
     // -----Etat Tamagotchi-----
 
     public int manger() {
-        // Définition de la constante à ajouter lorsqu'il mange
-        int i = 30;
-
-        if (faim <= 100 - i) {
-            faim += i;
-        } else {
-            faim = 100;
-        }
+        // Définition de la constante à ajouter
+        int increment = 30;
+        faim = incrementerValeur(faim, increment, MAX_FAIM);
         return faim;
     }
 
     public int dormir() {
-        // Définition de la constante à ajouter lorsqu'il dort
-        int i = 30;
-
-        if (sommeil <= 100 - i) {
-            sommeil += i;
-        } else {
-            sommeil = 100;
-        }
+        int increment = 30;
+        sommeil = incrementerValeur(sommeil, increment, MAX_SOMMEIL);
         return sommeil;
     }
 
     public int laver() {
-        // Définition de la constante à ajouter lorsqu'il se lave
-        int i = 30;
-
-        if (hygiene <= 100 - i) {
-            hygiene += i;
-        } else {
-            hygiene = 100;
-        }
+        int increment = 30;
+        hygiene = incrementerValeur(hygiene, increment, MAX_HYGIENE);
         return hygiene;
     }
 
     public int jouer() {
-        // Définition de la constante à ajouter lorsqu'il jouer
-        int i = 30;
-
-        if (loisir <= 100 - i) {
-            loisir += i;
-        } else {
-            loisir = 100;
-        }
+        int increment = 30;
+        loisir = incrementerValeur(loisir, increment, MAX_LOISIR);
         return loisir;
     }
 

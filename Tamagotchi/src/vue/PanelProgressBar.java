@@ -3,6 +3,7 @@ package vue;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+
 import java.awt.*;
 
 //import javafx.scene.layout.FlowPane;
@@ -11,7 +12,7 @@ public class PanelProgressBar extends JPanel {
 
     private JProgressBar barreVie, barreNourriture, barreSommeil, barreHygiene, barreLoisir;
 
-    public PanelProgressBar(int valueVie, int valueNourriture, int valueSommeil, int valueHygiene, int valueLoisir) {
+    public PanelProgressBar() {
 
         this.setBackground(Color.lightGray);
 
@@ -29,9 +30,6 @@ public class PanelProgressBar extends JPanel {
 
         JLabel lab5 = new JLabel("Loisir");
         barreLoisir = new JProgressBar();
-
-        // Place les JprogressBar aux valeurs voulues
-        actualiserConstantes(valueVie, valueNourriture, valueSommeil, valueHygiene, valueLoisir);
 
         // Afficher le pourcentage des JProgressBar
         barreVie.setStringPainted(true);
@@ -57,12 +55,12 @@ public class PanelProgressBar extends JPanel {
         this.setBounds(400, 10, 180, 120);
     }
 
-    public void actualiserConstantes(int i, int j, int k, int l, int m) {
-        setValueBarreVie(i);
-        setValueBarreNourriture(j);
-        setValueBarreSommeil(k);
-        setValueBarreHygiene(l);
-        setValueBarreLoisir(m);
+    public void actualiserConstantes(int vie, int nourriture, int sommeil, int hygiene, int loisir) {
+        setValueBarreVie(vie);
+        setValueBarreNourriture(nourriture);
+        setValueBarreSommeil(sommeil);
+        setValueBarreHygiene(hygiene);
+        setValueBarreLoisir(loisir);
         this.revalidate();
     }
 

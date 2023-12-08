@@ -1,6 +1,8 @@
 package modele;
 
+import java.awt.event.ActionListener;
 import javax.swing.Timer;
+import java.awt.event.ActionEvent;
 
 import controlleur.Sauvegarde;
 
@@ -16,10 +18,10 @@ public class Partie {
         this.tamagotchi = tamagotchi;
 
         // temps en seconde depuis la création de la partie
-        timerPartie = new Timer(1000, new ActionListener() { // Correspond à 1/100% de 12h
+        timerPartie = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tempsPartie += 1; // Temps en secondes
+                tempsPartie += 1; // Temps en secondes de la Partie
             }
         });
 
