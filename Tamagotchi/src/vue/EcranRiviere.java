@@ -51,7 +51,6 @@ public class EcranRiviere extends JPanel {
 
         // Bouton Mode développeur
         JButton btnDeveloppeur = new JButton("Mode Développeur");
-        JLabel test = new JLabel();
         btnDeveloppeur.setBounds(460, 300, 100, 60);
         this.add(btnDeveloppeur);
 
