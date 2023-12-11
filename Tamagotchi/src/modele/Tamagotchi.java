@@ -6,11 +6,19 @@ import javax.swing.JOptionPane;
 public class Tamagotchi {
 
     // Constantes pour les valeurs limites maximales
-    private static final int MAX_VIE = 100;
-    private static final int MAX_HYGIENE = 100;
-    private static final int MAX_FAIM = 100;
-    private static final int MAX_SOMMEIL = 100;
-    private static final int MAX_LOISIR = 100;
+    private static final int MIN_VIE = 0, MAX_VIE = 100;
+    private static final int MIN_HYGIENE = 0, MAX_HYGIENE = 100;
+    private static final int MIN_FAIM = 0, MAX_FAIM = 100;
+    private static final int MIN_SOMMEIL = 0, MAX_SOMMEIL = 100;
+    private static final int MIN_LOISIR = 0, MAX_LOISIR = 100;
+
+    // Constantes pour les incrémentation et decrémentations
+    private static final int DEC_VIE = 30, INC_VIE = 30;
+    private static final int DEC_HYGIENE = 30, INC_HYGIENE = 30;
+    private static final int DEC_FAIM = 30, INC_FAIM = 30;
+    private static final int DEC_SOMMEIL = 30, INC_SOMMEIL = 30;
+    private static final int DEC_LOISIR = 30, INC_LOISIR = 30;
+
     // Atributs
     private String nom, type;
     private int dureeVie, vie, hygiene, faim, sommeil, loisir;
@@ -42,30 +50,48 @@ public class Tamagotchi {
         return valeur;
     }
 
+    // Méthode utilitaire pour décrémenter une valeur jusqu'à un minimum
+    private int decrecrementerValeur(int valeur, int decrement, int min) {
+        if (valeur >= min + decrement) {
+            valeur -= decrement;
+        } else {
+            valeur = min;
+        }
+        return valeur;
+    }
+
+    public void decrementer() {
+        // Diminution selon les constantes chosies des attributs
+        vie = decrecrementerValeur(vie, DEC_VIE, MIN_VIE);
+        faim = decrecrementerValeur(vie, DEC_FAIM, MIN_FAIM);
+        hygiene = decrecrementerValeur(vie, DEC_HYGIENE, MIN_HYGIENE);
+        sommeil = decrecrementerValeur(vie, DEC_SOMMEIL, MIN_SOMMEIL);
+        loisir = decrecrementerValeur(vie, DEC_LOISIR, MIN_LOISIR);
+    }
+
     // -----Etat Tamagotchi-----
 
     public int manger() {
-        // Définition de la constante à ajouter
-        int increment = 30;
-        faim = incrementerValeur(faim, increment, MAX_FAIM);
+        // Incrémentation de l'attribut faim par la constante INC_
+        faim = incrementerValeur(faim, INC_FAIM, MAX_FAIM);
         return faim;
     }
 
     public int dormir() {
-        int increment = 30;
-        sommeil = incrementerValeur(sommeil, increment, MAX_SOMMEIL);
+        // Incrémentation de l'attribut sommeil par la constante INC_SOMMEIL
+        sommeil = incrementerValeur(sommeil, INC_SOMMEIL, MAX_SOMMEIL);
         return sommeil;
     }
 
     public int laver() {
-        int increment = 30;
-        hygiene = incrementerValeur(hygiene, increment, MAX_HYGIENE);
+        // Incrémentation de l'attribut hygiene par la constante INC_HYGIENE
+        hygiene = incrementerValeur(hygiene, INC_HYGIENE, MAX_HYGIENE);
         return hygiene;
     }
 
     public int jouer() {
-        int increment = 30;
-        loisir = incrementerValeur(loisir, increment, MAX_LOISIR);
+        // Incrémentation de l'attribut loisir par la constante INC_LOISIR
+        loisir = incrementerValeur(loisir, INC_LOISIR, MAX_LOISIR);
         return loisir;
     }
 

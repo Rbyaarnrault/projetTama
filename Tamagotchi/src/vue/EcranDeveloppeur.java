@@ -1,34 +1,35 @@
 package vue;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-
-import controlleur.TamagotchiControleur;
-
 public class EcranDeveloppeur extends JPanel {
 
-    private TamagotchiControleur contr;
+    private JSlider sliderTimer;
+    private JButton boutonValider;
 
-    public EcranDeveloppeur(TamagotchiControleur contr) {
-        this.contr = contr;
-        this.setLayout(null);
+    public EcranDeveloppeur(int valeurParDefaut, ActionListener validerListener) {
+        this.setLayout(new BorderLayout());
 
-        JSlider slider = new JSlider(1, 100, 50);
-        this.add(slider);
+        sliderTimer = new JSlider(1, 10, valeurParDefaut); // Ajoutez la valeur par défaut
+        sliderTimer.setMajorTickSpacing(1);
+        sliderTimer.setPaintTicks(true);
+        sliderTimer.setPaintLabels(true);
 
-        JButton boutonJeu = new JButton("Retour au Jeu");
-        boutonJeu.setBounds(460, 500, 120, 40);
-        this.add(boutonJeu);
+        boutonValider = new JButton("Valider");
+        boutonValider.addActionListener(validerListener);
 
-        boutonJeu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                contr.changerEcran("developpeur");
-            }
-        });
+        JPanel panelSlider = new JPanel(new BorderLayout());
+        panelSlider.add(new JLabel("Ajuster la vitesse du timer"), BorderLayout.NORTH);
+        panelSlider.add(sliderTimer, BorderLayout.CENTER);
+        panelSlider.add(boutonValider, BorderLayout.SOUTH);
+
+        this.add(panelSlider, BorderLayout.CENTER);
+    }
+
+    public int getVitesseTimer() {
+        return sliderTimer.getValue();
     }
 }

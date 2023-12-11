@@ -3,12 +3,12 @@ package vue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controlleur.TamagotchiControleur;
+import util.EcranActualisable;
 
-public class EcranRiviere extends JPanel {
+public class EcranRiviere extends JPanel implements EcranActualisable {
 
     private TamagotchiControleur controleur;
     private PanelProgressBar panBarres;
@@ -115,5 +115,11 @@ public class EcranRiviere extends JPanel {
     // Getter du panel des JprogressBar
     public PanelProgressBar getPanelBarres() {
         return panBarres;
+    }
+
+    // Méthode d'actualisation du PanelProgressBar
+    @Override
+    public void actualiserBarresAvecAttributs() {
+        panBarres.actualiserConstantes(controleur.getPartie().getTamagotchi());
     }
 }

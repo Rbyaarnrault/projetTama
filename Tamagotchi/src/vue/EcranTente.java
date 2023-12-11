@@ -6,8 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controlleur.TamagotchiControleur;
+import util.EcranActualisable;
 
-public class EcranTente extends JPanel {
+public class EcranTente extends JPanel implements EcranActualisable {
 
     private TamagotchiControleur controleur;
     private PanelProgressBar panBarres;
@@ -90,5 +91,11 @@ public class EcranTente extends JPanel {
     // Getter du panel des JprogressBar
     public PanelProgressBar getPanelBarres() {
         return panBarres;
+    }
+
+    // Méthode d'actualisation du PanelProgressBar
+    @Override
+    public void actualiserBarresAvecAttributs() {
+        panBarres.actualiserConstantes(controleur.getPartie().getTamagotchi());
     }
 }

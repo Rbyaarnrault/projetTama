@@ -4,6 +4,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import modele.Tamagotchi;
+
 import java.awt.*;
 
 //import javafx.scene.layout.FlowPane;
@@ -55,12 +57,13 @@ public class PanelProgressBar extends JPanel {
         this.setBounds(400, 10, 180, 120);
     }
 
-    public void actualiserConstantes(int vie, int nourriture, int sommeil, int hygiene, int loisir) {
-        setValueBarreVie(vie);
-        setValueBarreNourriture(nourriture);
-        setValueBarreSommeil(sommeil);
-        setValueBarreHygiene(hygiene);
-        setValueBarreLoisir(loisir);
+    public void actualiserConstantes(Tamagotchi tama) {
+        // Met les barres aux valeurs des attributs du tamagotchi
+        setValueBarreVie(tama.getVie());
+        setValueBarreNourriture(tama.getFaim());
+        setValueBarreSommeil(tama.getSommeil());
+        setValueBarreHygiene(tama.getHygiene());
+        setValueBarreLoisir(tama.getLoisir());
         this.revalidate();
     }
 

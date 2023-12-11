@@ -9,7 +9,7 @@ import controlleur.Sauvegarde;
 public class Partie {
 
     private Tamagotchi tamagotchi;
-    private Timer timerActions, timerPartie;
+    private Timer timerPartie;
     private int tempsPartie;
     private Sauvegarde sauvegarde;
     // private int tempsActionTimer;

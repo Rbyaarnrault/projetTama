@@ -1,9 +1,17 @@
 package controlleur;
 
+import javax.swing.Timer;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import modele.Partie;
 import modele.Tamagotchi;
+import util.EcranActualisable;
 import vue.*;
 
 public class TamagotchiControleur {
@@ -12,7 +20,11 @@ public class TamagotchiControleur {
     private EcranRiviere panRiviere;
     private EcranFeu panFeu;
     private EcranTente panTente;
+    private EcranDeveloppeur panDev;
     private Partie partie;
+    private Timer timerActualisation, timerDecrementation;
+    private int vitesseTimerDecr = 5; // Valeur par défault si non modifiée
+    private List<EcranActualisable> ecrans;
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
@@ -21,6 +33,24 @@ public class TamagotchiControleur {
         panRiviere = new EcranRiviere(this);
         panFeu = new EcranFeu(this);
         panTente = new EcranTente(this);
+        ecrans = new ArrayList<>();
+        ecrans.add(panFeu); // Ces 4 écrans serons actualisés fréquemment
+        ecrans.add(panForet);
+        ecrans.add(panRiviere);
+        ecrans.add(panTente);
+
+        panDev = new EcranDeveloppeur(vitesseTimerDecr, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Récupération de la vitesse du timer depuis l'écran ModeDéveloppeur, par
+                // défault sinon
+                vitesseTimerDecr = panDev.getVitesseTimer();
+
+                // Maj du délai du timer de décrémentation en fonction de la vitesse choisie
+                timerDecrementation.setDelay(1000 / vitesseTimerDecr);
+            }
+        });
+
         changerEcran("accueil"); // Initialisation du panel d'accueil
         fenetre.afficher();
     }
@@ -30,16 +60,50 @@ public class TamagotchiControleur {
         Tamagotchi tama = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
         partie = new Partie(tama);
 
+        demarrerTimers();
         changerEcran("feu");
     }
 
+    private void demarrerTimers() {
+        // Création des timer avec une action à effectuer à chaque intervalle
+
+        // timer qui va actualiser toutes les secondes les barres d'attributs
+        timerActualisation = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualiserEcrans();
+            }
+        });
+
+        // timer qui va décrémenter les attributs du tamagotchi
+        timerDecrementation = new Timer(5000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Logique pour décrémenter les attributs du Tamagotchi
+                partie.getTamagotchi().decrementer();
+            }
+        });
+
+        // Démarrez les timers
+        timerActualisation.start();
+        timerDecrementation.start();
+    }
+
+    // Méthode pour actualiser tous les écrans
+    private void actualiserEcrans() {
+        if (ecrans != null) {
+            for (EcranActualisable ecran : ecrans) {
+                ecran.actualiserBarresAvecAttributs();
+            }
+        }
+    }
+
+    // -----Gestion de la sauvegarde-----
     public void sauvergarderPartie() {
         partie.sauvergarder();
         // remettre accueil
         changerEcran("accueil");
     }
-
-    // -----Gestion de la sauvegarde-----
 
     public void chargerSauvegarde() {
         // Logique pour charger une sauvegarde
@@ -93,7 +157,7 @@ public class TamagotchiControleur {
 
             case "developpeur": // Ecran Mode Développeur
                 fenetre.setTitle("Mode Développeur");
-                pan = new EcranDeveloppeur(this); // LINITIALISER A CURSEUR.SET(TAMA.TIMER) ?
+                pan = panDev;
                 break;
         }
         fenetre.actualiser(pan);
@@ -123,7 +187,11 @@ public class TamagotchiControleur {
         partie.getTamagotchi().laver();
     }
 
-    // -----Getters des constantes-----
+    // -----Getters-----
+    public Partie getPartie() {
+        return partie;
+    }
+
     public int getVieTama() {
         return partie.getTamagotchi().getVie();
     }
