@@ -34,6 +34,7 @@ public class EcranCreation extends JPanel {
         // ----- barre de nom -----
         JTextField barreNom = new JTextField();
         barreNom.setPreferredSize(new Dimension(140, 40));
+        barreNom.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         this.add(createLabelledPanel("Nom du Tamagotchi:", barreNom)); // Ajout d'un label au JTexteField
 
         // ----- Espèces -----

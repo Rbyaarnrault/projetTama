@@ -33,33 +33,33 @@ public class EcranFeu extends JPanel implements EcranActualisable {
 
         // Bouton Mode développeur
         JButton btnDeveloppeur = new JButton("Mode Développeur");
-        btnDeveloppeur.setBounds(460, 300, 100, 60);
+        btnDeveloppeur.setBounds(420, 300, 160, 20);
         this.add(btnDeveloppeur);
 
         // Quitter
         JButton btnQuitter = new JButton("Quitter");
-        btnQuitter.setBounds(400, 260, 120, 40);
+        btnQuitter.setBounds(400, 260, 120, 30);
         this.add(btnQuitter);
         // --> ouvrir menu quitter pour save
 
         // Bouton Manger
         JButton btnManger = new JButton("Manger");
-        btnManger.setBounds(200, 40, 120, 40);
+        btnManger.setBounds(180, 140, 80, 30);
         this.add(btnManger);
 
         // Bouton aller dans la foret
         JButton btnForet = new JButton("Forêt");
-        btnForet.setBounds(200, 100, 120, 40);
+        btnForet.setBounds(180, 220, 80, 30);
         this.add(btnForet);
 
         // Bouton aller dans la tente
         JButton btnTente = new JButton("Tente");
-        btnTente.setBounds(200, 160, 120, 40);
+        btnTente.setBounds(180, 260, 80, 30);
         this.add(btnTente);
 
         // Bouton aller à la rivière
         JButton btnRiviere = new JButton("Rivière");
-        btnRiviere.setBounds(200, 220, 120, 40);
+        btnRiviere.setBounds(180, 300, 80, 30);
         this.add(btnRiviere);
 
         // -----Gestion des écouteurs-----

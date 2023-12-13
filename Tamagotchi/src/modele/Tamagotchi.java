@@ -1,5 +1,7 @@
 package modele;
 
+import java.util.Arrays;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -8,15 +10,14 @@ public class Tamagotchi {
     // Constantes pour les valeurs limites maximales
     private static final int MIN_VIE = 0, MAX_VIE = 100;
     private static final int MIN_HYGIENE = 0, MAX_HYGIENE = 100;
-    private static final int MIN_FAIM = 0, MAX_FAIM = 100;
+    private static final int MIN_FAIM = 0, MAX_FAIM = 200;
     private static final int MIN_SOMMEIL = 0, MAX_SOMMEIL = 100;
     private static final int MIN_LOISIR = 0, MAX_LOISIR = 100;
 
     // Constantes pour les incrémentation et decrémentations
-    private static final int DEC_VIE = 1, INC_VIE = 30;
     private static final int DEC_HYGIENE = 2, INC_HYGIENE = 30;
-    private static final int DEC_FAIM = 2, INC_FAIM = 30;
-    private static final int DEC_SOMMEIL = 2, INC_SOMMEIL = 30;
+    private static final int DEC_FAIM = 3, INC_FAIM = 30;
+    private static final int DEC_SOMMEIL = 1, INC_SOMMEIL = 30;
     private static final int DEC_LOISIR = 2, INC_LOISIR = 30;
 
     // Atributs
@@ -28,16 +29,37 @@ public class Tamagotchi {
             this.nom = name;
             this.type = type;
             this.dureeVie = 0; // Départ du compteur de durée de vie
-            this.vie = 100;
-            this.hygiene = 100;
-            this.faim = 100;
-            this.sommeil = 100;
-            this.loisir = 100;
-
+            this.vie = MAX_VIE;
+            this.hygiene = MAX_HYGIENE;
+            this.faim = MAX_FAIM;
+            this.sommeil = MAX_SOMMEIL;
+            this.loisir = MAX_LOISIR;
+            actualiserVie();
         } else {
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f, "Vous devez choisir le type de Tamagotchi !");
         }
+    }
+
+    private void actualiserVie() {
+        // Méthode qui va calculer la valeur de "vie" selon la valeur des 2 constantes
+        // les plus basses
+        // Ici Basé sur le fait faire mourir le tamagotchi si 2 attribut atteignent 0
+
+        int[] constantes = { hygiene, faim, sommeil, loisir };
+
+        // Tri du tableau dans l'ordre croissant
+        Arrays.sort(constantes);
+
+        // Calcul de la moyenne des trois constantes les plus basses
+        int moyenne = (constantes[0] + constantes[1]) / 2;
+
+        if (vie >= MIN_VIE) {
+            vie = MIN_VIE;
+        } else {
+            vie = moyenne;
+        }
+
     }
 
     // Méthode utilitaire pour incrémenter une valeur jusqu'à un maximum
@@ -62,11 +84,12 @@ public class Tamagotchi {
 
     public void decrementer() {
         // Diminution selon les constantes chosies des attributs
-        vie = decrecrementerValeur(vie, DEC_VIE, MIN_VIE);
-        faim = decrecrementerValeur(vie, DEC_FAIM, MIN_FAIM);
-        hygiene = decrecrementerValeur(vie, DEC_HYGIENE, MIN_HYGIENE);
-        sommeil = decrecrementerValeur(vie, DEC_SOMMEIL, MIN_SOMMEIL);
-        loisir = decrecrementerValeur(vie, DEC_LOISIR, MIN_LOISIR);
+
+        faim = decrecrementerValeur(faim, DEC_FAIM, MIN_FAIM);
+        hygiene = decrecrementerValeur(hygiene, DEC_HYGIENE, MIN_HYGIENE);
+        sommeil = decrecrementerValeur(sommeil, DEC_SOMMEIL, MIN_SOMMEIL);
+        loisir = decrecrementerValeur(loisir, DEC_LOISIR, MIN_LOISIR);
+        actualiserVie();
     }
 
     // -----Etat Tamagotchi-----

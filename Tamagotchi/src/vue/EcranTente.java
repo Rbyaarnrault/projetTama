@@ -31,26 +31,26 @@ public class EcranTente extends JPanel implements EcranActualisable {
 
         // -----Initialisation des boutons-----
 
-        // Bouton Mode développeur
+        // Bouton Dormir
         JButton btnDormir = new JButton("Dormir");
-        btnDormir.setBounds(460, 200, 100, 60);
+        btnDormir.setBounds(180, 140, 80, 30);
         this.add(btnDormir);
+
+        // Bouton Feu
+        JButton btnFeu = new JButton("Feu");
+        btnFeu.setBounds(180, 220, 80, 30);
+        this.add(btnFeu);
 
         // Bouton Mode développeur
         JButton btnDeveloppeur = new JButton("Mode Développeur");
-        btnDeveloppeur.setBounds(460, 300, 100, 60);
+        btnDeveloppeur.setBounds(420, 300, 160, 20);
         this.add(btnDeveloppeur);
 
         // Quitter
         JButton btnQuitter = new JButton("Quitter");
-        btnQuitter.setBounds(400, 260, 120, 40);
+        btnQuitter.setBounds(400, 260, 120, 30);
         this.add(btnQuitter);
         // --> ouvrir menu quitter pour save
-
-        // Bouton Manger
-        JButton btnFeu = new JButton("Feu");
-        btnFeu.setBounds(200, 40, 120, 40);
-        this.add(btnFeu);
 
         // -----Gestion des écouteurs-----
 

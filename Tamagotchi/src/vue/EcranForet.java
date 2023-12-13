@@ -32,28 +32,28 @@ public class EcranForet extends JPanel implements EcranActualisable {
 
         // Bouton Jouer
         JButton btnJouer = new JButton("Jouer");
-        btnJouer.setBounds(460, 200, 100, 60);
+        btnJouer.setBounds(180, 140, 80, 30);
         this.add(btnJouer);
 
         // Bouton Mode développeur
         JButton btnDeveloppeur = new JButton("Mode Développeur");
-        btnDeveloppeur.setBounds(460, 300, 100, 60);
+        btnDeveloppeur.setBounds(420, 300, 160, 20);
         this.add(btnDeveloppeur);
 
         // Quitter
         JButton btnQuitter = new JButton("Quitter");
-        btnQuitter.setBounds(400, 260, 120, 40);
+        btnQuitter.setBounds(400, 260, 120, 30);
         this.add(btnQuitter);
         // --> ouvrir menu quitter pour save
 
         // Bouton Feu
         JButton btnFeu = new JButton("Feu");
-        btnFeu.setBounds(200, 40, 120, 40);
+        btnFeu.setBounds(180, 220, 80, 30);
         this.add(btnFeu);
 
         // Bouton Rivière
         JButton btnRiviere = new JButton("Riviere");
-        btnRiviere.setBounds(200, 400, 120, 40);
+        btnRiviere.setBounds(180, 260, 80, 30);
         this.add(btnRiviere);
 
         // -----Gestion des écouteurs-----

@@ -48,7 +48,7 @@ public class TamagotchiControleur {
                 vitesseTimerDecr = panDev.getVitesseTimer();
 
                 // Maj du délai du timer de décrémentation en fonction de la vitesse choisie
-                timerDecrementation.setDelay(1000 / vitesseTimerDecr);
+                timerDecrementation.setDelay(5000 / vitesseTimerDecr);
                 changerEcran(getPanelActif()); // Rappelle le dernier écran actif
             }
         });
@@ -103,8 +103,6 @@ public class TamagotchiControleur {
     // -----Gestion de la sauvegarde-----
     public void sauvergarderPartie() {
         partie.sauvergarder();
-        // remettre accueil
-        changerEcran("accueil");
     }
 
     public void chargerSauvegarde() {

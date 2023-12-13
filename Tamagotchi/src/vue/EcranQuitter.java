@@ -15,7 +15,7 @@ public class EcranQuitter extends JPanel {
 
     public EcranQuitter(TamagotchiControleur controleur) {
         this.controleur = controleur;
-        this.setLayout(null);
+        // this.setLayout(null);
         this.add(creerPanelComposants());
     }
 
@@ -39,6 +39,8 @@ public class EcranQuitter extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 controleur.sauvergarderPartie();
                 JOptionPane.showMessageDialog(new JFrame(), "La sauvegarde a bien été effectuée !");
+                // remettre accueil
+                controleur.changerEcran("accueil");
             }
         });
 
@@ -46,7 +48,7 @@ public class EcranQuitter extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Permet de revenir à l'écran de jeu
-                controleur.changerEcran("feu");
+                controleur.changerEcran(controleur.getPanelActif()); // Rappelle le dernier écran actif
             }
         });
 

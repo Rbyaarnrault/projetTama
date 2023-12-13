@@ -31,32 +31,32 @@ public class EcranRiviere extends JPanel implements EcranActualisable {
 
         // Bouton Manger
         JButton btnManger = new JButton("Manger");
-        btnManger.setBounds(200, 40, 120, 40);
+        btnManger.setBounds(180, 140, 80, 30);
         this.add(btnManger);
 
         // Bouton Jouer
         JButton btnJouer = new JButton("Jouer");
-        btnJouer.setBounds(460, 200, 100, 60);
+        btnJouer.setBounds(180, 180, 80, 30);
         this.add(btnJouer);
 
         // Bouton Feu
         JButton btnFeu = new JButton("Feu");
-        btnFeu.setBounds(460, 100, 100, 60);
+        btnFeu.setBounds(180, 260, 80, 30);
         this.add(btnFeu);
 
         // Bouton Foret
         JButton btnForet = new JButton("Foret");
-        btnForet.setBounds(460, 100, 100, 60);
+        btnForet.setBounds(180, 300, 80, 30);
         this.add(btnForet);
 
         // Bouton Mode développeur
         JButton btnDeveloppeur = new JButton("Mode Développeur");
-        btnDeveloppeur.setBounds(460, 300, 100, 60);
+        btnDeveloppeur.setBounds(420, 300, 160, 20);
         this.add(btnDeveloppeur);
 
         // Quitter
         JButton btnQuitter = new JButton("Quitter");
-        btnQuitter.setBounds(400, 260, 120, 40);
+        btnQuitter.setBounds(400, 260, 120, 30);
         this.add(btnQuitter);
         // --> ouvrir menu quitter pour save
 
