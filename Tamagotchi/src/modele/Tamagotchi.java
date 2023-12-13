@@ -13,11 +13,11 @@ public class Tamagotchi {
     private static final int MIN_LOISIR = 0, MAX_LOISIR = 100;
 
     // Constantes pour les incrémentation et decrémentations
-    private static final int DEC_VIE = 30, INC_VIE = 30;
-    private static final int DEC_HYGIENE = 30, INC_HYGIENE = 30;
-    private static final int DEC_FAIM = 30, INC_FAIM = 30;
-    private static final int DEC_SOMMEIL = 30, INC_SOMMEIL = 30;
-    private static final int DEC_LOISIR = 30, INC_LOISIR = 30;
+    private static final int DEC_VIE = 1, INC_VIE = 30;
+    private static final int DEC_HYGIENE = 2, INC_HYGIENE = 30;
+    private static final int DEC_FAIM = 2, INC_FAIM = 30;
+    private static final int DEC_SOMMEIL = 2, INC_SOMMEIL = 30;
+    private static final int DEC_LOISIR = 2, INC_LOISIR = 30;
 
     // Atributs
     private String nom, type;
@@ -29,10 +29,10 @@ public class Tamagotchi {
             this.type = type;
             this.dureeVie = 0; // Départ du compteur de durée de vie
             this.vie = 100;
-            this.hygiene = 80;
-            this.faim = 60;
-            this.sommeil = 50;
-            this.loisir = 50;
+            this.hygiene = 100;
+            this.faim = 100;
+            this.sommeil = 100;
+            this.loisir = 100;
 
         } else {
             JFrame f = new JFrame();
@@ -71,10 +71,10 @@ public class Tamagotchi {
 
     // -----Etat Tamagotchi-----
 
-    public int manger() {
+    public void manger() {
         // Incrémentation de l'attribut faim par la constante INC_
         faim = incrementerValeur(faim, INC_FAIM, MAX_FAIM);
-        return faim;
+        // return faim;
     }
 
     public int dormir() {

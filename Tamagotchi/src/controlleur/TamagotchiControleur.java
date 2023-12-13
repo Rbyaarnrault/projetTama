@@ -23,8 +23,9 @@ public class TamagotchiControleur {
     private EcranDeveloppeur panDev;
     private Partie partie;
     private Timer timerActualisation, timerDecrementation;
-    private int vitesseTimerDecr = 5; // Valeur par défault si non modifiée
+    private int vitesseTimerDecr = 1; // Valeur par défault si non modifiée
     private List<EcranActualisable> ecrans;
+    private String panActif;
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
@@ -48,6 +49,7 @@ public class TamagotchiControleur {
 
                 // Maj du délai du timer de décrémentation en fonction de la vitesse choisie
                 timerDecrementation.setDelay(1000 / vitesseTimerDecr);
+                changerEcran(getPanelActif()); // Rappelle le dernier écran actif
             }
         });
 
@@ -160,6 +162,9 @@ public class TamagotchiControleur {
                 pan = panDev;
                 break;
         }
+        if (choix != "developpeur") {
+            panActif = choix; // Dernier écran actif appelé avant le mode développeur
+        }
         fenetre.actualiser(pan);
 
     }
@@ -190,6 +195,10 @@ public class TamagotchiControleur {
     // -----Getters-----
     public Partie getPartie() {
         return partie;
+    }
+
+    public String getPanelActif() {
+        return panActif;
     }
 
     public int getVieTama() {

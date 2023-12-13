@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import controlleur.TamagotchiControleur;
 import modele.Tamagotchi;
 
 import java.awt.*;
