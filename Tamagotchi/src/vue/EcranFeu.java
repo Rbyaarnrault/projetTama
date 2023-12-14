@@ -131,7 +131,7 @@ public class EcranFeu extends JPanel implements EcranActualisable {
     // Méthode d'actualisation du PanelProgressBar
     @Override
     public void actualiserComposantsAvecAttributs() {
-        panInfos.actualiserInfos(controleur.getPartie().getTamagotchi());
+        panInfos.actualiserInfos(controleur.getPartie());
         panBarres.actualiserConstantes(controleur.getPartie().getTamagotchi());
     }
 

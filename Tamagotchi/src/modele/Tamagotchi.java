@@ -9,20 +9,19 @@ public class Tamagotchi {
     // Constantes pour les valeurs limites maximales
     private static final int MIN_VIE = 0, MAX_VIE = 100;
     private static final int MIN_HYGIENE = 0, MAX_HYGIENE = 100;
-    private static final int MIN_FAIM = 0, MAX_FAIM = 200;
+    private static final int MIN_FAIM = 0, MAX_FAIM = 100;
     private static final int MIN_SOMMEIL = 0, MAX_SOMMEIL = 100;
     private static final int MIN_LOISIR = 0, MAX_LOISIR = 100;
 
     // Constantes pour les incrémentation et decrémentations
-    private static final int DEC_HYGIENE = 2, INC_HYGIENE = 30;
+    private static final int DEC_HYGIENE = 2, INC_HYGIENE = 100;
     private static final int DEC_FAIM = 3, INC_FAIM = 30;
-    private static final int DEC_SOMMEIL = 1, INC_SOMMEIL = 30;
-    private static final int DEC_LOISIR = 2, INC_LOISIR = 30;
+    private static final int DEC_SOMMEIL = 1, INC_SOMMEIL = 60;
+    private static final int DEC_LOISIR = 2, INC_LOISIR = 50;
 
     // Atributs
     private String nom, type;
-    private int vie, hygiene, faim, sommeil, loisir;
-    private long dureeVie;
+    private int dureeVie, vie, hygiene, faim, sommeil, loisir;
 
     public Tamagotchi(String name, String type) { // Instancie un objet tamagotchi par son nom
         if ((type.equals("Chien")) || (type.equals("Chat")) || (type.equals("Robot"))) {
@@ -55,15 +54,16 @@ public class Tamagotchi {
         int moyenne = (constantes[0] + constantes[1]) / 2;
 
         if (vie >= MIN_VIE) {
-            vie = MIN_VIE;
-        } else {
             vie = moyenne;
+        } else {
+            vie = MIN_VIE;
         }
 
     }
 
     public void ajouterSecondeDuree() {
-        dureeVie += 1;
+        setDureeVie(getDureeVie() + 1);
+        ;
     }
 
     // Méthode utilitaire pour incrémenter une valeur jusqu'à un maximum
@@ -130,7 +130,7 @@ public class Tamagotchi {
         return type;
     }
 
-    public long getDureeVie() {
+    public int getDureeVie() {
         return dureeVie;
     }
 

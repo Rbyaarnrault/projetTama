@@ -9,8 +9,6 @@ import controlleur.Sauvegarde;
 public class Partie {
 
     private Tamagotchi tamagotchi;
-    private Timer timerPartie;
-    private int tempsPartie;
     private Sauvegarde sauvegarde;
 
     private Meteo meteo;
@@ -20,26 +18,7 @@ public class Partie {
     public Partie(Tamagotchi tamagotchi) {
         this.tamagotchi = tamagotchi;
 
-        meteo = new Meteo();
-        int delai = 35; // délai pour le changement de météo
-        final int[] cpt = { 0 }; // compteur pour le timer du changement de météo
-
-        // temps en seconde depuis la création de la partie
-        timerPartie = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tempsPartie += 1; // Temps en secondes de la Partie
-                cpt[0] += 1;
-
-                if (cpt[0] == delai) {
-                    meteo.changerMeteo();
-                    cpt[0] = 0;
-                }
-            }
-        });
-
-        // Démarrez le minuteur
-        timerPartie.start();
+        this.meteo = new Meteo();
     }
 
     public void sauvergarder() {
@@ -59,12 +38,8 @@ public class Partie {
         return tamagotchi;
     }
 
-    public int getTempsPartie() {
-        return tempsPartie;
-    }
-
-    public Timer getTimerPartie() {
-        return timerPartie;
+    public Meteo getMeteo() {
+        return meteo;
     }
 
     public Sauvegarde getSauvegarde() {

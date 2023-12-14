@@ -22,7 +22,7 @@ public class TamagotchiControleur {
     private EcranTente panTente;
     private EcranDeveloppeur panDev;
     private Partie partie;
-    private Timer timerActualisation, timerDecrementation, timerDuree;
+    private Timer timerActualisation, timerDecrementation, timerMeteo;
     private int vitesseTimerDecr = 1; // Valeur par défault si non modifiée
     private List<EcranActualisable> ecrans;
     private String panActif;
@@ -73,7 +73,8 @@ public class TamagotchiControleur {
         timerActualisation = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                actualiserEcrans();
+                actualiserEcrans(); // Actualise les ecrans toutes les secondes
+                partie.getTamagotchi().ajouterSecondeDuree(); // Ajoute la duree de vie au tamagotchi
             }
         });
 
@@ -86,19 +87,19 @@ public class TamagotchiControleur {
             }
         });
 
-        // timer qui augmenter de secondes en secondes la duree de vie du Tamagotchi
-        timerDuree = new Timer(1000, new ActionListener() {
+        // timer qui va modifier à terme la météo
+        timerMeteo = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Logique pour augmenter la duree
-                partie.getTamagotchi().ajouterSecondeDuree();
-                ;
+                // Logique pour décrémenter les attributs du Tamagotchi
+                partie.getMeteo().obtenirNouvelleConditionMeteo();
             }
         });
 
         // Démarrez les timers
         timerActualisation.start();
         timerDecrementation.start();
+        timerMeteo.start();
     }
 
     // Méthode pour actualiser tous les écrans
@@ -151,7 +152,7 @@ public class TamagotchiControleur {
                 break;
 
             case "feu": // Ecran Salle Feu
-                fenetre.setTitle("Feu");
+                fenetre.setTitle("Feu de camp");
                 pan = panFeu;
                 break;
 

@@ -46,7 +46,7 @@ public class ChronoFormateur {
                 dureeFormatee.append(minutes).append("min ");
             }
         }
-        if (secondes > 0) {
+        if (secondes >= 0) {
             if (secondes > 1) {
                 dureeFormatee.append(secondes).append("secs ");
             } else {
