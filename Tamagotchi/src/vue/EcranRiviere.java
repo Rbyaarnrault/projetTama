@@ -12,51 +12,55 @@ public class EcranRiviere extends JPanel implements EcranActualisable {
 
     private TamagotchiControleur controleur;
     private PanelProgressBar panBarres;
+    private PanelInfos panInfos;
 
     public EcranRiviere(TamagotchiControleur contr) {
         this.controleur = contr;
-
         this.setLayout(null);
 
-        this.add(initialiserPanelProgressBar());
-        creerPanelComposants();
+        initialiserPanels();
     }
 
-    private PanelProgressBar initialiserPanelProgressBar() {
+    private void initialiserPanels() {
         // Initialisation des barres d'attributs
-        return panBarres = new PanelProgressBar();
+        panBarres = new PanelProgressBar();
+        panInfos = new PanelInfos();
+        creerPanelComposants();
+
+        this.add(panBarres);
+        this.add(panInfos);
     }
 
     private void creerPanelComposants() {
 
         // Bouton Manger
         JButton btnManger = new JButton("Manger");
-        btnManger.setBounds(180, 140, 80, 30);
+        btnManger.setBounds(280, 240, 80, 30);
         this.add(btnManger);
 
         // Bouton Jouer
         JButton btnJouer = new JButton("Jouer");
-        btnJouer.setBounds(180, 180, 80, 30);
+        btnJouer.setBounds(280, 280, 80, 30);
         this.add(btnJouer);
 
         // Bouton Feu
         JButton btnFeu = new JButton("Feu");
-        btnFeu.setBounds(180, 260, 80, 30);
+        btnFeu.setBounds(280, 360, 80, 30);
         this.add(btnFeu);
 
         // Bouton Foret
         JButton btnForet = new JButton("Foret");
-        btnForet.setBounds(180, 300, 80, 30);
+        btnForet.setBounds(280, 400, 80, 30);
         this.add(btnForet);
 
         // Bouton Mode développeur
         JButton btnDeveloppeur = new JButton("Mode Développeur");
-        btnDeveloppeur.setBounds(420, 300, 160, 20);
+        btnDeveloppeur.setBounds(520, 400, 160, 20);
         this.add(btnDeveloppeur);
 
         // Quitter
         JButton btnQuitter = new JButton("Quitter");
-        btnQuitter.setBounds(400, 260, 120, 30);
+        btnQuitter.setBounds(500, 360, 120, 30);
         this.add(btnQuitter);
         // --> ouvrir menu quitter pour save
 
@@ -119,7 +123,8 @@ public class EcranRiviere extends JPanel implements EcranActualisable {
 
     // Méthode d'actualisation du PanelProgressBar
     @Override
-    public void actualiserBarresAvecAttributs() {
+    public void actualiserComposantsAvecAttributs() {
+        panInfos.actualiserInfos(controleur.getPartie().getTamagotchi());
         panBarres.actualiserConstantes(controleur.getPartie().getTamagotchi());
     }
 }

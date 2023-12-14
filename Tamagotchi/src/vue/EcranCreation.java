@@ -1,34 +1,17 @@
 package vue;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+import javax.swing.*;
 import controlleur.TamagotchiControleur;
 
 public class EcranCreation extends JPanel {
 
-    private TamagotchiControleur controleur;
     private JButton boutonEsp1, boutonEsp2, boutonEsp3, boutonEsp4;
     private int especeSelectionnee;
 
     public EcranCreation(TamagotchiControleur controleur) {
-        this.controleur = controleur;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // ----- barre de nom -----

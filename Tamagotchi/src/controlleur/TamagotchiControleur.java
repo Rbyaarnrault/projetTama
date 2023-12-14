@@ -22,7 +22,7 @@ public class TamagotchiControleur {
     private EcranTente panTente;
     private EcranDeveloppeur panDev;
     private Partie partie;
-    private Timer timerActualisation, timerDecrementation;
+    private Timer timerActualisation, timerDecrementation, timerDuree;
     private int vitesseTimerDecr = 1; // Valeur par défault si non modifiée
     private List<EcranActualisable> ecrans;
     private String panActif;
@@ -86,6 +86,16 @@ public class TamagotchiControleur {
             }
         });
 
+        // timer qui augmenter de secondes en secondes la duree de vie du Tamagotchi
+        timerDuree = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Logique pour augmenter la duree
+                partie.getTamagotchi().ajouterSecondeDuree();
+                ;
+            }
+        });
+
         // Démarrez les timers
         timerActualisation.start();
         timerDecrementation.start();
@@ -95,7 +105,7 @@ public class TamagotchiControleur {
     private void actualiserEcrans() {
         if (ecrans != null) {
             for (EcranActualisable ecran : ecrans) {
-                ecran.actualiserBarresAvecAttributs();
+                ecran.actualiserComposantsAvecAttributs();
             }
         }
     }

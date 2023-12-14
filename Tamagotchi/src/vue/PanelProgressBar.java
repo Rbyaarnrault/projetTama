@@ -3,8 +3,6 @@ package vue;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-
-import controlleur.TamagotchiControleur;
 import modele.Tamagotchi;
 
 import java.awt.*;
@@ -55,7 +53,7 @@ public class PanelProgressBar extends JPanel {
 
         // Arrangement en grille (col, lig, hgap, vgap)
         this.setLayout(new GridLayout(5, 2, 10, 10));
-        this.setBounds(400, 10, 180, 120);
+        this.setBounds(500, 10, 180, 120);
     }
 
     public void actualiserConstantes(Tamagotchi tama) {

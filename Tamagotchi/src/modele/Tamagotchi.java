@@ -1,7 +1,6 @@
 package modele;
 
 import java.util.Arrays;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -22,7 +21,8 @@ public class Tamagotchi {
 
     // Atributs
     private String nom, type;
-    private int dureeVie, vie, hygiene, faim, sommeil, loisir;
+    private int vie, hygiene, faim, sommeil, loisir;
+    private long dureeVie;
 
     public Tamagotchi(String name, String type) { // Instancie un objet tamagotchi par son nom
         if ((type.equals("Chien")) || (type.equals("Chat")) || (type.equals("Robot"))) {
@@ -62,6 +62,10 @@ public class Tamagotchi {
 
     }
 
+    public void ajouterSecondeDuree() {
+        dureeVie += 1;
+    }
+
     // Méthode utilitaire pour incrémenter une valeur jusqu'à un maximum
     private int incrementerValeur(int valeur, int increment, int max) {
         if (valeur <= max - increment) {
@@ -97,7 +101,6 @@ public class Tamagotchi {
     public void manger() {
         // Incrémentation de l'attribut faim par la constante INC_
         faim = incrementerValeur(faim, INC_FAIM, MAX_FAIM);
-        // return faim;
     }
 
     public int dormir() {
@@ -127,7 +130,7 @@ public class Tamagotchi {
         return type;
     }
 
-    public int getDureeVie() {
+    public long getDureeVie() {
         return dureeVie;
     }
 
