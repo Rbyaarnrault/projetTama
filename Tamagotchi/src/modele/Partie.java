@@ -12,16 +12,29 @@ public class Partie {
     private Timer timerPartie;
     private int tempsPartie;
     private Sauvegarde sauvegarde;
+
+    private Meteo meteo;
+
     // private int tempsActionTimer;
 
     public Partie(Tamagotchi tamagotchi) {
         this.tamagotchi = tamagotchi;
+
+        meteo = new Meteo();
+        int delai = 35; // délai pour le changement de météo
+        final int[] cpt = { 0 }; // compteur pour le timer du changement de météo
 
         // temps en seconde depuis la création de la partie
         timerPartie = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tempsPartie += 1; // Temps en secondes de la Partie
+                cpt[0] += 1;
+
+                if (cpt[0] == delai) {
+                    meteo.changerMeteo();
+                    cpt[0] = 0;
+                }
             }
         });
 

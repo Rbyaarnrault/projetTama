@@ -41,7 +41,7 @@ public class Tamagotchi {
         }
     }
 
-    private void actualiserVie() {
+    protected void actualiserVie() {
         // Méthode qui va calculer la valeur de "vie" selon la valeur des 2 constantes
         // les plus basses
         // Ici Basé sur le fait faire mourir le tamagotchi si 2 attribut atteignent 0
