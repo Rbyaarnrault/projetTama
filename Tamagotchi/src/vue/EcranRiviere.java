@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import controlleur.TamagotchiControleur;
 import util.EcranActualisable;
 
-public class EcranRiviere extends JPanel implements EcranActualisable {
+public class EcranRiviere extends EcranJeu implements EcranActualisable {
 
     private TamagotchiControleur controleur;
     private PanelProgressBar panBarres;
