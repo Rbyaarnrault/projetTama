@@ -43,6 +43,11 @@ public class EcranRiviere extends JPanel implements EcranActualisable {
         btnJouer.setBounds(280, 280, 80, 30);
         this.add(btnJouer);
 
+        // Bouton Se laver
+        JButton btnLaver = new JButton("Laver");
+        btnLaver.setBounds(180, 360, 80, 30);
+        this.add(btnLaver);
+
         // Bouton Feu
         JButton btnFeu = new JButton("Feu");
         btnFeu.setBounds(280, 360, 80, 30);
@@ -95,6 +100,14 @@ public class EcranRiviere extends JPanel implements EcranActualisable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controleur.jouerTama();
+            }
+        });
+
+        // Déclencher l'action "Se Laver"
+        btnLaver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controleur.laverTama();
             }
         });
 
