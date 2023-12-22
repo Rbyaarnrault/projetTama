@@ -1,25 +1,34 @@
 package vue;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import controlleur.TamagotchiControleur;
-import util.EcranActualisable;
+import java.awt.image.ImageObserver;
 
-public class EcranForet extends EcranJeu implements EcranActualisable {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import controlleur.TamagotchiControleur;
+import modele.Tamagotchi;
+
+public class EcranForet extends EcranJeu {
 
     private TamagotchiControleur controleur;
     private PanelProgressBar panBarres;
     private PanelInfos panInfos;
+    private Image img;
 
     public EcranForet(TamagotchiControleur contr) {
+        super(contr);
         this.controleur = contr;
         this.setLayout(null);
+        this.img = new ImageIcon("Tamagotchi/src/ressources/img/imgForet.jpg").getImage();
 
         initialiserPanels();
     }
 
-    private void initialiserPanels() {
+    protected void initialiserPanels() {
         // Initialisation des barres d'attributs
         panBarres = new PanelProgressBar();
         panInfos = new PanelInfos();
@@ -29,7 +38,7 @@ public class EcranForet extends EcranJeu implements EcranActualisable {
         this.add(panInfos);
     }
 
-    private void creerPanelComposants() {
+    protected void creerPanelComposants() {
 
         // -----Initialisation des boutons-----
 
@@ -113,6 +122,14 @@ public class EcranForet extends EcranJeu implements EcranActualisable {
     public void actualiserComposantsAvecAttributs() {
         panInfos.actualiserInfos(controleur.getPartie());
         panBarres.actualiserConstantes(controleur.getPartie().getTamagotchi());
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (img != null) {
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), (ImageObserver) this);
+        }
     }
 
 }
