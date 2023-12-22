@@ -63,7 +63,7 @@ public class TamagotchiControleur {
         partie = new Partie(tama);
 
         demarrerTimers();
-        changerEcran("feu");
+        changerEcran("foret");
     }
 
     private void demarrerTimers() {

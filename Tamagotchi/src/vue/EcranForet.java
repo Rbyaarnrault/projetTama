@@ -7,113 +7,35 @@ import javax.swing.JPanel;
 import controlleur.TamagotchiControleur;
 import util.EcranActualisable;
 
-public class EcranForet extends EcranJeu implements EcranActualisable {
-
-    private TamagotchiControleur controleur;
-    private PanelProgressBar panBarres;
-    private PanelInfos panInfos;
+public class EcranForet extends EcranJeu {
 
     public EcranForet(TamagotchiControleur contr) {
-        this.controleur = contr;
+        super(contr);
         this.setLayout(null);
-
-        initialiserPanels();
+        super.initialiserPanels();
     }
 
-    private void initialiserPanels() {
-        // Initialisation des barres d'attributs
-        panBarres = new PanelProgressBar();
-        panInfos = new PanelInfos();
-        creerPanelComposants();
-
-        this.add(panBarres);
-        this.add(panInfos);
-    }
-
-    private void creerPanelComposants() {
-
-        // -----Initialisation des boutons-----
-
-        // Bouton Jouer
-        JButton btnJouer = new JButton("Jouer");
-        btnJouer.setBounds(280, 240, 80, 30);
-        this.add(btnJouer);
-
-        // Bouton Mode développeur
-        JButton btnDeveloppeur = new JButton("Mode Développeur");
+    protected void placerComposants() {
         btnDeveloppeur.setBounds(520, 400, 160, 20);
         this.add(btnDeveloppeur);
-
-        // Quitter
-        JButton btnQuitter = new JButton("Quitter");
         btnQuitter.setBounds(500, 360, 120, 30);
         this.add(btnQuitter);
-        // --> ouvrir menu quitter pour save
-
-        // Bouton Feu
-        JButton btnFeu = new JButton("Feu");
+        // BTN Lieux
         btnFeu.setBounds(280, 320, 80, 30);
         this.add(btnFeu);
-
-        // Bouton Rivière
-        JButton btnRiviere = new JButton("Riviere");
-        btnRiviere.setBounds(280, 360, 80, 30);
+        btnRiviere.setBounds(280, 400, 80, 30);
         this.add(btnRiviere);
-
-        // -----Gestion des écouteurs-----
-
-        // Déclencer l'action "Jouer"
-        btnJouer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.jouerTama();
-            }
-        });
-
-        // Aller au feu
-        btnFeu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran("feu");
-            }
-        });
-
-        // Aller à la rivière
-        btnRiviere.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran("riviere");
-            }
-        });
-
-        // Aller au mode développeur
-        btnDeveloppeur.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran("developpeur");
-            }
-        });
-
-        // Quitter
-        btnQuitter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran("quitter");
-            }
-        });
-    }
-
-    // ------
-    // Getter du panel des JprogressBar
-    public PanelProgressBar getPanelBarres() {
-        return panBarres;
+        // BTN Actions
+        btnManger.setBounds(280, 240, 80, 30);
+        this.add(btnManger);
+        btnJouer.setBounds(380, 220, 80, 30);
+        this.add(btnJouer);
     }
 
     // Méthode d'actualisation du PanelProgressBar
     @Override
     public void actualiserComposantsAvecAttributs() {
-        panInfos.actualiserInfos(controleur.getPartie());
-        panBarres.actualiserConstantes(controleur.getPartie().getTamagotchi());
+        super.actualiserComposantsAvecAttributs();
     }
 
 }
