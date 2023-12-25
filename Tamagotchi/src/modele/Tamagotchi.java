@@ -1,44 +1,27 @@
 package modele;
 
 import java.util.Arrays;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-public class Tamagotchi {
-
-    // Constantes pour les valeurs limites maximales
-    private static final int MIN_VIE = 0, MAX_VIE = 100;
-    private static final int MIN_HYGIENE = 0, MAX_HYGIENE = 100;
-    private static final int MIN_FAIM = 0, MAX_FAIM = 100;
-    private static final int MIN_SOMMEIL = 0, MAX_SOMMEIL = 100;
-    private static final int MIN_LOISIR = 0, MAX_LOISIR = 100;
-
-    // Constantes pour les incrémentation et decrémentations
-    private static final int DEC_HYGIENE = 2, INC_HYGIENE = 100;
-    private static final int DEC_FAIM = 3, INC_FAIM = 30;
-    private static final int DEC_SOMMEIL = 1, INC_SOMMEIL = 60;
-    private static final int DEC_LOISIR = 2, INC_LOISIR = 50;
+public abstract class Tamagotchi {
 
     // Atributs
-    private String nom, type;
-    private int dureeVie, vie, hygiene, faim, sommeil, loisir;
+    protected String nom;
+    protected StrategieConstantes strategie; // Instancié dans les sous classes
+    protected int dureeVie, vie, hygiene, faim, sommeil, loisir;
 
-    public Tamagotchi(String name, String type) { // Instancie un objet tamagotchi par son nom
-        if ((type.equals("Chien")) || (type.equals("Chat")) || (type.equals("Robot"))) {
-            this.nom = name;
-            this.type = type;
-            this.dureeVie = 0; // Départ du compteur de durée de vie
-            this.vie = MAX_VIE;
-            this.hygiene = MAX_HYGIENE;
-            this.faim = MAX_FAIM;
-            this.sommeil = MAX_SOMMEIL;
-            this.loisir = MAX_LOISIR;
-            actualiserVie();
-        } else {
-            JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Vous devez choisir le type de Tamagotchi !");
-        }
+    public Tamagotchi(String name) { // Instancie un objet tamagotchi par son nom
+        this.nom = name;
+        this.strategie = initialiserStrategie();
+
+        this.dureeVie = 0; // Départ du compteur de durée de vie
+        this.vie = strategie.getMax_Vie();
+        this.hygiene = strategie.getMax_Hygiene();
+        this.faim = strategie.getMax_Faim();
+        this.sommeil = strategie.getMax_Sommeil();
+        this.loisir = strategie.getMAX_Loisir();
     }
+
+    protected abstract StrategieConstantes initialiserStrategie();
 
     protected void actualiserVie() {
         // Méthode qui va calculer la valeur de "vie" selon la valeur des 2 constantes
@@ -53,10 +36,10 @@ public class Tamagotchi {
         // Calcul de la moyenne des trois constantes les plus basses
         int moyenne = (constantes[0] + constantes[1]) / 2;
 
-        if (vie >= MIN_VIE) {
+        if (vie >= strategie.getMin_Vie()) {
             vie = moyenne;
         } else {
-            vie = MIN_VIE;
+            vie = strategie.getMin_Vie();
         }
 
     }
@@ -89,10 +72,10 @@ public class Tamagotchi {
     public void decrementer() {
         // Diminution selon les constantes chosies des attributs
 
-        faim = decrecrementerValeur(faim, DEC_FAIM, MIN_FAIM);
-        hygiene = decrecrementerValeur(hygiene, DEC_HYGIENE, MIN_HYGIENE);
-        sommeil = decrecrementerValeur(sommeil, DEC_SOMMEIL, MIN_SOMMEIL);
-        loisir = decrecrementerValeur(loisir, DEC_LOISIR, MIN_LOISIR);
+        faim = decrecrementerValeur(faim, strategie.getDec_Faim(), strategie.getMin_Faim());
+        hygiene = decrecrementerValeur(hygiene, strategie.getDec_Hygiene(), strategie.getMin_Hygiene());
+        sommeil = decrecrementerValeur(sommeil, strategie.getDec_Sommeil(), strategie.getMin_Sommeil());
+        loisir = decrecrementerValeur(loisir, strategie.getDec_Loisir(), strategie.getMin_Loisir());
         actualiserVie();
     }
 
@@ -100,34 +83,30 @@ public class Tamagotchi {
 
     public void manger() {
         // Incrémentation de l'attribut faim par la constante INC_
-        faim = incrementerValeur(faim, INC_FAIM, MAX_FAIM);
+        faim = incrementerValeur(faim, strategie.getInc_Faim(), strategie.getMax_Faim());
     }
 
     public int dormir() {
         // Incrémentation de l'attribut sommeil par la constante INC_SOMMEIL
-        sommeil = incrementerValeur(sommeil, INC_SOMMEIL, MAX_SOMMEIL);
+        sommeil = incrementerValeur(sommeil, strategie.getInc_Sommeil(), strategie.getMax_Sommeil());
         return sommeil;
     }
 
     public int laver() {
         // Incrémentation de l'attribut hygiene par la constante INC_HYGIENE
-        hygiene = incrementerValeur(hygiene, INC_HYGIENE, MAX_HYGIENE);
+        hygiene = incrementerValeur(hygiene, strategie.getInc_Hygiene(), strategie.getMax_Hygiene());
         return hygiene;
     }
 
     public int jouer() {
         // Incrémentation de l'attribut loisir par la constante INC_LOISIR
-        loisir = incrementerValeur(loisir, INC_LOISIR, MAX_LOISIR);
+        loisir = incrementerValeur(loisir, strategie.getInc_Loisir(), strategie.getMAX_Loisir());
         return loisir;
     }
 
     // -----Getters-----
     public String getNom() {
         return nom;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public int getDureeVie() {

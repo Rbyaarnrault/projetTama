@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import controlleur.TamagotchiControleur;
-import modele.Tamagotchi;
 
 public class EcranForet extends EcranJeu {
 

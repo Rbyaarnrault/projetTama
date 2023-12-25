@@ -9,7 +9,12 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import modele.Chat;
+import modele.Chien;
 import modele.Partie;
+import modele.Poussin;
+import modele.Robot;
 import modele.Tamagotchi;
 import util.EcranActualisable;
 import vue.*;
@@ -59,11 +64,28 @@ public class TamagotchiControleur {
 
     public void creerNouvellePartie(String n, String t) {
         // Logique pour créer une nouvelle partie
-        Tamagotchi tama = new Tamagotchi(n, t); // Création du tamagotchi en récupérant le contenu des JTextField
+        Tamagotchi tama = choisirTamagotchi(n, t);
         partie = new Partie(tama);
 
         demarrerTimers();
         changerEcran("foret");
+    }
+
+    // Méthode qui instancie le bon type de tamagotchi selon l'espèce choisie
+    private Tamagotchi choisirTamagotchi(String nom, String espece) {
+        switch (espece) {
+            case "Chien":
+                return new Chien(nom);
+            case "Chat":
+                return new Chat(nom);
+            case "Robot":
+                return new Robot(nom);
+            case "Poussin":
+                return new Poussin(nom);
+            // Gestion d'erreur:
+            default:
+                throw new IllegalArgumentException("Espèce non reconnue : " + espece);
+        }
     }
 
     private void demarrerTimers() {
