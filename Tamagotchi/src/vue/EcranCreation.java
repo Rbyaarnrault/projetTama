@@ -3,6 +3,8 @@ package vue;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
+
 import javax.swing.*;
 import controlleur.TamagotchiControleur;
 
@@ -10,8 +12,10 @@ public class EcranCreation extends JPanel {
 
     private JButton boutonEsp1, boutonEsp2, boutonEsp3, boutonEsp4;
     private int especeSelectionnee;
+    private Image img;
 
     public EcranCreation(TamagotchiControleur controleur) {
+        this.img = new ImageIcon("Tamagotchi/src/ressources/img/chargePa.png").getImage();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // ----- barre de nom -----
@@ -46,11 +50,21 @@ public class EcranCreation extends JPanel {
         JPanel boutonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JButton effacerButton = new JButton("Effacer");
         JButton validerButton = new JButton("Valider");
+        JButton retourMenButton = new JButton("Retour");
         boutonsPanel.add(effacerButton);
         boutonsPanel.add(validerButton);
+        boutonsPanel.add(retourMenButton);
         this.add(boutonsPanel);
 
         // Ajout des écouteurs
+
+        retourMenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controleur.changerEcran("accueil");
+            }
+        });
+
         effacerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -155,6 +169,14 @@ public class EcranCreation extends JPanel {
 
     private void afficherFenetreErreur(String message) {
         JOptionPane.showMessageDialog(this, message);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (img != null) {
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), (ImageObserver) this);
+        }
     }
 
 }

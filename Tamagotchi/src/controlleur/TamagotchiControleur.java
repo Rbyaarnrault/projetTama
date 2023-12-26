@@ -223,6 +223,32 @@ public class TamagotchiControleur {
         partie.getTamagotchi().laver();
     }
 
+    // AJOUTER LES METHODES SPECIFIQUE DU ROBOT
+
+    // Robot
+
+    public void recyclerRobot() {
+        // Logique pour la gestion du mode recyclage du robot
+        partie.getTamagotchi().recycler();
+    }
+
+    public void rechargerRobot() {
+        // Logique pour la gestion de la recharge du robot
+        partie.getTamagotchi().recharger();
+    }
+
+    public void majRobot() {
+        // Logique pour la gestion des mises à jour du robot
+        partie.getTamagotchi().maj();
+    }
+
+    public void blagueRobot() {
+        // Logique pour la gestion des blagues du robot
+        partie.getTamagotchi().blague();
+    }
+
+    // CREER UN GETROBOT SPECIFIQUE PLUTOT QUE GETTAMAGOTCHI ?
+
     // -----Getters-----
     public Partie getPartie() {
         return partie;

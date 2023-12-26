@@ -1,12 +1,21 @@
 package vue;
 
+import javax.swing.ImageIcon;
+
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+
 import controlleur.TamagotchiControleur;
 
 public class EcranFeu extends EcranJeu {
 
+    private Image img;
+
     public EcranFeu(TamagotchiControleur contr) {
         super(contr);
         this.setLayout(null);
+        this.img = new ImageIcon("Tamagotchi/src/ressources/img/imgFe3.jpg").getImage();
         super.initialiserPanels();
     }
 
@@ -16,20 +25,26 @@ public class EcranFeu extends EcranJeu {
         btnQuitter.setBounds(500, 360, 120, 30);
         this.add(btnQuitter);
         // BTN Lieux
-        btnForet.setBounds(280, 320, 80, 30);
+        btnForet.setBounds(320, 220, 80, 30);
         this.add(btnForet);
-        btnTente.setBounds(280, 400, 80, 30);
+        btnTente.setBounds(480, 260, 80, 30);
         this.add(btnTente);
         // BTN Actions
-        btnManger.setBounds(280, 240, 80, 30);
+        btnManger.setBounds(320, 420, 80, 30);
         this.add(btnManger);
-        btnJouer.setBounds(380, 220, 80, 30);
-        this.add(btnJouer);
     }
 
     // Méthode d'actualisation du PanelProgressBar
     @Override
     public void actualiserComposantsAvecAttributs() {
         super.actualiserComposantsAvecAttributs();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (img != null) {
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), (ImageObserver) this);
+        }
     }
 }

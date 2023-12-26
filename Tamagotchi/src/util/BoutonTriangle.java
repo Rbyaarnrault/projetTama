@@ -11,6 +11,20 @@ public class BoutonTriangle extends JButton {
         setContentAreaFilled(false);
         setFocusPainted(false);
         setBorderPainted(false);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+
+        BoutonTriangle upButton = new BoutonTriangle(Direction.UP);
+        BoutonTriangle downButton = new BoutonTriangle(Direction.DOWN);
+        BoutonTriangle leftButton = new BoutonTriangle(Direction.LEFT);
+        BoutonTriangle rightButton = new BoutonTriangle(Direction.RIGHT);
+
+        panel.add(upButton);
+        panel.add(downButton);
+        panel.add(leftButton);
+        panel.add(rightButton);
+
     }
 
     private Polygon createTriangle(Direction direction) {

@@ -15,7 +15,7 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     private PanelProgressBar panBarres;
     private PanelInfos panInfos;
     protected JButton btnDeveloppeur, btnQuitter, btnManger, btnForet, btnTente, btnRiviere, btnFeu, btnLaver, btnJouer,
-            btnDormir;
+            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague;
 
     public EcranJeu(TamagotchiControleur controleur) {
         this.controleur = controleur;
@@ -40,6 +40,7 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         // Boutons
         btnDeveloppeur = new JButton("Mode Développeur");
         btnQuitter = new JButton("Quitter");
+
         // Lieux
         btnForet = new JButton("Forêt");
         btnTente = new JButton("Tente");
@@ -50,6 +51,12 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         btnLaver = new JButton("Laver");
         btnDormir = new JButton("Dormir");
         btnJouer = new JButton("Jouer");
+
+        // Boutons du robot
+        btnRecycler = new JButton("Recycler");
+        btnRecharger = new JButton("Recharger");
+        btnMaj = new JButton("Mise à jour");
+        btnBlague = new JButton("Blague");
 
         // -----Gestion des écouteurs-----
         // Aller au mode développeur
