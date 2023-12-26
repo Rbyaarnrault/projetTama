@@ -4,7 +4,6 @@ public class Chat extends Tamagotchi {
 
     public Chat(String name) {
         super(name);
-        this.strategie = new StrategieChat();
     }
 
     @Override

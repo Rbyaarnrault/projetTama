@@ -71,7 +71,6 @@ public abstract class Tamagotchi {
 
     public void decrementer() {
         // Diminution selon les constantes chosies des attributs
-
         faim = decrecrementerValeur(faim, strategie.getDec_Faim(), strategie.getMin_Faim());
         hygiene = decrecrementerValeur(hygiene, strategie.getDec_Hygiene(), strategie.getMin_Hygiene());
         sommeil = decrecrementerValeur(sommeil, strategie.getDec_Sommeil(), strategie.getMin_Sommeil());

@@ -55,44 +55,37 @@ public abstract class StrategieConstantes {
     }
 
     // ----------------------
-    public int getDec_Vie() {
-        return MIN_VIE;
-    }
-
-    public int getInc_Vie() {
-        return MAX_VIE;
-    }
 
     public int getDec_Hygiene() {
-        return MIN_HYGIENE;
+        return DEC_HYGIENE;
     }
 
     public int getInc_Hygiene() {
-        return MAX_HYGIENE;
+        return INC_HYGIENE;
     }
 
     public int getDec_Faim() {
-        return MIN_FAIM;
+        return DEC_FAIM;
     }
 
     public int getInc_Faim() {
-        return MAX_FAIM;
+        return INC_FAIM;
     }
 
     public int getDec_Sommeil() {
-        return MIN_SOMMEIL;
+        return DEC_SOMMEIL;
     }
 
     public int getInc_Sommeil() {
-        return MAX_SOMMEIL;
+        return INC_SOMMEIL;
     }
 
     public int getDec_Loisir() {
-        return MIN_LOISIR;
+        return DEC_LOISIR;
     }
 
     public int getInc_Loisir() {
-        return MAX_LOISIR;
+        return INC_LOISIR;
     }
 
 }

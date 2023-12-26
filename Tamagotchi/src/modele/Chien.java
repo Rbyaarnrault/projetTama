@@ -4,7 +4,6 @@ public class Chien extends Tamagotchi {
 
     public Chien(String nom) {
         super(nom);
-        this.strategie = new StrategieChien();
     }
 
     @Override
