@@ -34,7 +34,7 @@ public class TamagotchiControleur {
 
     public TamagotchiControleur(TamagotchiFrame fen) {
         // Initialisation de la fenêtre JFrame
-        fenetre = fen;
+        this.fenetre = fen;
         panForet = new EcranForet(this);
         panRiviere = new EcranRiviere(this);
         panFeu = new EcranFeu(this);
@@ -135,17 +135,19 @@ public class TamagotchiControleur {
 
     // -----Gestion de la sauvegarde-----
     public void sauvergarderPartie() {
+        // Logique pour sauvegarder une partie en cours
         partie.sauvergarder();
     }
 
-    public void chargerSauvegarde() {
-        // Logique pour charger une sauvegarde
-        // Afficher l'écran de la salle en fonction de l'état sauvegardé
-        // Débuter toujours dans la foret ?
+    public void chargerPartie(String nomFichier) {
+        // Logique pour charger une sauvegarde contenue dans le fichier à cet
+        // emplacement
+        partie = partie.getSauvegarde().chargerPartie(nomFichier);
     }
 
     public void supprimerSauvegarde() {
         // Logique pour supprimer une sauvegarde
+
     }
 
     // --------Choix de l'écran----------
@@ -192,6 +194,10 @@ public class TamagotchiControleur {
                 fenetre.setTitle("Mode Développeur");
                 pan = panDev;
                 break;
+            case "sauvegardes": // Ecran de choix de sauvegardes
+                fenetre.setTitle("Choix d'une sauvegarde");
+                pan = new EcranSauvegardes(this);
+                break;
         }
         if (choix != "developpeur") {
             panActif = choix; // Dernier écran actif appelé avant le mode développeur
@@ -229,22 +235,42 @@ public class TamagotchiControleur {
 
     public void recyclerRobot() {
         // Logique pour la gestion du mode recyclage du robot
-        partie.getTamagotchi().recycler();
+        if (partie.getTamagotchi() instanceof Robot) {
+            ((Robot) partie.getTamagotchi()).recycler();
+        } else {
+            // METTRE UN JOPTION PANE ?
+            System.out.println("Ce type de tamagotchi ne peut pas se recycler.");
+        }
     }
 
     public void rechargerRobot() {
         // Logique pour la gestion de la recharge du robot
-        partie.getTamagotchi().recharger();
+        if (partie.getTamagotchi() instanceof Robot) {
+            ((Robot) partie.getTamagotchi()).recharger();
+        } else {
+            // METTRE UN JOPTION PANE ?
+            System.out.println("Ce type de tamagotchi ne peut pas se recharger.");
+        }
     }
 
     public void majRobot() {
         // Logique pour la gestion des mises à jour du robot
-        partie.getTamagotchi().maj();
+        if (partie.getTamagotchi() instanceof Robot) {
+            ((Robot) partie.getTamagotchi()).maj();
+        } else {
+            // METTRE UN JOPTION PANE ?
+            System.out.println("Ce type de tamagotchi ne peut pas se mettre à jour.");
+        }
     }
 
     public void blagueRobot() {
         // Logique pour la gestion des blagues du robot
-        partie.getTamagotchi().blague();
+        if (partie.getTamagotchi() instanceof Robot) {
+            ((Robot) partie.getTamagotchi()).blaguer();
+        } else {
+            // METTRE UN JOPTION PANE ?
+            System.out.println("Ce type de tamagotchi ne peut pas faire de blagues.");
+        }
     }
 
     // CREER UN GETROBOT SPECIFIQUE PLUTOT QUE GETTAMAGOTCHI ?

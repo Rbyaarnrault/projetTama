@@ -50,7 +50,7 @@ public class EcranAccueil extends JPanel {
         panelBoutons.setLayout(new BoxLayout(panelBoutons, BoxLayout.X_AXIS));
 
         JButton nouvellePartieButton = new JButton("Nouvelle Partie");
-        JButton chargerPartieButton = new JButton("Charger la Partie");
+        JButton chargerPartieButton = new JButton("Charger une Partie");
 
         // Gestionnaire d'événements des boutons
         nouvellePartieButton.addActionListener(new ActionListener() {
@@ -65,7 +65,7 @@ public class EcranAccueil extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Logique pour charger une partie
-                controleur.chargerSauvegarde();
+                controleur.changerEcran("sauvegardes");
             }
         });
 

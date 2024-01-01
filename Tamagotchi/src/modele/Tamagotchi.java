@@ -1,8 +1,9 @@
 package modele;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public abstract class Tamagotchi {
+public abstract class Tamagotchi implements Serializable {
 
     // Atributs
     protected String nom;

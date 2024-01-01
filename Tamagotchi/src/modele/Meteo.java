@@ -1,9 +1,10 @@
 package modele;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Random;
 
-public class Meteo {
+public class Meteo implements Serializable {
     // Utilisation d'un générateur de nombres aléatoires
     private Random random = new Random();
 

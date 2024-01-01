@@ -30,7 +30,8 @@ public class Robot extends Tamagotchi {
         // return hygiene;
     }
 
-    public void blague() {
+    public void blaguer() {
+        // Permet au robot de faire une blague aléatoirement dans une liste
         // Incrémentation de l'attribut loisir par la constante INC_LOISIR
         // loisir = incrementerValeur(loisir, strategie.getInc_Loisir(),
         // strategie.getMAX_Loisir());
@@ -39,22 +40,23 @@ public class Robot extends Tamagotchi {
 
     // -----Getters----
 
-    public int getMaj() {
-        // return hygiene;
-    }
-
-    public int getRecharge() {
-        // return faim;
-    }
-
-    public int getRecycler() {
-        // return sommeil;
-    }
-
-    public int getBlague() {
-        // return loisir;
-    }
-
+    /*
+     * public int getMaj() {
+     * // return hygiene;
+     * }
+     * 
+     * public int getRecharge() {
+     * // return faim;
+     * }
+     * 
+     * public int getRecycler() {
+     * // return sommeil;
+     * }
+     * 
+     * public int getBlague() {
+     * // return loisir;
+     * }
+     */
     // Créer des setters différents ou reprendre ceux de Tamagotchi.java ?
 
     @Override
