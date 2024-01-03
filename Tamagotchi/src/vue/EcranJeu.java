@@ -35,12 +35,18 @@ public class EcranJeu extends JPanel implements EcranActualisable {
 
         panBarres = new PanelProgressBar();
         panInfos = new PanelInfos();
-        panTama = new PanelImgTama();
+
         creerPanelComposants();
         placerComposants();
 
         this.add(panBarres);
         this.add(panInfos);
+
+    }
+
+    protected void initialiserPanelTamagotchi() {
+
+        panTama = new PanelImgTama(controleur);
         this.add(panTama);
     }
 
@@ -175,5 +181,8 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     public void actualiserComposantsAvecAttributs() {
         panInfos.actualiserInfos(controleur.getPartie());
         panBarres.actualiserConstantes(controleur.getPartie().getTamagotchi());
+        initialiserPanelTamagotchi();
+        panTama.actualiserImageTama();
     }
+
 }
