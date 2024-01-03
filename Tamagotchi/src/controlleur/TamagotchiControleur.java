@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import modele.Chat;
@@ -137,12 +138,20 @@ public class TamagotchiControleur {
     public void sauvergarderPartie() {
         // Logique pour sauvegarder une partie en cours
         partie.sauvergarder();
+        JOptionPane.showMessageDialog(new JFrame(), "La sauvegarde a bien été effectuée !");
+
+        // remettre accueil
+        changerEcran("accueil");
     }
 
     public void chargerPartie(String nomFichier) {
         // Logique pour charger une sauvegarde contenue dans le fichier à cet
         // emplacement
         partie = Partie.chargerDepuisSauvegarde(nomFichier);
+        if (partie != null) {
+            System.out.println("Sauvegarde " + nomFichier + " chargée !");
+            changerEcran("foret");
+        }
     }
 
     public void supprimerSauvegarde() {

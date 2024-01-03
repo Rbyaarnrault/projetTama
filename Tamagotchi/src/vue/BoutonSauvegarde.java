@@ -9,19 +9,17 @@ public class BoutonSauvegarde extends JButton {
 
     private String nomSauvegarde;
 
-    public BoutonSauvegarde(String nomSauvegarde, Image imageTamagotchi, String dateDerniereSauvegarde) {
+    public BoutonSauvegarde(String nomSauvegarde, Image imageTamagotchi) {
         this.nomSauvegarde = nomSauvegarde;
 
         // Créer un JPanel personnalisé avec le layout souhaité
         JPanel panel = new JPanel(new BorderLayout());
         JLabel labelNom = new JLabel(nomSauvegarde);
         JLabel labelImage = new JLabel(new ImageIcon(imageTamagotchi));
-        JLabel labelDate = new JLabel(dateDerniereSauvegarde);
 
         // Ajouter les composants au JPanel
         panel.add(labelNom, BorderLayout.NORTH);
         panel.add(labelImage, BorderLayout.CENTER);
-        panel.add(labelDate, BorderLayout.SOUTH);
 
         // Utiliser le JPanel comme composant du bouton
         this.add(panel);

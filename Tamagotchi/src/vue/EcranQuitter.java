@@ -1,8 +1,6 @@
 package vue;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,9 +36,6 @@ public class EcranQuitter extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controleur.sauvergarderPartie();
-                JOptionPane.showMessageDialog(new JFrame(), "La sauvegarde a bien été effectuée !");
-                // remettre accueil
-                controleur.changerEcran("accueil");
             }
         });
 

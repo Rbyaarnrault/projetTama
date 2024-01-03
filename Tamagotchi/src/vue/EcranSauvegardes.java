@@ -34,11 +34,11 @@ public class EcranSauvegardes extends JPanel {
             for (File fichier : fichiersSauvegarde) {
                 if (fichier.isFile() && fichier.getName().endsWith(".dat")) { // Seulement les fichiers en .dat
 
-                    BoutonSauvegarde bouton = creerSauvegardeButton(fichier);
+                    // BoutonSauvegarde bouton = creerSauvegardeButton(fichier);
                     JButton bouton1 = new JButton(fichier.getName());
                     // Associez chaque bouton à la sauvegarde correspondante
                     final String nomFichier = fichier.getAbsolutePath();
-                    bouton.addActionListener(new ActionListener() {
+                    bouton1.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             chargerSauvegarde(nomFichier);
@@ -57,17 +57,17 @@ public class EcranSauvegardes extends JPanel {
     }
 
     private BoutonSauvegarde creerSauvegardeButton(File fichier) {
-        // Ici, vous pouvez extraire les informations du fichier si nécessaire
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichier))) {
             String nomSauvegarde = fichier.getName().replace(".dat", ""); // Retirez l'extension;
-            String dateDerniereSauvegarde = "2023-01-01"; // TROUVER METHODE POUR EXTRAIRE DATE OU FAIRE SANS CAR DEJA
-                                                          // DANS LE NOM
 
-            String cheminImage = (String) ois.readObject();
-            Image image = ImageUtils.loadImageFromPath(cheminImage);
+            // Vous pouvez ignorer la lecture de la chaîne (elle est déjà lue dans Partie)
+            ois.readObject(); // Ignorer la chaîne
+
+            // Charger l'image directement depuis le fichier
+            Image image = ImageUtils.loadImageFromPath(fichier.getAbsolutePath());
 
             // Créez et retournez un nouveau bouton SauvegardeButton
-            return new BoutonSauvegarde(nomSauvegarde, image, dateDerniereSauvegarde);
+            return new BoutonSauvegarde(nomSauvegarde, image);
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -78,10 +78,6 @@ public class EcranSauvegardes extends JPanel {
 
     private void chargerSauvegarde(String nomFichier) {
         controleur.chargerPartie(nomFichier);
-        ;
-        // Actualisez l'interface utilisateur avec les détails de la sauvegarde chargée
-        // ...
-        System.out.println("Sauvegarde " + nomFichier + " chargée !");
     }
 
 }
