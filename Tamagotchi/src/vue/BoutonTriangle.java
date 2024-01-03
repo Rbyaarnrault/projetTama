@@ -1,4 +1,4 @@
-package util;
+package vue;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,27 +63,17 @@ public class BoutonTriangle extends JButton {
         g2d.dispose();
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Triangle Button Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-
-        BoutonTriangle upButton = new BoutonTriangle(Direction.UP);
-        BoutonTriangle downButton = new BoutonTriangle(Direction.DOWN);
-        BoutonTriangle leftButton = new BoutonTriangle(Direction.LEFT);
-        BoutonTriangle rightButton = new BoutonTriangle(Direction.RIGHT);
-
-        panel.add(upButton);
-        panel.add(downButton);
-        panel.add(leftButton);
-        panel.add(rightButton);
-
-        frame.add(panel);
-        frame.setVisible(true);
-    }
+    /*
+     * BoutonTriangle upButton = new BoutonTriangle(Direction.UP);
+     * BoutonTriangle downButton = new BoutonTriangle(Direction.DOWN);
+     * BoutonTriangle leftButton = new BoutonTriangle(Direction.LEFT);
+     * BoutonTriangle rightButton = new BoutonTriangle(Direction.RIGHT);
+     * 
+     * panel.add(upButton);
+     * panel.add(downButton);
+     * panel.add(leftButton);
+     * panel.add(rightButton);
+     */
 
     private enum Direction {
         UP, DOWN, LEFT, RIGHT

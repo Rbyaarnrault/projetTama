@@ -1,11 +1,15 @@
 package modele;
 
+import javax.swing.ImageIcon;
+
 public class Robot extends Tamagotchi {
 
     // Créer nouvelles variables
 
     public Robot(String name) {
         super(name);
+        // A MODIFIER POUR BONNE IMAGE
+        imageTamagotchi = new ImageIcon("").getImage();
     }
 
     // -----Etat Tamagotchi-----

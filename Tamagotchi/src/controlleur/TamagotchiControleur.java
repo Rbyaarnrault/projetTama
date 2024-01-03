@@ -142,7 +142,7 @@ public class TamagotchiControleur {
     public void chargerPartie(String nomFichier) {
         // Logique pour charger une sauvegarde contenue dans le fichier à cet
         // emplacement
-        partie = partie.getSauvegarde().chargerPartie(nomFichier);
+        partie = Partie.chargerDepuisSauvegarde(nomFichier);
     }
 
     public void supprimerSauvegarde() {

@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.Image;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -9,6 +10,7 @@ public abstract class Tamagotchi implements Serializable {
     protected String nom;
     protected StrategieConstantes strategie; // Instancié dans les sous classes
     protected int dureeVie, vie, hygiene, faim, sommeil, loisir;
+    protected transient Image imageTamagotchi;
 
     public Tamagotchi(String name) { // Instancie un objet tamagotchi par son nom
         this.nom = name;
@@ -131,6 +133,10 @@ public abstract class Tamagotchi implements Serializable {
 
     public int getLoisir() {
         return loisir;
+    }
+
+    public Image getImage() {
+        return imageTamagotchi;
     }
 
     // -----Setters-----

@@ -4,14 +4,19 @@ import java.io.File;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.swing.JOptionPane;
+
 import controlleur.Sauvegarde;
 
 public class Partie implements Serializable {
 
     private Tamagotchi tamagotchi;
+    private static final long serialVersionUID = 1L;
     private static Sauvegarde sauvegarde;
     // private Salle foret, riviere, feu, tente;
     private Meteo meteo;
+    private String nomFichier;
 
     // private int tempsActionTimer;
 
@@ -26,30 +31,26 @@ public class Partie implements Serializable {
         sauvegarde = new Sauvegarde();
     }
 
+    public Partie() {
+        this.meteo = new Meteo();
+        sauvegarde = new Sauvegarde();
+    }
+
     public void sauvergarder() {
         // Génération d'un fichier à nom unique
-        String nomFichier = genererNomFichierSauvegarde();
+        nomFichier = genererNomFichierSauvegarde();
         sauvegarde.sauvegarderPartie(this, nomFichier);
     }
 
-    /*
-     * public Partie charger(String chemin) {
-     * String[] sauvegardes = obtenirSauvegardesDisponibles();
-     * if (sauvegardes != null && sauvegardes.length > 0) {
-     * String nomFichier = (String) JOptionPane.showInputDialog(new
-     * JOptionPane("sauvegardes"),
-     * "Choisir une sauvegarde à charger:", "Charger une partie",
-     * JOptionPane.QUESTION_MESSAGE, null,
-     * sauvegardes, sauvegardes[0]);
-     * if (nomFichier != null) {
-     * sauvegarde.chargerPartie("chemin/vers/votre/repertoire/sauvegardes/" +
-     * nomFichier);
-     * }
-     * } else {
-     * System.out.println("Il n'y a aucune sauvegarde disponible !");
-     * }
-     * }
-     */
+    public static Partie chargerDepuisSauvegarde(String cheminSauvegarde) {
+        Partie nouvellePartie = new Partie();
+        nouvellePartie.charger(cheminSauvegarde);
+        return nouvellePartie;
+    }
+
+    public void charger(String chemin) {
+        sauvegarde.chargerPartie(chemin);
+    }
 
     public void supprimer() {
 
@@ -83,5 +84,9 @@ public class Partie implements Serializable {
 
     public Sauvegarde getSauvegarde() {
         return sauvegarde;
+    }
+
+    public String getNomFichier() {
+        return nomFichier;
     }
 }
