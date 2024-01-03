@@ -7,7 +7,7 @@ public class Chien extends Tamagotchi {
     public Chien(String nom) {
         super(nom);
         // A MODIFIER POUR BONNE IMAGE
-        imageTamagotchi = new ImageIcon("").getImage();
+        imageTamagotchi = new ImageIcon("Tamagotchi/src/ressources/img/Chien2.png").getImage();
     }
 
     @Override

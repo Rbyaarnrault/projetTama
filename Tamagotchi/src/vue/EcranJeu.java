@@ -1,9 +1,13 @@
 package vue;
 
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controlleur.TamagotchiControleur;
@@ -15,7 +19,9 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     private PanelProgressBar panBarres;
     private PanelInfos panInfos;
     protected JButton btnDeveloppeur, btnQuitter, btnManger, btnForet, btnTente, btnRiviere, btnFeu, btnLaver, btnJouer,
-            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague;
+            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague;;
+
+    private PanelImgTama panTama;
 
     public EcranJeu(TamagotchiControleur controleur) {
         this.controleur = controleur;
@@ -26,13 +32,16 @@ public class EcranJeu extends JPanel implements EcranActualisable {
 
     protected void initialiserPanels() {
         // Initialisation des barres d'attributs
+
         panBarres = new PanelProgressBar();
         panInfos = new PanelInfos();
+        panTama = new PanelImgTama();
         creerPanelComposants();
         placerComposants();
 
         this.add(panBarres);
         this.add(panInfos);
+        this.add(panTama);
     }
 
     protected void creerPanelComposants() {
@@ -155,6 +164,10 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     // Getter du panel des JprogressBar
     public PanelInfos getPanelInfos() {
         return panInfos;
+    }
+
+    public PanelImgTama getPanelImgTama() {
+        return panTama;
     }
 
     // Méthode d'actualisation du PanelProgressBar
