@@ -5,6 +5,10 @@ import java.util.List;
 
 public class SalleFeu extends Salle {
 
+    public SalleFeu() {
+        nom = "feu";
+    }
+
     @Override
     public List<String> getActionsDisponibles() {
         // Retourne la liste des actions disponibles dans la forêt

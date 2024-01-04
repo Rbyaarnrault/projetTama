@@ -24,13 +24,10 @@ public class EcranRiviere extends EcranJeu {
         this.add(btnDeveloppeur);
         btnQuitter.setBounds(560, 400, 120, 30);
         this.add(btnQuitter);
-        // BTN Lieux
-        btnForet.setBounds(330, 420, 80, 30);
-        this.add(btnForet);
         // BTN Actions
-        btnLaver.setBounds(280, 320, 80, 30);
+        btnLaver.setBounds(580, 230, 80, 30);
         this.add(btnLaver);
-        btnJouer.setBounds(330, 320, 80, 30);
+        btnJouer.setBounds(580, 280, 80, 30);
         this.add(btnJouer);
     }
 

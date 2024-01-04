@@ -4,8 +4,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.UIManager;
-
 import modele.Tamagotchi;
 
 import java.awt.*;

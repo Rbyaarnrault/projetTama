@@ -24,11 +24,8 @@ public class EcranTente extends EcranJeu {
         this.add(btnDeveloppeur);
         btnQuitter.setBounds(560, 400, 120, 30);
         this.add(btnQuitter);
-        // BTN Lieux
-        btnFeu.setBounds(295, 250, 80, 30);
-        this.add(btnFeu);
         // BTN Actions
-        btnDormir.setBounds(500, 310, 80, 30);
+        btnDormir.setBounds(580, 255, 80, 30);
         this.add(btnDormir);
     }
 

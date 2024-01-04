@@ -2,56 +2,25 @@ package vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BoutonTriangle extends JButton {
-    private Polygon triangle;
+
+    private Direction direction;
 
     public BoutonTriangle(Direction direction) {
-        this.triangle = createTriangle(direction);
+        this.direction = direction;
         setContentAreaFilled(false);
         setFocusPainted(false);
         setBorderPainted(false);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-
-        BoutonTriangle upButton = new BoutonTriangle(Direction.UP);
-        BoutonTriangle downButton = new BoutonTriangle(Direction.DOWN);
-        BoutonTriangle leftButton = new BoutonTriangle(Direction.LEFT);
-        BoutonTriangle rightButton = new BoutonTriangle(Direction.RIGHT);
-
-        panel.add(upButton);
-        panel.add(downButton);
-        panel.add(leftButton);
-        panel.add(rightButton);
-
-    }
-
-    private Polygon createTriangle(Direction direction) {
-        Polygon polygon = new Polygon();
-        switch (direction) {
-            case UP:
-                polygon.addPoint(0, 10);
-                polygon.addPoint(10, 10);
-                polygon.addPoint(5, 0);
-                break;
-            case DOWN:
-                polygon.addPoint(0, 0);
-                polygon.addPoint(10, 0);
-                polygon.addPoint(5, 10);
-                break;
-            case LEFT:
-                polygon.addPoint(10, 0);
-                polygon.addPoint(10, 10);
-                polygon.addPoint(0, 5);
-                break;
-            case RIGHT:
-                polygon.addPoint(0, 0);
-                polygon.addPoint(0, 10);
-                polygon.addPoint(10, 5);
-                break;
-        }
-        return polygon;
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Gérer l'action du bouton triangle ici, si nécessaire
+            }
+        });
     }
 
     @Override
@@ -59,23 +28,38 @@ public class BoutonTriangle extends JButton {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(getBackground());
-        g2d.fillPolygon(triangle);
+        g2d.fillPolygon(createTriangle());
         g2d.dispose();
     }
 
-    /*
-     * BoutonTriangle upButton = new BoutonTriangle(Direction.UP);
-     * BoutonTriangle downButton = new BoutonTriangle(Direction.DOWN);
-     * BoutonTriangle leftButton = new BoutonTriangle(Direction.LEFT);
-     * BoutonTriangle rightButton = new BoutonTriangle(Direction.RIGHT);
-     * 
-     * panel.add(upButton);
-     * panel.add(downButton);
-     * panel.add(leftButton);
-     * panel.add(rightButton);
-     */
+    private Polygon createTriangle() {
+        Polygon polygon = new Polygon();
+        switch (direction) {
+            case HAUT:
+                polygon.addPoint(0, 50);
+                polygon.addPoint(50, 50);
+                polygon.addPoint(25, 0);
+                break;
+            case BAS:
+                polygon.addPoint(0, 0);
+                polygon.addPoint(50, 0);
+                polygon.addPoint(25, 50);
+                break;
+            case GAUCHE:
+                polygon.addPoint(50, 0);
+                polygon.addPoint(50, 50);
+                polygon.addPoint(0, 25);
+                break;
+            case DROITE:
+                polygon.addPoint(0, 0);
+                polygon.addPoint(0, 50);
+                polygon.addPoint(50, 25);
+                break;
+        }
+        return polygon;
+    }
 
-    private enum Direction {
-        UP, DOWN, LEFT, RIGHT
+    public enum Direction {
+        HAUT, BAS, GAUCHE, DROITE
     }
 }

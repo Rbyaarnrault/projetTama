@@ -24,13 +24,8 @@ public class EcranFeu extends EcranJeu {
         this.add(btnDeveloppeur);
         btnQuitter.setBounds(560, 400, 120, 30);
         this.add(btnQuitter);
-        // BTN Lieux
-        btnForet.setBounds(320, 220, 80, 30);
-        this.add(btnForet);
-        btnTente.setBounds(480, 330, 80, 30);
-        this.add(btnTente);
         // BTN Actions
-        btnManger.setBounds(320, 420, 80, 30);
+        btnManger.setBounds(580, 255, 80, 30);
         this.add(btnManger);
     }
 

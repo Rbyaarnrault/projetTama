@@ -209,25 +209,21 @@ public class TamagotchiControleur {
                 break;
 
             case "foret": // Ecran Salle Forêt
-                partie.setSalleActuelle("foret");
                 fenetre.setTitle("Forêt");
                 pan = panForet;
                 break;
 
             case "riviere": // Ecran Salle Rivère
-                partie.setSalleActuelle("riviere");
                 fenetre.setTitle("Rivière");
                 pan = panRiviere;
                 break;
 
             case "feu": // Ecran Salle Feu
-                partie.setSalleActuelle("feu");
                 fenetre.setTitle("Feu de camp");
                 pan = panFeu;
                 break;
 
             case "tente": // Ecran Salle Tente
-                partie.setSalleActuelle("tente");
                 fenetre.setTitle("Tente");
                 pan = panTente;
                 break;
@@ -254,6 +250,22 @@ public class TamagotchiControleur {
     }
 
     // -----Action sur le modèle---------
+
+    // Permet de se déplacer sur la salle de gauche de la salleActuelle en
+    // récupérant son nom qui est paramètre de la fonction setSalleActuelle
+    public void deplacerVersLaGauche() {
+        String s = partie.getSalleActuelle().getSalleGauche().getNomSalle();
+        partie.setSalleActuelle(s);
+        changerEcran(s);
+    }
+
+    // IDEM pour la droite
+    public void deplacerVersLaDroite() {
+        String s = partie.getSalleActuelle().getSalleDroite().getNomSalle();
+        partie.setSalleActuelle(s);
+        changerEcran(s);
+    }
+
     public void effectuerActionTama(String action) {
         partie.getSalleActuelle().effectuerAction(action, partie.getTamagotchi());
     }

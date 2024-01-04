@@ -25,6 +25,14 @@ public class Partie implements Serializable {
 
     public Partie(Tamagotchi tamagotchi) {
         this.tamagotchi = tamagotchi;
+        this.meteo = new Meteo();
+        sauvegarde = new Sauvegarde();
+
+        creerSalles();
+        setSalleActuelle("foret"); // On commence toujours une nouvelle Partie dans la foret
+    }
+
+    public void creerSalles() {
         this.foret = new SalleForet();
         this.riviere = new SalleRiviere();
         this.feu = new SalleFeu();
@@ -35,8 +43,12 @@ public class Partie implements Serializable {
         this.listeSalles.add(riviere);
         this.listeSalles.add(tente);
 
-        this.meteo = new Meteo();
-        sauvegarde = new Sauvegarde();
+        riviere.setSalleDroite(foret);
+        foret.setSalleGauche(riviere);
+        foret.setSalleDroite(feu);
+        feu.setSalleDroite(tente);
+        feu.setSalleGauche(foret);
+        tente.setSalleGauche(feu);
     }
 
     public void sauvergarder() {

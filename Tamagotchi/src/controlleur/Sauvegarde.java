@@ -3,12 +3,7 @@ package controlleur;
 import java.io.*;
 
 import javax.swing.ImageIcon;
-
-import modele.Chat;
-import modele.Chien;
 import modele.Partie;
-import modele.Poussin;
-import modele.Robot;
 
 public class Sauvegarde {
 

@@ -16,9 +16,8 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     private TamagotchiControleur controleur;
     private PanelProgressBar panBarres;
     private PanelInfos panInfos;
-    protected JButton btnDeveloppeur, btnQuitter, btnManger, btnForet, btnTente, btnRiviere, btnFeu, btnLaver, btnJouer,
-            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague;;
-
+    protected JButton btnDeveloppeur, btnQuitter, btnManger, btnLaver, btnJouer,
+            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague, boutonGauche, boutonDroite;
     private PanelImgTama panTama;
 
     public EcranJeu(TamagotchiControleur controleur) {
@@ -54,11 +53,6 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         btnDeveloppeur = new JButton("Mode Développeur");
         btnQuitter = new JButton("Quitter");
 
-        // Lieux
-        btnForet = new JButton("Forêt");
-        btnTente = new JButton("Tente");
-        btnRiviere = new JButton("Rivière");
-        btnFeu = new JButton("Feu");
         // Actions
         btnManger = new JButton("Manger");
         btnLaver = new JButton("Laver");
@@ -70,6 +64,10 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         btnRecharger = new JButton("Recharger");
         btnMaj = new JButton("Mise à jour");
         btnBlague = new JButton("Blague");
+
+        // Créer les boutons triangles de navigation intersalles
+        boutonGauche = new BoutonTriangle(BoutonTriangle.Direction.GAUCHE);
+        boutonDroite = new BoutonTriangle(BoutonTriangle.Direction.DROITE);
 
         // -----Gestion des écouteurs-----
         // Aller au mode développeur
@@ -88,39 +86,36 @@ public class EcranJeu extends JPanel implements EcranActualisable {
             }
         });
 
-        // LIEUX
+        // Lieux
 
-        // Aller à la rivière
-        btnRiviere.addActionListener(new ActionListener() {
+        // AJout des listeners sur les boutons triangles (de Direction)
+        boutonGauche.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran("riviere");
+                // Permet de faire l'action seulement si une salle est accessible à gauche
+                if (controleur.getPartie().getSalleActuelle().getSalleGauche() != null) {
+                    // Déplacer vers la salle de gauche
+                    controleur.deplacerVersLaGauche();
+                }
             }
         });
 
-        // Aller à la tente
-        btnTente.addActionListener(new ActionListener() {
+        boutonDroite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran("tente");
+                // Permet de faire l'action seulement si une salle est accessible à droite
+                if (controleur.getPartie().getSalleActuelle().getSalleDroite() != null) {
+                    // Déplacer vers la salle de gauche
+                    controleur.deplacerVersLaDroite();
+                }
             }
         });
 
-        // Aller à la foret
-        btnForet.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran("foret");
-            }
-        });
-
-        // Aller au feu de camp
-        btnFeu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.changerEcran("feu");
-            }
-        });
+        // Place et ajoute les boutons triangles à votre écran
+        boutonGauche.setBounds(330, 400, 50, 50);
+        boutonDroite.setBounds(410, 400, 50, 50);
+        this.add(boutonGauche);
+        this.add(boutonDroite);
 
         // Liste de mes boutons Actions
         List<JButton> boutonsActions = new ArrayList<JButton>();
