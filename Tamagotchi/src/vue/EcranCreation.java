@@ -26,6 +26,7 @@ public class EcranCreation extends JPanel {
 
         // ----- Espèces -----
         JPanel panEspece = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panEspece.setOpaque(false);
 
         // Initialisation des boutons
         boutonEsp1 = creerBouton("Chien");
@@ -48,6 +49,7 @@ public class EcranCreation extends JPanel {
 
         // ----- boutons -----
         JPanel boutonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        boutonsPanel.setOpaque(false);
         JButton effacerButton = new JButton("Effacer");
         JButton validerButton = new JButton("Valider");
         JButton retourMenButton = new JButton("Retour");
@@ -70,6 +72,7 @@ public class EcranCreation extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Supprimer le contenu des champs de texte
                 barreNom.setText(null);
+                especeSelectionnee = -1;
                 reinitialiserStyleBoutons();
             }
         });
@@ -110,6 +113,7 @@ public class EcranCreation extends JPanel {
         pan.setSize(200, 40);
         JLabel labelComponent = new JLabel(label);
         component.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pan.setOpaque(false);
         pan.add(labelComponent, BorderLayout.WEST);
         pan.add(component, BorderLayout.CENTER);
         return pan;

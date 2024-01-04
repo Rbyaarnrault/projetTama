@@ -9,7 +9,7 @@ public class Robot extends Tamagotchi {
     public Robot(String name) {
         super(name);
         // A MODIFIER POUR BONNE IMAGE
-        cheminImage = "";
+        cheminImage = "Tamagotchi/src/ressources/img/Robot.png";
         setImage(new ImageIcon(cheminImage).getImage());
     }
 

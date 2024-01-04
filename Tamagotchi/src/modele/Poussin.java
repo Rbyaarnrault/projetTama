@@ -6,7 +6,7 @@ public class Poussin extends Tamagotchi {
     public Poussin(String name) {
         super(name);
         // A MODIFIER POUR BONNE IMAGE
-        cheminImage = "";
+        cheminImage = "Tamagotchi/src/ressources/img/Poussin2.png";
         setImage(new ImageIcon(cheminImage).getImage());
     }
 

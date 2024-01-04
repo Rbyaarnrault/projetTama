@@ -242,7 +242,7 @@ public class TamagotchiControleur {
                 pan = new EcranSauvegardes(this);
                 break;
         }
-        if (choix != "developpeur") {
+        if (choix != "quitter" && choix != "developpeur") {
             panActif = choix; // Dernier écran actif appelé avant le mode développeur
         }
         fenetre.actualiser(pan);
