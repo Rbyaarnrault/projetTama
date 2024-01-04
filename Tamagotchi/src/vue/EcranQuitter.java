@@ -1,35 +1,36 @@
 package vue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.image.ImageObserver;
 import controlleur.TamagotchiControleur;
 
 public class EcranQuitter extends JPanel {
     private TamagotchiControleur controleur;
-    private JPanel panComposants;
+
+    private JButton btnSave;
+    private JButton btnAnnuler;
+
+    private java.awt.Image img;
 
     public EcranQuitter(TamagotchiControleur controleur) {
         this.controleur = controleur;
-        // this.setLayout(null);
-        this.add(creerPanelComposants());
+        setLayout(null); // Utilisation d'un layout null pour positionner manuellement les composants
+        this.img = new ImageIcon("Tamagotchi/src/ressources/img/sortie.png").getImage();
+        creerComposants();
+        placerComposants();
     }
 
-    private JPanel creerPanelComposants() {
-
-        panComposants = new JPanel();
-
+    private void creerComposants() {
         // Bouton de Sauvegarde
-        JButton btnSave = new JButton("Sauvegarder");
-        btnSave.setBounds(150, 20, 120, 40);
-        panComposants.add(btnSave);
+        btnSave = new JButton("Sauvegarder et quitter");
 
         // Bouton de retour
-        JButton btnAnnuler = new JButton("Annuler");
-        btnAnnuler.setBounds(150, 100, 120, 40);
-        panComposants.add(btnAnnuler);
+        btnAnnuler = new JButton("Annuler");
 
         // Initialisation des écouteurs
         btnSave.addActionListener(new ActionListener() {
@@ -42,11 +43,26 @@ public class EcranQuitter extends JPanel {
         btnAnnuler.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Permet de revenir à l'écran de jeu
-                controleur.changerEcran(controleur.getPanelActif()); // Rappelle le dernier écran actif
+                controleur.changerEcran(controleur.getPanelActif());
             }
         });
+    }
 
-        return panComposants;
+    private void placerComposants() {
+        // Positionnement manuel des boutons
+        btnSave.setBounds(240, 250, 180, 30); // x, y, largeur, hauteur
+        btnAnnuler.setBounds(300, 380, 80, 30);
+
+        // Ajout des boutons au panel
+        add(btnSave);
+        add(btnAnnuler);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (img != null) {
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), (ImageObserver) this);
+        }
     }
 }

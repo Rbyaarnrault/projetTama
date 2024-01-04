@@ -14,6 +14,12 @@ public class EcranAccueil extends JPanel {
     private TamagotchiControleur controleur;
     private Image img;
 
+    // Définition d'une couleur en hexadécimal
+    String hexColor = "#C2794C"; // marron clair
+    String hexColor2 = "#5E271E"; // marron foncé
+    Color maCouleur = Color.decode(hexColor);
+    Color texte = Color.decode(hexColor2);
+
     public EcranAccueil(TamagotchiControleur controleur) {
         this.controleur = controleur;
         this.img = new ImageIcon("Tamagotchi/src/ressources/img/pageAcc.png").getImage();
@@ -29,21 +35,6 @@ public class EcranAccueil extends JPanel {
         JPanel panelBoutons = creerPanelBoutons();
         add(panelBoutons);
     }
-
-    /*
-     * private JPanel createAnimationPanel() {
-     * // appel du JPanel pour l'animation
-     * JPanel animationPanel = new JPanel();
-     * animationPanel.setLayout(new BorderLayout());
-     * 
-     * // Création l'élément TamagotchiAnimation
-     * TamagotchiAnimation tamagotchiAnimation = new TamagotchiAnimation();
-     * 
-     * animationPanel.add(tamagotchiAnimation);
-     * 
-     * return animationPanel;
-     * }
-     */
 
     private JPanel creerPanelBoutons() {
         JPanel panelBoutons = new JPanel();
@@ -69,9 +60,15 @@ public class EcranAccueil extends JPanel {
             }
         });
 
-        // Centrez les boutons horizontalement
+        // Centrez les boutons horizontalement + styliser
         nouvellePartieButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nouvellePartieButton.setForeground(texte);
+        nouvellePartieButton.setBackground(maCouleur);
+        nouvellePartieButton.setFocusPainted(false);
         chargerPartieButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        chargerPartieButton.setForeground(texte);
+        chargerPartieButton.setBackground(maCouleur);
+        chargerPartieButton.setFocusPainted(false);
 
         // Ajout d'un espace fixe entre les boutons
         panelBoutons.setOpaque(false);

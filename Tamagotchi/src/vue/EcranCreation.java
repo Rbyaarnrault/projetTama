@@ -14,6 +14,12 @@ public class EcranCreation extends JPanel {
     private int especeSelectionnee;
     private Image img;
 
+    // Définition d'une couleur en hexadécimal
+    String hexColor = "#C2794C"; // marron clair
+    String hexColor2 = "#5E271E"; // marron foncé
+    Color maCouleur = Color.decode(hexColor);
+    Color texte = Color.decode(hexColor2);
+
     public EcranCreation(TamagotchiControleur controleur) {
         this.img = new ImageIcon("Tamagotchi/src/ressources/img/chargePa.png").getImage();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -122,18 +128,28 @@ public class EcranCreation extends JPanel {
     private JButton creerBouton(String texte) {
         JButton bouton = new JButton(texte);
         bouton.setPreferredSize(new Dimension(120, 150)); // Ajustez la taille selon vos besoins
+        bouton.setBackground(maCouleur);
+        bouton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 
         bouton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                // couleur hexadecimal
+                String hexColor = "#C2794C"; // marron clair
+                Color maCouleur = Color.decode(hexColor);
+                String hexColor2 = "#5E271E"; // marron foncé
+                Color texte = Color.decode(hexColor2);
 
                 // Réinitialisez le style de tous les boutons
                 reinitialiserStyleBoutons();
 
                 // Mettez en valeur le bouton sélectionné
                 bouton.setBorderPainted(false);
-                bouton.setBackground(Color.YELLOW);
-                bouton.setFont(new Font("Arial", Font.BOLD, 18)); // Ajustez la police selon vos besoins
+                bouton.setBackground(texte);
+                bouton.setForeground(maCouleur);
+                bouton.setFocusPainted(false);
+                bouton.setFont(new Font("Segoe UI", Font.BOLD, 18));
 
                 // Mettez à jour l'espèce sélectionnée
                 if (e.getSource() == boutonEsp1) {
@@ -152,18 +168,18 @@ public class EcranCreation extends JPanel {
 
     private void reinitialiserStyleBoutons() {
         // Réinitialisez le style de tous les boutons
-        boutonEsp1.setBorderPainted(true);
-        boutonEsp2.setBorderPainted(true);
-        boutonEsp3.setBorderPainted(true);
-        boutonEsp4.setBorderPainted(true);
-        boutonEsp1.setBackground(null);
-        boutonEsp2.setBackground(null);
-        boutonEsp3.setBackground(null);
-        boutonEsp4.setBackground(null);
-        boutonEsp1.setFont(new Font("Arial", Font.PLAIN, 12)); // Police
-        boutonEsp2.setFont(new Font("Arial", Font.PLAIN, 12));
-        boutonEsp3.setFont(new Font("Arial", Font.PLAIN, 12));
-        boutonEsp4.setFont(new Font("Arial", Font.PLAIN, 12));
+        boutonEsp1.setForeground(texte);
+        boutonEsp2.setForeground(texte);
+        boutonEsp3.setForeground(texte);
+        boutonEsp4.setForeground(texte);
+        boutonEsp1.setBackground(maCouleur);
+        boutonEsp2.setBackground(maCouleur);
+        boutonEsp3.setBackground(maCouleur);
+        boutonEsp4.setBackground(maCouleur);
+        boutonEsp1.setFont(new Font("Segoe UI", Font.PLAIN, 16)); // Police
+        boutonEsp2.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        boutonEsp3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        boutonEsp4.setFont(new Font("Segoe UI", Font.PLAIN, 16));
     }
 
     // Ajoutez une méthode pour obtenir l'espèce sélectionnée

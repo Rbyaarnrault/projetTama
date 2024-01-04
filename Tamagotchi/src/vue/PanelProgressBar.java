@@ -1,8 +1,11 @@
 package vue;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.UIManager;
+
 import modele.Tamagotchi;
 
 import java.awt.*;
@@ -13,9 +16,13 @@ public class PanelProgressBar extends JPanel {
 
     private JProgressBar barreVie, barreNourriture, barreSommeil, barreHygiene, barreLoisir;
 
-    public PanelProgressBar() {
+    // Définition d'une couleur en hexadécimal
+    String hexColor = "#C2794C"; // marron clair
+    String hexColor2 = "#5E271E"; // marron foncé
+    Color maCouleur = Color.decode(hexColor);
+    Color texte = Color.decode(hexColor2);
 
-        this.setBackground(Color.lightGray);
+    public PanelProgressBar() {
 
         JLabel lab1 = new JLabel("Vie");
         barreVie = new JProgressBar();
@@ -41,17 +48,30 @@ public class PanelProgressBar extends JPanel {
 
         // Ajout à l'écran
         this.add(lab1);
+        lab1.setForeground(texte);
         this.add(barreVie);
+        barreVie.setForeground(texte);
         this.add(lab2);
+        lab2.setForeground(texte);
         this.add(barreNourriture);
+        barreNourriture.setForeground(texte);
         this.add(lab3);
+        lab3.setForeground(texte);
         this.add(barreSommeil);
+        barreSommeil.setForeground(texte);
         this.add(lab4);
+        lab4.setForeground(texte);
         this.add(barreHygiene);
+        barreHygiene.setForeground(texte);
         this.add(lab5);
+        lab5.setForeground(texte);
         this.add(barreLoisir);
+        barreLoisir.setForeground(texte);
 
         // Arrangement en grille (col, lig, hgap, vgap)
+        this.setBackground(maCouleur);
+        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
         this.setLayout(new GridLayout(5, 2, 10, 10));
         this.setBounds(500, 10, 180, 120);
     }

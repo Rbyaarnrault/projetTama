@@ -13,8 +13,14 @@ public class PanelInfos extends JPanel {
 
     private JLabel nom, duree, physique, moral, meteo;
 
+    // Définition d'une couleur en hexadécimal
+    String hexColor = "#C2794C"; // marron clair
+    String hexColor2 = "#5E271E"; // marron foncé
+    Color maCouleur = Color.decode(hexColor);
+    Color texte = Color.decode(hexColor2);
+
     public PanelInfos() {
-        this.setBackground(Color.lightGray);
+        this.setBackground(maCouleur);
 
         JLabel lab1 = new JLabel("Nom:");
         nom = new JLabel("");
