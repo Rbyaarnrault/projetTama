@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.swing.JOptionPane;
-
 import controlleur.Sauvegarde;
 
 public class Partie implements Serializable {
@@ -31,25 +28,15 @@ public class Partie implements Serializable {
         sauvegarde = new Sauvegarde();
     }
 
-    public Partie() {
-        this.meteo = new Meteo();
-        sauvegarde = new Sauvegarde();
-    }
-
     public void sauvergarder() {
         // Génération d'un fichier à nom unique
         nomFichier = genererNomFichierSauvegarde();
         sauvegarde.sauvegarderPartie(this, nomFichier);
     }
 
-    public static Partie chargerDepuisSauvegarde(String cheminSauvegarde) {
-        Partie nouvellePartie = new Partie();
-        nouvellePartie.charger(cheminSauvegarde);
-        return nouvellePartie;
-    }
-
-    public void charger(String chemin) {
-        sauvegarde.chargerPartie(chemin);
+    public static Partie charger(String cheminSauvegarde) {
+        sauvegarde = new Sauvegarde();
+        return sauvegarde.chargerPartie(cheminSauvegarde);
     }
 
     public void supprimer() {

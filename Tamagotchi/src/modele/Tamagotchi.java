@@ -136,7 +136,7 @@ public abstract class Tamagotchi implements Serializable {
     }
 
     public Image getImage() {
-        return imageTamagotchi;
+        return this.imageTamagotchi;
     }
 
     // -----Setters-----
@@ -166,5 +166,9 @@ public abstract class Tamagotchi implements Serializable {
 
     public void setDureeVie(int d) {
         dureeVie = d;
+    }
+
+    public void setImage(Image i) {
+        imageTamagotchi = i;
     }
 }

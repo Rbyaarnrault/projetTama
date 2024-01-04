@@ -2,12 +2,14 @@ package vue;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controlleur.TamagotchiControleur;
+import modele.Tamagotchi;
 
 public class PanelImgTama extends JPanel {
 
@@ -25,10 +27,23 @@ public class PanelImgTama extends JPanel {
     }
 
     public void actualiserImageTama() {
-        this.imgIcon = new ImageIcon(controleur.getPartie().getTamagotchi().getImage());
-        this.imgTama = new JLabel(imgIcon);
+        Tamagotchi tamagotchi = controleur.getPartie().getTamagotchi();
 
-        this.add(imgTama);
+        if (tamagotchi != null) {
+            Image image = tamagotchi.getImage();
+
+            if (image != null) {
+                this.imgIcon = new ImageIcon(image);
+                this.imgTama = new JLabel(imgIcon);
+
+                this.removeAll(); // Supprimer les composants précédents avant d'ajouter le nouveau
+                this.add(imgTama);
+            } else {
+                System.out.println("L'image du Tamagotchi est null.");
+            }
+        } else {
+            System.out.println("Le Tamagotchi dans la Partie est null.");
+        }
     }
 
 }
