@@ -22,9 +22,9 @@ public class EcranForet extends EcranJeu {
     }
 
     protected void placerComposants() {
-        btnDeveloppeur.setBounds(520, 400, 160, 20);
+        btnDeveloppeur.setBounds(520, 440, 160, 20);
         this.add(btnDeveloppeur);
-        btnQuitter.setBounds(500, 360, 120, 30);
+        btnQuitter.setBounds(560, 400, 120, 30);
         this.add(btnQuitter);
         // BTN Lieux
         btnRiviere.setBounds(280, 320, 80, 30);
@@ -32,7 +32,7 @@ public class EcranForet extends EcranJeu {
         btnFeu.setBounds(330, 430, 80, 30);
         this.add(btnFeu);
         // BTN Actions
-        btnJouer.setBounds(490, 250, 80, 30);
+        btnJouer.setBounds(490, 280, 80, 30);
         this.add(btnJouer);
     }
 

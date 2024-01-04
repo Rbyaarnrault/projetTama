@@ -20,24 +20,18 @@ public class EcranFeu extends EcranJeu {
     }
 
     protected void placerComposants() {
-        btnDeveloppeur.setBounds(520, 400, 160, 20);
+        btnDeveloppeur.setBounds(520, 440, 160, 20);
         this.add(btnDeveloppeur);
-        btnQuitter.setBounds(500, 360, 120, 30);
+        btnQuitter.setBounds(560, 400, 120, 30);
         this.add(btnQuitter);
         // BTN Lieux
         btnForet.setBounds(320, 220, 80, 30);
         this.add(btnForet);
-        btnTente.setBounds(480, 260, 80, 30);
+        btnTente.setBounds(480, 330, 80, 30);
         this.add(btnTente);
         // BTN Actions
         btnManger.setBounds(320, 420, 80, 30);
         this.add(btnManger);
-    }
-
-    // Méthode d'actualisation du PanelProgressBar
-    @Override
-    public void actualiserComposantsAvecAttributs() {
-        super.actualiserComposantsAvecAttributs();
     }
 
     @Override

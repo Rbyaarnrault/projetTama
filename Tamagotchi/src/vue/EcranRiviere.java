@@ -20,9 +20,9 @@ public class EcranRiviere extends EcranJeu {
     }
 
     protected void placerComposants() {
-        btnDeveloppeur.setBounds(520, 400, 160, 20);
+        btnDeveloppeur.setBounds(520, 440, 160, 20);
         this.add(btnDeveloppeur);
-        btnQuitter.setBounds(500, 360, 120, 30);
+        btnQuitter.setBounds(560, 400, 120, 30);
         this.add(btnQuitter);
         // BTN Lieux
         btnForet.setBounds(330, 420, 80, 30);
