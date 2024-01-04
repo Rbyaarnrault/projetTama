@@ -3,6 +3,7 @@ package modele;
 import java.io.File;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import controlleur.Sauvegarde;
 
@@ -11,18 +12,28 @@ public class Partie implements Serializable {
     private Tamagotchi tamagotchi;
     private static final long serialVersionUID = 1L;
     private static Sauvegarde sauvegarde;
-    // private Salle foret, riviere, feu, tente;
+    private SalleForet foret;
+    private SalleFeu feu;
+    private SalleRiviere riviere;
+    private SalleTente tente;
     private Meteo meteo;
     private String nomFichier;
+    private ArrayList<Salle> listeSalles;
+    private Salle salleActuelle;
 
     // private int tempsActionTimer;
 
     public Partie(Tamagotchi tamagotchi) {
         this.tamagotchi = tamagotchi;
-        // this.foret = new SalleForet();
-        // this.riviere = new SalleRiviere();
-        // this.feu = new SalleFeu();
-        // this.tente = new SalleTente();
+        this.foret = new SalleForet();
+        this.riviere = new SalleRiviere();
+        this.feu = new SalleFeu();
+        this.tente = new SalleTente();
+        this.listeSalles = new ArrayList<Salle>();
+        this.listeSalles.add(foret);
+        this.listeSalles.add(feu);
+        this.listeSalles.add(riviere);
+        this.listeSalles.add(tente);
 
         this.meteo = new Meteo();
         sauvegarde = new Sauvegarde();
@@ -75,5 +86,36 @@ public class Partie implements Serializable {
 
     public String getNomFichier() {
         return nomFichier;
+    }
+
+    public ArrayList<Salle> getListeSalles() {
+        return listeSalles;
+    }
+
+    public Salle getSalleActuelle() {
+        return salleActuelle;
+    }
+
+    public void setSalleActuelle(String s) {
+        // Va permettre au de définir la salle actuelle pour que le tamagotchi fasse les
+        // actions qui lui sont possibles dans la salle donnée
+
+        switch (s) {
+            case "foret":
+                salleActuelle = foret;
+                break;
+            case "feu":
+                salleActuelle = feu;
+                break;
+            case "riviere":
+                salleActuelle = riviere;
+                break;
+            case "tente":
+                salleActuelle = tente;
+                break;
+            default:
+                System.out.println("Erreur: Salle inconnue");
+                break;
+        }
     }
 }

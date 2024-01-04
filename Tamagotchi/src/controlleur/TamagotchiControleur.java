@@ -209,21 +209,25 @@ public class TamagotchiControleur {
                 break;
 
             case "foret": // Ecran Salle Forêt
+                partie.setSalleActuelle("foret");
                 fenetre.setTitle("Forêt");
                 pan = panForet;
                 break;
 
             case "riviere": // Ecran Salle Rivère
+                partie.setSalleActuelle("riviere");
                 fenetre.setTitle("Rivière");
                 pan = panRiviere;
                 break;
 
             case "feu": // Ecran Salle Feu
+                partie.setSalleActuelle("feu");
                 fenetre.setTitle("Feu de camp");
                 pan = panFeu;
                 break;
 
             case "tente": // Ecran Salle Tente
+                partie.setSalleActuelle("tente");
                 fenetre.setTitle("Tente");
                 pan = panTente;
                 break;
@@ -250,26 +254,8 @@ public class TamagotchiControleur {
     }
 
     // -----Action sur le modèle---------
-
-    public void nourrirTama() {
-        // Logique pour la gestion de la faim/nourriture du Tama
-        partie.getTamagotchi().manger();
-    }
-
-    public void dormirTama() {
-        // Logique pour la gestion du sommeil/dodo du Tama
-        partie.getTamagotchi().dormir();
-    }
-
-    public void jouerTama() {
-        // Logique pour la gestion du loisir/jeu du Tama
-        partie.getTamagotchi().jouer();
-
-    }
-
-    public void laverTama() {
-        // Logique pour la gestion de l'hygiène du Tama
-        partie.getTamagotchi().laver();
+    public void effectuerActionTama(String action) {
+        partie.getSalleActuelle().effectuerAction(action, partie.getTamagotchi());
     }
 
     // AJOUTER LES METHODES SPECIFIQUE DU ROBOT

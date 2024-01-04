@@ -1,6 +1,8 @@
 package vue;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
@@ -120,40 +122,25 @@ public class EcranJeu extends JPanel implements EcranActualisable {
             }
         });
 
-        // ACTIONS
+        // Liste de mes boutons Actions
+        List<JButton> boutonsActions = new ArrayList<JButton>();
+        boutonsActions.add(btnManger);
+        boutonsActions.add(btnDormir);
+        boutonsActions.add(btnJouer);
+        boutonsActions.add(btnLaver);
 
-        // Manger
-        btnManger.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.nourrirTama();
-            }
-        });
-
-        btnDormir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.dormirTama();
-            }
-        });
-
-        btnJouer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.jouerTama();
-            }
-        });
-
-        btnLaver.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleur.laverTama();
-            }
-        });
-
+        for (JButton bouton : boutonsActions) {
+            bouton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Appel de la fonction avec le texte de l'action
+                    controleur.effectuerActionTama(bouton.getText());
+                }
+            });
+        }
     }
 
-    protected void placerComposants() { // ?????????????????
+    protected void placerComposants() { // Méthode redéfinit dans les sous classes
 
     }
 

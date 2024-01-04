@@ -30,7 +30,8 @@ public class EcranRiviere extends EcranJeu {
         // BTN Actions
         btnLaver.setBounds(280, 320, 80, 30);
         this.add(btnLaver);
-
+        btnJouer.setBounds(330, 320, 80, 30);
+        this.add(btnJouer);
     }
 
     @Override
