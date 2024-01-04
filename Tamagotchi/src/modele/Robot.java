@@ -9,7 +9,8 @@ public class Robot extends Tamagotchi {
     public Robot(String name) {
         super(name);
         // A MODIFIER POUR BONNE IMAGE
-        setImage(new ImageIcon("").getImage());
+        cheminImage = "";
+        setImage(new ImageIcon(cheminImage).getImage());
     }
 
     // -----Etat Tamagotchi-----

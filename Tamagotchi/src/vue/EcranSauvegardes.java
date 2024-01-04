@@ -3,7 +3,6 @@ package vue;
 import javax.swing.*;
 
 import controlleur.TamagotchiControleur;
-import modele.Tamagotchi;
 import util.ImageUtils;
 
 import java.awt.Image;

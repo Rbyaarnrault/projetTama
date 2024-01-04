@@ -7,7 +7,8 @@ public class Chat extends Tamagotchi {
     public Chat(String name) {
         super(name);
         // A MODIFIER POUR BONNE IMAGE
-        setImage(new ImageIcon("Tamagotchi/src/ressources/img/Chat2.png").getImage());
+        cheminImage = "";
+        setImage(new ImageIcon(cheminImage).getImage());
     }
 
     @Override

@@ -67,6 +67,7 @@ public class TamagotchiControleur {
         // Logique pour créer une nouvelle partie
         Tamagotchi tama = choisirTamagotchi(n, t);
         partie = new Partie(tama);
+        System.out.println("Chargement de l'image : " + partie.getTamagotchi().getImage());
 
         demarrerTimers(); // Va démarrer tous les timers et l'initialisation de tous les attributs et
                           // constantes sur chaque écran
@@ -91,6 +92,11 @@ public class TamagotchiControleur {
     }
 
     private void demarrerTimers() {
+
+        actualiserEcrans(); // Actualise les ecrans instantanément puis selon les
+        // timers (évite d'attendre
+        // le timer pour commencer à actualiser)
+
         // Création des timer avec une action à effectuer à chaque intervalle
 
         // timer qui va actualiser toutes les secondes les barres d'attributs
@@ -139,8 +145,20 @@ public class TamagotchiControleur {
     public void sauvergarderPartie() {
         // Logique pour sauvegarder une partie en cours
         partie.sauvergarder();
+        // Arret des timers
+        timerActualisation.stop();
+        timerDecrementation.stop();
+        timerMeteo.stop();
         JOptionPane.showMessageDialog(new JFrame(), "La sauvegarde a bien été effectuée !");
 
+        // Permet de libérer la mémoire en supprimant l'instance de Partie et éviter des
+        // conflits
+        partie = null;
+
+        panForet = null;
+        panRiviere = null;
+        panFeu = null;
+        panTente = null;
         // remettre accueil
         changerEcran("accueil");
     }
@@ -151,6 +169,19 @@ public class TamagotchiControleur {
         partie = Partie.charger(nomFichier);
         if (partie != null) {
             System.out.println("Sauvegarde " + nomFichier + " chargée !");
+
+            // Réinstanciation des Ecrans au cas où l'appli n'aurait pas été fermée (le
+            // controleur conserverait donc son instance)
+            panForet = new EcranForet(this);
+            panRiviere = new EcranRiviere(this);
+            panFeu = new EcranFeu(this);
+            panTente = new EcranTente(this);
+            ecrans = new ArrayList<>();
+            ecrans.add(panFeu); // Ces 4 écrans serons actualisés fréquemment
+            ecrans.add(panForet);
+            ecrans.add(panRiviere);
+            ecrans.add(panTente);
+
             demarrerTimers();
             changerEcran("foret");
 

@@ -1,7 +1,5 @@
 package vue;
 
-import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -31,6 +29,7 @@ public class PanelImgTama extends JPanel {
 
         if (tamagotchi != null) {
             Image image = tamagotchi.getImage();
+            System.out.println("Chargement de l'image : " + controleur.getPartie().getTamagotchi().getImage());
 
             if (image != null) {
                 this.imgIcon = new ImageIcon(image);

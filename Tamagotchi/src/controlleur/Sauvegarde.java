@@ -2,6 +2,8 @@ package controlleur;
 
 import java.io.*;
 
+import javax.swing.ImageIcon;
+
 import modele.Chat;
 import modele.Chien;
 import modele.Partie;
@@ -14,18 +16,14 @@ public class Sauvegarde {
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomFichier))) {
 
+            System.out.println("Chargement de l'image : " + partie.getTamagotchi().getImage());
+
             oos.writeObject(partie);
 
             // Seul moyen pour stocker le chemin d'accès de l'image
-            if (partie.getTamagotchi() instanceof Chien) {
-                oos.writeObject("Tamagotchi/src/ressources/img/chien.png");
-            } else if (partie.getTamagotchi() instanceof Chat) {
-                oos.writeObject("");
-            } else if (partie.getTamagotchi() instanceof Poussin) {
-                oos.writeObject("");
-            } else if (partie.getTamagotchi() instanceof Robot) {
-                oos.writeObject("");
-            }
+            // En stockant dans l'objet l'url de l'image
+
+            oos.writeObject(partie.getTamagotchi().getCheminImage());
 
             System.out.println("Partie sauvegardée avec succès dans " + nomFichier);
 
@@ -42,6 +40,11 @@ public class Sauvegarde {
                 // Me permet de voir le contenu de partie en debug pour voir si tout est
                 // fonctionnel
                 Partie partie = (Partie) obj;
+                System.out.println("Chargement de l'image : " + partie.getTamagotchi().getImage());
+
+                String cheminImage = (String) ois.readObject();
+                partie.getTamagotchi().setImage(new ImageIcon(cheminImage).getImage());
+
                 return partie;
             } else {
                 System.out.println("Le fichier ne contient pas une instance de Partie.");

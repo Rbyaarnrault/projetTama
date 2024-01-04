@@ -11,6 +11,7 @@ public abstract class Tamagotchi implements Serializable {
     protected StrategieConstantes strategie; // Instancié dans les sous classes
     protected int dureeVie, vie, hygiene, faim, sommeil, loisir;
     protected transient Image imageTamagotchi;
+    protected String cheminImage;
 
     public Tamagotchi(String name) { // Instancie un objet tamagotchi par son nom
         this.nom = name;
@@ -170,5 +171,9 @@ public abstract class Tamagotchi implements Serializable {
 
     public void setImage(Image i) {
         imageTamagotchi = i;
+    }
+
+    public String getCheminImage() {
+        return cheminImage;
     }
 }
