@@ -12,17 +12,14 @@ public class BoutonSauvegarde extends JButton {
     public BoutonSauvegarde(String nomSauvegarde, Image imageTamagotchi) {
         this.nomSauvegarde = nomSauvegarde;
 
-        // Créer un JPanel personnalisé avec le layout souhaité
-        JPanel panel = new JPanel(new BorderLayout());
-        JLabel labelNom = new JLabel(nomSauvegarde);
-        JLabel labelImage = new JLabel(new ImageIcon(imageTamagotchi));
+        // Configurer le texte du bouton
+        this.setText(nomSauvegarde);
 
-        // Ajouter les composants au JPanel
-        panel.add(labelNom, BorderLayout.NORTH);
-        panel.add(labelImage, BorderLayout.CENTER);
+        // Redimensionner l'image
+        Image scaledImage = imageTamagotchi.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
-        // Utiliser le JPanel comme composant du bouton
-        this.add(panel);
+        // Configurer l'icône du bouton avec l'image redimensionnée
+        this.setIcon(new ImageIcon(scaledImage));
 
         // Ajouter un ActionListener pour gérer le clic sur le bouton
         this.addActionListener(new ActionListener() {
