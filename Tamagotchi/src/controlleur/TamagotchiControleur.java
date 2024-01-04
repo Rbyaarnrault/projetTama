@@ -68,7 +68,8 @@ public class TamagotchiControleur {
         Tamagotchi tama = choisirTamagotchi(n, t);
         partie = new Partie(tama);
 
-        demarrerTimers();
+        demarrerTimers(); // Va démarrer tous les timers et l'initialisation de tous les attributs et
+                          // constantes sur chaque écran
         changerEcran("foret");
     }
 
@@ -147,10 +148,12 @@ public class TamagotchiControleur {
     public void chargerPartie(String nomFichier) {
         // Logique pour charger une sauvegarde contenue dans le fichier à cet
         // emplacement
-        partie = Partie.chargerDepuisSauvegarde(nomFichier);
+        partie = Partie.charger(nomFichier);
         if (partie != null) {
             System.out.println("Sauvegarde " + nomFichier + " chargée !");
+            demarrerTimers();
             changerEcran("foret");
+
         }
     }
 
