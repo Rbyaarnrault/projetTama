@@ -3,6 +3,8 @@ package vue;
 import javax.swing.*;
 
 import controlleur.TamagotchiControleur;
+import modele.Partie;
+import modele.Tamagotchi;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -18,50 +20,49 @@ public class EcranSauvegardes extends JPanel {
 
     private TamagotchiControleur controleur;
     private String repertoireSauvegardes = "Tamagotchi/src/ressources/sauvegardes"; // Remplacez par le chemin réel
+    private File[] fichiersSauvegarde;
 
     public EcranSauvegardes(TamagotchiControleur controleur) {
         this.controleur = controleur;
 
+        // Récupérez la liste des fichiers de sauvegarde dans le répertoire
+        File repertoire = new File(repertoireSauvegardes);
+        fichiersSauvegarde = repertoire.listFiles();
+
+    }
+
+    public void initialiserSauvegardes() {
+
         this.setLayout(new BorderLayout());
         Box verticalBox = Box.createVerticalBox();
 
-        // Récupérez la liste des fichiers de sauvegarde dans le répertoire
-        File repertoire = new File(repertoireSauvegardes);
-        File[] fichiersSauvegarde = repertoire.listFiles();
-
         // Parcourez chaque fichier et créez un bouton pour chaque sauvegarde existante
-        if (fichiersSauvegarde != null) {
-            verticalBox.add(Box.createVerticalStrut(40));
-            for (File fichier : fichiersSauvegarde) {
-                if (fichier.isFile() && fichier.getName().endsWith(".dat")) { // Seulement les fichiers en .dat
+        verticalBox.add(Box.createVerticalStrut(40));
+        for (File fichier : fichiersSauvegarde) {
+            if (fichier.isFile() && fichier.getName().endsWith(".dat")) { // Seulement les fichiers en .dat
 
-                    BoutonSauvegarde bouton = creerSauvegardeButton(fichier);
+                BoutonSauvegarde bouton = creerSauvegardeButton(fichier);
 
-                    // Associez chaque bouton à la sauvegarde correspondante
-                    final String nomFichier = fichier.getAbsolutePath();
-                    bouton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            chargerSauvegarde(nomFichier);
-                        }
-                    });
+                // Associez chaque bouton à la sauvegarde correspondante
+                final String nomFichier = fichier.getAbsolutePath();
+                bouton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        chargerSauvegarde(nomFichier);
+                    }
+                });
 
-                    bouton.setAlignmentX(Component.CENTER_ALIGNMENT);
-                    // Ajoute le bouton à l'interface utilisateur
-                    verticalBox.add(bouton);
+                bouton.setAlignmentX(Component.CENTER_ALIGNMENT);
+                // Ajoute le bouton à l'interface utilisateur
+                verticalBox.add(bouton);
 
-                    // Ajoute un espace vertical (décalage) entre les boutons
-                    verticalBox.add(Box.createVerticalGlue()); // Add flexible space
-
-                    this.add(verticalBox, BorderLayout.CENTER);
-                }
+                // Ajoute un espace vertical (décalage) entre les boutons
+                verticalBox.add(Box.createVerticalGlue()); // Add flexible space
+                this.add(verticalBox, BorderLayout.CENTER);
             }
-
-            verticalBox.add(Box.createVerticalStrut(40));
-        } else {
-            System.out.println("Répertoire " + repertoireSauvegardes + " vide/inconnu");
         }
 
+        verticalBox.add(Box.createVerticalStrut(40));
     }
 
     private BoutonSauvegarde creerSauvegardeButton(File fichier) {
@@ -69,13 +70,17 @@ public class EcranSauvegardes extends JPanel {
             String nomSauvegarde = fichier.getName().replace(".dat", ""); // Retirez l'extension;
 
             // Vous pouvez ignorer la lecture de la chaîne (elle est déjà lue dans Partie)
-            ois.readObject(); // Ignorer la chaîne
+            Partie partie = (Partie) ois.readObject(); // Ignorer la chaîne
 
             String cheminImage = (String) ois.readObject();
             Image img = new ImageIcon(cheminImage).getImage();
 
             // Créez et retournez un nouveau bouton SauvegardeButton
-            return new BoutonSauvegarde(nomSauvegarde, img);
+            Tamagotchi tama = partie.getTamagotchi();
+            String nom = tama.getClass().getName() + ": " + tama.getNom();
+
+            // substring enleve le mot "modele."
+            return new BoutonSauvegarde(nom.substring(7), img);
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -86,6 +91,10 @@ public class EcranSauvegardes extends JPanel {
 
     private void chargerSauvegarde(String nomFichier) {
         controleur.chargerPartie(nomFichier);
+    }
+
+    public File[] getRepertoireSauvegarde() {
+        return fichiersSauvegarde;
     }
 
 }

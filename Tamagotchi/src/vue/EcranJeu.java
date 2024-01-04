@@ -129,7 +129,11 @@ public class EcranJeu extends JPanel implements EcranActualisable {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Appel de la fonction avec le texte de l'action
-                    controleur.effectuerActionTama(bouton.getText());
+                    try {
+                        controleur.effectuerActionTama(bouton.getText());
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                 }
             });
         }

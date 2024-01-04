@@ -14,17 +14,23 @@ public class SalleTente extends Salle {
         // Retourne la liste des actions disponibles dans la forêt
         List<String> actions = new ArrayList<>();
         actions.add("Dormir");
+        actions.add("Mourir");
         return actions;
     }
 
     @Override
+    // Permet de savoir quelles actions sont possibles et d'éliminer les
+    // potentielles non autorisées
     public String effectuerAction(String action, Tamagotchi tamagotchi) {
         switch (action) {
             case "Dormir":
                 tamagotchi.jouer();
                 return "Le Tamagotchi a dormi dans la tente.";
+            case "Mourir":
+                tamagotchi.mourir();
+                return "Le Tamagotchi est mort dans la tente.";
             default:
-                return "Action non reconnue.";
+                return "Action impossible ici/inconnue.";
         }
     }
 

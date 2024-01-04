@@ -1,8 +1,9 @@
 package modele;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Salle {
+public abstract class Salle implements Serializable {
 
     private Salle salleGauche;
     private Salle salleDroite;

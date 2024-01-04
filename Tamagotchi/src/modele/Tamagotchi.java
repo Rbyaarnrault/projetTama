@@ -4,12 +4,16 @@ import java.awt.Image;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public abstract class Tamagotchi implements Serializable {
 
     // Atributs
     protected String nom;
     protected StrategieConstantes strategie; // Instancié dans les sous classes
     protected int dureeVie, vie, hygiene, faim, sommeil, loisir;
+    protected Boolean estMort;
     protected transient Image imageTamagotchi;
     protected String cheminImage;
 
@@ -17,6 +21,7 @@ public abstract class Tamagotchi implements Serializable {
         this.nom = name;
         this.strategie = initialiserStrategie();
 
+        this.estMort = false;
         this.dureeVie = 0; // Départ du compteur de durée de vie
         this.vie = strategie.getMax_Vie();
         this.hygiene = strategie.getMax_Hygiene();
@@ -75,11 +80,19 @@ public abstract class Tamagotchi implements Serializable {
 
     public void decrementer() {
         // Diminution selon les constantes chosies des attributs
-        faim = decrecrementerValeur(faim, strategie.getDec_Faim(), strategie.getMin_Faim());
-        hygiene = decrecrementerValeur(hygiene, strategie.getDec_Hygiene(), strategie.getMin_Hygiene());
-        sommeil = decrecrementerValeur(sommeil, strategie.getDec_Sommeil(), strategie.getMin_Sommeil());
-        loisir = decrecrementerValeur(loisir, strategie.getDec_Loisir(), strategie.getMin_Loisir());
-        actualiserVie();
+        if (vie > 0) { // Si vie en positif non nul
+            faim = decrecrementerValeur(faim, strategie.getDec_Faim(), strategie.getMin_Faim());
+            hygiene = decrecrementerValeur(hygiene, strategie.getDec_Hygiene(), strategie.getMin_Hygiene());
+            sommeil = decrecrementerValeur(sommeil, strategie.getDec_Sommeil(), strategie.getMin_Sommeil());
+            loisir = decrecrementerValeur(loisir, strategie.getDec_Loisir(), strategie.getMin_Loisir());
+            actualiserVie();
+        } else {
+            // On le fait mourir une seule fois et pas à chaques secondes
+            if (estMort == false) {
+                mourir(); // Sinon faire mourir le tama
+                // Evite du processing si le tama est mort
+            }
+        }
     }
 
     // -----Etat Tamagotchi-----
@@ -107,7 +120,31 @@ public abstract class Tamagotchi implements Serializable {
         return loisir;
     }
 
+    public void mourir() {
+        if (getVie() <= 0) {
+            // Mise au min de tous les attributs
+            estMort = true;
+            faim = strategie.getMin_Faim();
+            sommeil = strategie.getMin_Sommeil();
+            hygiene = strategie.getMin_Hygiene();
+            loisir = strategie.getMin_Loisir();
+
+            // Afficher un message informant de la mort
+            int choix = JOptionPane.showOptionDialog(new JFrame(), "Votre Tamagotchi est mort. Game Over.",
+                    "Game Over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+                    new Object[] { "OK" },
+                    "OK");
+            if (choix == JOptionPane.YES_OPTION) {
+
+            }
+        }
+    }
+
     // -----Getters-----
+    public Boolean estMort() {
+        return estMort;
+    }
+
     public String getNom() {
         return nom;
     }

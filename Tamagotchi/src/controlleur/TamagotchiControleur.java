@@ -69,9 +69,9 @@ public class TamagotchiControleur {
         partie = new Partie(tama);
         System.out.println("Chargement de l'image : " + partie.getTamagotchi().getImage());
 
+        changerEcran("foret");
         demarrerTimers(); // Va démarrer tous les timers et l'initialisation de tous les attributs et
                           // constantes sur chaque écran
-        changerEcran("foret");
     }
 
     // Méthode qui instancie le bon type de tamagotchi selon l'espèce choisie
@@ -93,7 +93,9 @@ public class TamagotchiControleur {
 
     private void demarrerTimers() {
 
-        actualiserEcrans(); // Actualise les ecrans instantanément puis selon les
+        actualiserEcrans();
+        partie.getMeteo().obtenirNouvelleConditionMeteo();
+        // Actualise les ecrans instantanément puis selon les
         // timers (évite d'attendre
         // le timer pour commencer à actualiser)
 
@@ -182,9 +184,8 @@ public class TamagotchiControleur {
             ecrans.add(panRiviere);
             ecrans.add(panTente);
 
-            demarrerTimers();
             changerEcran("foret");
-
+            demarrerTimers();
         }
     }
 
@@ -196,6 +197,7 @@ public class TamagotchiControleur {
     // --------Choix de l'écran----------
     public void changerEcran(String choix) {
         JPanel pan = new JPanel(); // Nouveau JPanel temporaire qui va être affecté de l'écran voulu
+        Boolean condition = true; // Sert pour l'EcranSauvegardes
 
         switch (choix) {
             case "accueil": // Ecran Accueil
@@ -239,13 +241,30 @@ public class TamagotchiControleur {
                 break;
             case "sauvegardes": // Ecran de choix de sauvegardes
                 fenetre.setTitle("Choix d'une sauvegarde");
-                pan = new EcranSauvegardes(this);
+                EcranSauvegardes ecranS = new EcranSauvegardes(this);
+
+                // Si le repertoire est vide
+                if (ecranS.getRepertoireSauvegarde() == null || ecranS.getRepertoireSauvegarde().length == 0) {
+                    condition = false;
+                    JOptionPane.showMessageDialog(new JFrame(), " Le répertoire de sauvegarde est vide/inconnu !");
+                    System.out.println("Répertoire de sauvegarde  vide/inconnu");
+                } else {
+                    condition = true;
+                    ecranS.initialiserSauvegardes();
+                    pan = ecranS;
+                }
+                break;
+
+            default:
+                System.out.println("nom de l'écran voulu inconnu");
                 break;
         }
         if (choix != "quitter" && choix != "developpeur") {
             panActif = choix; // Dernier écran actif appelé avant le mode développeur
         }
-        fenetre.actualiser(pan);
+        if (condition == true) {
+            fenetre.actualiser(pan);
+        }
 
     }
 
@@ -266,8 +285,20 @@ public class TamagotchiControleur {
         changerEcran(s);
     }
 
-    public void effectuerActionTama(String action) {
-        partie.getSalleActuelle().effectuerAction(action, partie.getTamagotchi());
+    public void effectuerActionTama(String action) throws Exception {
+        if (partie.getTamagotchi().estMort() == false) {
+            // SI le tamagotchi est vivant
+            partie.getSalleActuelle().effectuerAction(action, partie.getTamagotchi());
+        } else {
+            // Afficher un message informant de la mort
+            int choix = JOptionPane.showOptionDialog(new JFrame(), "Votre Tamagotchi est mort. Game Over.",
+                    "Game Over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+                    new Object[] { "OK" },
+                    "OK");
+            if (choix == JOptionPane.YES_OPTION) {
+                relancerApplication();
+            }
+        }
     }
 
     // AJOUTER LES METHODES SPECIFIQUE DU ROBOT
@@ -347,5 +378,11 @@ public class TamagotchiControleur {
 
     public JFrame getFrame() {
         return fenetre;
+    }
+
+    // -----Restart du controleur-----
+    public void relancerApplication() throws Exception {
+        String[] args = {};
+        MainApp.main(args);
     }
 }
