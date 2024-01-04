@@ -74,13 +74,13 @@ public class PanelProgressBar extends JPanel {
         this.setBounds(500, 10, 180, 120);
     }
 
-    public void actualiserConstantes(Tamagotchi tama) {
+    public void actualiserBarresSelonConstantes(Tamagotchi tama) {
         // Met les barres aux valeurs des attributs du tamagotchi
-        setValueBarreVie(tama.getVie());
-        setValueBarreNourriture(tama.getFaim());
-        setValueBarreSommeil(tama.getSommeil());
-        setValueBarreHygiene(tama.getHygiene());
-        setValueBarreLoisir(tama.getLoisir());
+        setValueBarreVie((int) tama.getVie());
+        setValueBarreNourriture((int) tama.getFaim());
+        setValueBarreSommeil((int) tama.getSommeil());
+        setValueBarreHygiene((int) tama.getHygiene());
+        setValueBarreLoisir((int) tama.getLoisir());
         this.revalidate();
     }
 

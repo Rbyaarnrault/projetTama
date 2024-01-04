@@ -162,7 +162,7 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     @Override
     public void actualiserComposantsAvecAttributs() {
         panInfos.actualiserInfos(controleur.getPartie());
-        panBarres.actualiserConstantes(controleur.getPartie().getTamagotchi());
+        panBarres.actualiserBarresSelonConstantes(controleur.getPartie().getTamagotchi());
         initialiserPanelTamagotchi();
         panTama.actualiserImageTama();
     }

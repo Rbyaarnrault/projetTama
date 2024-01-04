@@ -67,8 +67,6 @@ public class EcranSauvegardes extends JPanel {
 
     private BoutonSauvegarde creerSauvegardeButton(File fichier) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichier))) {
-            String nomSauvegarde = fichier.getName().replace(".dat", ""); // Retirez l'extension;
-
             // Vous pouvez ignorer la lecture de la chaîne (elle est déjà lue dans Partie)
             Partie partie = (Partie) ois.readObject(); // Ignorer la chaîne
 

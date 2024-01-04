@@ -97,7 +97,7 @@ public class PanelInfos extends JPanel {
         this.revalidate();
     }
 
-    public String actualiserDuree(int durationInSeconds) {
+    public String actualiserDuree(long durationInSeconds) {
         // Appel de la classe ChronoFormateur pour convertir la duree
         String dureeFormatee = ChronoFormateur.DureeFormat(durationInSeconds);
         return dureeFormatee;

@@ -21,8 +21,6 @@ public class Partie implements Serializable {
     private ArrayList<Salle> listeSalles;
     private Salle salleActuelle;
 
-    // private int tempsActionTimer;
-
     public Partie(Tamagotchi tamagotchi) {
         this.tamagotchi = tamagotchi;
         this.meteo = new Meteo();

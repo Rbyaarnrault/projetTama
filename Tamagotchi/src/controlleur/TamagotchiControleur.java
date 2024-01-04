@@ -53,8 +53,6 @@ public class TamagotchiControleur {
                 // défault sinon
                 vitesseTimerDecr = panDev.getVitesseTimer();
 
-                // Maj du délai du timer de décrémentation en fonction de la vitesse choisie
-                timerDecrementation.setDelay(5000 / vitesseTimerDecr);
                 changerEcran(getPanelActif()); // Rappelle le dernier écran actif
             }
         });
@@ -106,16 +104,16 @@ public class TamagotchiControleur {
             @Override
             public void actionPerformed(ActionEvent e) {
                 actualiserEcrans(); // Actualise les ecrans toutes les secondes
-                partie.getTamagotchi().ajouterSecondeDuree(); // Ajoute la duree de vie au tamagotchi
+                partie.getTamagotchi().calculDureeVie();
             }
         });
 
-        // timer qui va décrémenter les attributs du tamagotchi
-        timerDecrementation = new Timer(5000, new ActionListener() {
+        // timer qui va actualiser les attributs du tamagotchi
+        timerDecrementation = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Logique pour décrémenter les attributs du Tamagotchi
-                partie.getTamagotchi().decrementer();
+                partie.getTamagotchi().actualisationDecrementationConstantes(vitesseTimerDecr);
             }
         });
 
@@ -243,7 +241,7 @@ public class TamagotchiControleur {
                 fenetre.setTitle("Choix d'une sauvegarde");
                 EcranSauvegardes ecranS = new EcranSauvegardes(this);
 
-                // Si le repertoire est vide
+                // Si le repertoire de sauvegarde est vide
                 if (ecranS.getRepertoireSauvegarde() == null || ecranS.getRepertoireSauvegarde().length == 0) {
                     condition = false;
                     JOptionPane.showMessageDialog(new JFrame(), " Le répertoire de sauvegarde est vide/inconnu !");
@@ -263,7 +261,32 @@ public class TamagotchiControleur {
             panActif = choix; // Dernier écran actif appelé avant le mode développeur
         }
         if (condition == true) {
-            fenetre.actualiser(pan);
+            // Si c'est durant la partie
+            if (partie != null) {
+
+                // Si le tama est mort, plus aucune action possible
+                if (partie.getTamagotchi().estMort() == false) {
+                    fenetre.actualiser(pan);
+
+                } else {
+                    // Afficher un message informant de la mort et redémarrer l'application
+                    int res = JOptionPane.showOptionDialog(new JFrame(),
+                            "Votre Tamagotchi est mort. Game Over. \n    L'application va redémarrer",
+                            "Game Over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+                            new Object[] { "OK" },
+                            "OK");
+                    if (res == JOptionPane.YES_OPTION) {
+                        try {
+                            relancerApplication();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } else {
+                // Si la partie n'a pas encore été crée, pas de condition pour changer d'écran
+                fenetre.actualiser(pan);
+            }
         }
 
     }
@@ -285,18 +308,25 @@ public class TamagotchiControleur {
         changerEcran(s);
     }
 
-    public void effectuerActionTama(String action) throws Exception {
+    public void effectuerActionTama(String action) {
         if (partie.getTamagotchi().estMort() == false) {
             // SI le tamagotchi est vivant
             partie.getSalleActuelle().effectuerAction(action, partie.getTamagotchi());
+
         } else {
-            // Afficher un message informant de la mort
-            int choix = JOptionPane.showOptionDialog(new JFrame(), "Votre Tamagotchi est mort. Game Over.",
+            // Si le tama est mort, plus aucune action possible
+            // Afficher un message informant de la mort et redémarrer l'application
+            int choix = JOptionPane.showOptionDialog(new JFrame(),
+                    "Votre Tamagotchi est mort. Game Over. \n    L'application va redémarrer",
                     "Game Over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
                     new Object[] { "OK" },
                     "OK");
             if (choix == JOptionPane.YES_OPTION) {
-                relancerApplication();
+                try {
+                    relancerApplication();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -356,23 +386,23 @@ public class TamagotchiControleur {
         return panActif;
     }
 
-    public int getVieTama() {
+    public double getVieTama() {
         return partie.getTamagotchi().getVie();
     }
 
-    public int getNourritureTama() {
+    public double getNourritureTama() {
         return partie.getTamagotchi().getFaim();
     }
 
-    public int getSommeilTama() {
+    public double getSommeilTama() {
         return partie.getTamagotchi().getSommeil();
     }
 
-    public int getHygieneTama() {
+    public double getHygieneTama() {
         return partie.getTamagotchi().getHygiene();
     }
 
-    public int getLoisirTama() {
+    public double getLoisirTama() {
         return partie.getTamagotchi().getLoisir();
     }
 
@@ -381,6 +411,7 @@ public class TamagotchiControleur {
     }
 
     // -----Restart du controleur-----
+
     public void relancerApplication() throws Exception {
         String[] args = {};
         MainApp.main(args);

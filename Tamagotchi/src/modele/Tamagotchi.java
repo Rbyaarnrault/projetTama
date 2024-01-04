@@ -2,6 +2,8 @@ package modele;
 
 import java.awt.Image;
 import java.io.Serializable;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
@@ -12,13 +14,17 @@ public abstract class Tamagotchi implements Serializable {
     // Atributs
     protected String nom;
     protected StrategieConstantes strategie; // Instancié dans les sous classes
-    protected int dureeVie, vie, hygiene, faim, sommeil, loisir;
+    protected double vie, hygiene, faim, sommeil, loisir;
     protected Boolean estMort;
     protected transient Image imageTamagotchi;
     protected String cheminImage;
+    private Instant debutVie, derniereActualisation;
+    protected long dureeVie;
 
     public Tamagotchi(String name) { // Instancie un objet tamagotchi par son nom
         this.nom = name;
+        debutVie = Instant.now(); // Fixe l'instant de la création du tamagotchi
+        derniereActualisation = debutVie;
         this.strategie = initialiserStrategie();
 
         this.estMort = false;
@@ -33,58 +39,61 @@ public abstract class Tamagotchi implements Serializable {
     protected abstract StrategieConstantes initialiserStrategie();
 
     protected void actualiserVie() {
-        // Méthode qui va calculer la valeur de "vie" selon la valeur des 2 constantes
-        // les plus basses
-        // Ici Basé sur le fait faire mourir le tamagotchi si 2 attribut atteignent 0
+        // Calcule la valeur de "vie" selon les 2 constantes les plus basses
+        // Ici, on veut faire mourir le tamagotchi si 2 attributs sur 4
+        // atteignent 0
 
-        int[] constantes = { hygiene, faim, sommeil, loisir };
+        double[] constantes = { hygiene, faim, sommeil, loisir };
 
         // Tri du tableau dans l'ordre croissant
         Arrays.sort(constantes);
 
         // Calcul de la moyenne des trois constantes les plus basses
-        int moyenne = (constantes[0] + constantes[1]) / 2;
+        double moyenne = (constantes[0] + constantes[1]) / 2;
 
         if (vie >= strategie.getMin_Vie()) {
             vie = moyenne;
         } else {
             vie = strategie.getMin_Vie();
         }
-
     }
 
-    public void ajouterSecondeDuree() {
-        setDureeVie(getDureeVie() + 1);
-        ;
+    public void calculDureeVie() {
+        Instant maintenant = Instant.now(); // Fixe l'instant présent
+        Duration dureeEcoulee = Duration.between(debutVie, maintenant);
+        long tempsEcouleMillis = dureeEcoulee.toMillis();
+
+        // Calcule en seconde la duree de vie du tamagotchi
+        setDureeVie(tempsEcouleMillis / 1000);
     }
 
-    // Méthode utilitaire pour incrémenter une valeur jusqu'à un maximum
-    private int incrementerValeur(int valeur, int increment, int max) {
-        if (valeur <= max - increment) {
-            valeur += increment;
-        } else {
-            valeur = max;
-        }
-        return valeur;
-    }
+    public void actualisationDecrementationConstantes(int vitesseTimerDecr) {
 
-    // Méthode utilitaire pour décrémenter une valeur jusqu'à un minimum
-    private int decrecrementerValeur(int valeur, int decrement, int min) {
-        if (valeur >= min + decrement) {
-            valeur -= decrement;
-        } else {
-            valeur = min;
-        }
-        return valeur;
-    }
-
-    public void decrementer() {
-        // Diminution selon les constantes chosies des attributs
         if (vie > 0) { // Si vie en positif non nul
-            faim = decrecrementerValeur(faim, strategie.getDec_Faim(), strategie.getMin_Faim());
-            hygiene = decrecrementerValeur(hygiene, strategie.getDec_Hygiene(), strategie.getMin_Hygiene());
-            sommeil = decrecrementerValeur(sommeil, strategie.getDec_Sommeil(), strategie.getMin_Sommeil());
-            loisir = decrecrementerValeur(loisir, strategie.getDec_Loisir(), strategie.getMin_Loisir());
+            // Calcul de la décrémentation depuis la dernière actualisation
+            Instant maintenant = Instant.now(); // Fixe l'instant ou j'actualise
+            Duration dureeEcoulee = Duration.between(derniereActualisation, maintenant);
+            // vitesseTimerDecr va plus ou moins augmenter le temps comme si il y avait eu
+            // plus de temps depuis la dernière actualisation
+            double tempsEcouleMillis = dureeEcoulee.toMillis() * vitesseTimerDecr;
+
+            // /1000 = 1seconde : actualisation toute les secondes
+            faim -= ((tempsEcouleMillis / 10000) * strategie.DEC_FAIM);
+            sommeil -= ((tempsEcouleMillis / 10000) * strategie.DEC_SOMMEIL);
+            double tmp = ((tempsEcouleMillis / 10000) * strategie.DEC_HYGIENE);
+            hygiene -= tmp;
+            loisir -= ((tempsEcouleMillis / 10000) * strategie.DEC_LOISIR);
+
+            // Sert conserver les valeurs au dessus du min (ou égal)
+            faim = Math.max(strategie.MIN_FAIM, faim);
+            sommeil = Math.max(strategie.MIN_SOMMEIL, sommeil);
+            hygiene = Math.max(strategie.MIN_HYGIENE, hygiene);
+            loisir = Math.max(strategie.MIN_LOISIR, loisir);
+
+            // Affectation du temps fixé pour situer la dernière actualisation
+            derniereActualisation = maintenant;
+
+            // recalcule la valeur de vie
             actualiserVie();
         } else {
             // On le fait mourir une seule fois et pas à chaques secondes
@@ -95,29 +104,28 @@ public abstract class Tamagotchi implements Serializable {
         }
     }
 
-    // -----Etat Tamagotchi-----
-
     public void manger() {
-        // Incrémentation de l'attribut faim par la constante INC_
-        faim = incrementerValeur(faim, strategie.getInc_Faim(), strategie.getMax_Faim());
+        // Incrémentation de la faim par la constante d'incrémentation de faim
+        faim += strategie.INC_FAIM;
+        faim = Math.min(faim, strategie.MAX_FAIM); // Permet de ne pas dépasse la borne max
     }
 
-    public int dormir() {
-        // Incrémentation de l'attribut sommeil par la constante INC_SOMMEIL
-        sommeil = incrementerValeur(sommeil, strategie.getInc_Sommeil(), strategie.getMax_Sommeil());
-        return sommeil;
+    public void dormir() {
+        // Incrémentation de la faim par la constante d'incrémentation de sommeil
+        sommeil += strategie.INC_SOMMEIL;
+        sommeil = Math.min(sommeil, strategie.MAX_SOMMEIL); // Permet de ne pas dépasse la borne max
     }
 
-    public int laver() {
-        // Incrémentation de l'attribut hygiene par la constante INC_HYGIENE
-        hygiene = incrementerValeur(hygiene, strategie.getInc_Hygiene(), strategie.getMax_Hygiene());
-        return hygiene;
+    public void laver() {
+        // Incrémentation de la faim par la constante d'incrémentation de hygiene
+        hygiene += strategie.INC_HYGIENE;
+        hygiene = Math.min(hygiene, strategie.MAX_HYGIENE);
     }
 
-    public int jouer() {
-        // Incrémentation de l'attribut loisir par la constante INC_LOISIR
-        loisir = incrementerValeur(loisir, strategie.getInc_Loisir(), strategie.getMAX_Loisir());
-        return loisir;
+    public void jouer() {
+        // Incrémentation de la faim par la constante d'incrémentation de loisir
+        loisir += strategie.INC_LOISIR;
+        loisir = Math.min(loisir, strategie.MAX_LOISIR);
     }
 
     public void mourir() {
@@ -130,13 +138,8 @@ public abstract class Tamagotchi implements Serializable {
             loisir = strategie.getMin_Loisir();
 
             // Afficher un message informant de la mort
-            int choix = JOptionPane.showOptionDialog(new JFrame(), "Votre Tamagotchi est mort. Game Over.",
-                    "Game Over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                    new Object[] { "OK" },
-                    "OK");
-            if (choix == JOptionPane.YES_OPTION) {
-
-            }
+            JOptionPane.showMessageDialog(new JFrame(), "Votre Tamagotchi est mort. Game Over.",
+                    "Game Over", JOptionPane.YES_OPTION);
         }
     }
 
@@ -149,27 +152,27 @@ public abstract class Tamagotchi implements Serializable {
         return nom;
     }
 
-    public int getDureeVie() {
+    public long getDureeVie() {
         return dureeVie;
     }
 
-    public int getVie() {
+    public double getVie() {
         return vie;
     }
 
-    public int getHygiene() {
+    public double getHygiene() {
         return hygiene;
     }
 
-    public int getFaim() {
+    public double getFaim() {
         return faim;
     }
 
-    public int getSommeil() {
+    public double getSommeil() {
         return sommeil;
     }
 
-    public int getLoisir() {
+    public double getLoisir() {
         return loisir;
     }
 
@@ -202,7 +205,7 @@ public abstract class Tamagotchi implements Serializable {
         loisir = l;
     }
 
-    public void setDureeVie(int d) {
+    public void setDureeVie(long d) {
         dureeVie = d;
     }
 
