@@ -40,8 +40,8 @@ public class EcranAccueil extends JPanel {
         JPanel panelBoutons = new JPanel();
         panelBoutons.setLayout(new BoxLayout(panelBoutons, BoxLayout.X_AXIS));
 
-        JButton nouvellePartieButton = new JButton("Nouvelle Partie");
-        JButton chargerPartieButton = new JButton("Charger une Partie");
+        BoutonColore nouvellePartieButton = new BoutonColore("Nouvelle Partie");
+        BoutonColore chargerPartieButton = new BoutonColore("Charger une Partie");
 
         // Gestionnaire d'événements des boutons
         nouvellePartieButton.addActionListener(new ActionListener() {
@@ -62,13 +62,7 @@ public class EcranAccueil extends JPanel {
 
         // Centrez les boutons horizontalement + styliser
         nouvellePartieButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        nouvellePartieButton.setForeground(texte);
-        nouvellePartieButton.setBackground(maCouleur);
-        nouvellePartieButton.setFocusPainted(false);
         chargerPartieButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        chargerPartieButton.setForeground(texte);
-        chargerPartieButton.setBackground(maCouleur);
-        chargerPartieButton.setFocusPainted(false);
 
         // Ajout d'un espace fixe entre les boutons
         panelBoutons.setOpaque(false);

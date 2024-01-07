@@ -4,14 +4,15 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JButton;
 import java.awt.*;
-
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import controlleur.TamagotchiControleur;
+//import javafx.scene.paint.Color;
 import util.EcranActualisable;
 
 public class EcranJeu extends JPanel implements EcranActualisable {
@@ -19,8 +20,10 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     private TamagotchiControleur controleur;
     private PanelProgressBar panBarres;
     private PanelInfos panInfos;
-    protected JButton btnDeveloppeur, btnQuitter, btnManger, btnLaver, btnJouer,
-            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague, boutonDroite, boutonHaut, boutonBas;
+    protected BoutonColore btnDeveloppeur, btnQuitter, btnManger, btnLaver, btnJouer,
+            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague;
+    protected JButton boutonGauche, boutonDroite;
+
     private PanelImgTama panTama;
 
     // Définition d'une couleur en hexadécimal
@@ -68,20 +71,20 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     protected void creerPanelComposants() {
 
         // Boutons
-        btnDeveloppeur = new JButton("Mode Développeur");
-        btnQuitter = new JButton("Quitter");
+        btnDeveloppeur = new BoutonColore("Mode Développeur");
+        btnQuitter = new BoutonColore("Quitter");
 
         // Actions
-        btnManger = new JButton("Manger");
-        btnLaver = new JButton("Laver");
-        btnDormir = new JButton("Dormir");
-        btnJouer = new JButton("Jouer");
+        btnManger = new BoutonColore("Manger");
+        btnLaver = new BoutonColore("Laver");
+        btnDormir = new BoutonColore("Dormir");
+        btnJouer = new BoutonColore("Jouer");
 
         // Boutons du robot
-        btnRecycler = new JButton("Recycler");
-        btnRecharger = new JButton("Recharger");
-        btnMaj = new JButton("Mise à jour");
-        btnBlague = new JButton("Blague");
+        btnRecycler = new BoutonColore("Recycler");
+        btnRecharger = new BoutonColore("Recharger");
+        btnMaj = new BoutonColore("Mise à jour");
+        btnBlague = new BoutonColore("Blague");
 
         // Créer les boutons triangles de navigation intersalles
         boutonDroite = new BoutonTriangle(BoutonTriangle.Direction.DROITE);
@@ -143,13 +146,13 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         });
 
         // Liste de mes boutons Actions
-        List<JButton> boutonsActions = new ArrayList<JButton>();
+        List<BoutonColore> boutonsActions = new ArrayList<BoutonColore>();
         boutonsActions.add(btnManger);
         boutonsActions.add(btnDormir);
         boutonsActions.add(btnJouer);
         boutonsActions.add(btnLaver);
 
-        for (JButton bouton : boutonsActions) {
+        for (BoutonColore bouton : boutonsActions) {
             bouton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

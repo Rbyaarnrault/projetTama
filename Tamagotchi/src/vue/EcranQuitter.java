@@ -1,7 +1,6 @@
 package vue;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -12,8 +11,8 @@ import controlleur.TamagotchiControleur;
 public class EcranQuitter extends JPanel {
     private TamagotchiControleur controleur;
 
-    private JButton btnSave;
-    private JButton btnAnnuler;
+    private BoutonColore btnSave;
+    private BoutonColore btnAnnuler;
 
     private java.awt.Image img;
 
@@ -27,10 +26,10 @@ public class EcranQuitter extends JPanel {
 
     private void creerComposants() {
         // Bouton de Sauvegarde
-        btnSave = new JButton("Sauvegarder et quitter");
+        btnSave = new BoutonColore("Sauvegarder et quitter");
 
         // Bouton de retour
-        btnAnnuler = new JButton("Annuler");
+        btnAnnuler = new BoutonColore("Annuler");
 
         // Initialisation des écouteurs
         btnSave.addActionListener(new ActionListener() {

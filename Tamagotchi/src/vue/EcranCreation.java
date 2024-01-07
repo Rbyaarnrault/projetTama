@@ -10,7 +10,7 @@ import controlleur.TamagotchiControleur;
 
 public class EcranCreation extends JPanel {
 
-    private JButton boutonEsp1, boutonEsp2, boutonEsp3, boutonEsp4;
+    private BoutonColore boutonEsp1, boutonEsp2, boutonEsp3, boutonEsp4;
     private int especeSelectionnee;
     private Image img;
 
@@ -56,9 +56,9 @@ public class EcranCreation extends JPanel {
         // ----- boutons -----
         JPanel boutonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         boutonsPanel.setOpaque(false);
-        JButton effacerButton = new JButton("Effacer");
-        JButton validerButton = new JButton("Valider");
-        JButton retourMenButton = new JButton("Retour");
+        BoutonColore effacerButton = new BoutonColore("Effacer");
+        BoutonColore validerButton = new BoutonColore("Valider");
+        BoutonColore retourMenButton = new BoutonColore("Retour");
         boutonsPanel.add(effacerButton);
         boutonsPanel.add(validerButton);
         boutonsPanel.add(retourMenButton);
@@ -125,8 +125,8 @@ public class EcranCreation extends JPanel {
         return pan;
     }
 
-    private JButton creerBouton(String texte) {
-        JButton bouton = new JButton(texte);
+    private BoutonColore creerBouton(String texte) {
+        BoutonColore bouton = new BoutonColore(texte);
         bouton.setPreferredSize(new Dimension(120, 150)); // Ajustez la taille selon vos besoins
         bouton.setBackground(maCouleur);
         bouton.setFont(new Font("Segoe UI", Font.PLAIN, 16));

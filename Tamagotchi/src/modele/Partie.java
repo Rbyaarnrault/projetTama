@@ -20,6 +20,7 @@ public class Partie implements Serializable {
     private String nomFichier;
     private ArrayList<Salle> listeSalles;
     private Salle salleActuelle;
+    private int vitesseTimerDecrement;
 
     public Partie(Tamagotchi tamagotchi) {
         this.tamagotchi = tamagotchi;
@@ -104,6 +105,14 @@ public class Partie implements Serializable {
 
     public Salle getSalleActuelle() {
         return salleActuelle;
+    }
+
+    public int getVitesseTimerDecrement() {
+        return vitesseTimerDecrement;
+    }
+
+    public void setVitesseTimerDecrement(int t) {
+        vitesseTimerDecrement = t;
     }
 
     public void setSalleActuelle(String s) {
