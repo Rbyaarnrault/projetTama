@@ -12,8 +12,8 @@ public class EcranDeveloppeur extends JPanel {
     public EcranDeveloppeur(int valeurParDefaut, ActionListener validerListener) {
         this.setLayout(new BorderLayout());
 
-        sliderTimer = new JSlider(1, 10, valeurParDefaut); // Ajoutez la valeur par défaut
-        sliderTimer.setMajorTickSpacing(1);
+        sliderTimer = new JSlider(1, 100, valeurParDefaut); // Ajoutez la valeur par défaut
+        sliderTimer.setMajorTickSpacing(10);
         sliderTimer.setPaintTicks(true);
         sliderTimer.setPaintLabels(true);
 
