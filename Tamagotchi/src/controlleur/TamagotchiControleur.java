@@ -29,7 +29,6 @@ public class TamagotchiControleur {
     private EcranDeveloppeur panDev;
     private Partie partie;
     private Timer timerActualisation, timerDecrementation, timerMeteo;
-    private int vitesseTimerDecr = 1; // Valeur par défault si non modifiée
     private List<EcranActualisable> ecrans;
     private String panActif;
 
@@ -46,17 +45,6 @@ public class TamagotchiControleur {
         ecrans.add(panRiviere);
         ecrans.add(panTente);
 
-        panDev = new EcranDeveloppeur(vitesseTimerDecr, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Récupération de la vitesse du timer depuis l'écran ModeDéveloppeur, par
-                // défault sinon
-                vitesseTimerDecr = panDev.getVitesseTimer();
-
-                changerEcran(getPanelActif()); // Rappelle le dernier écran actif
-            }
-        });
-
         changerEcran("accueil"); // Initialisation du panel d'accueil
         fenetre.afficher();
     }
@@ -65,7 +53,24 @@ public class TamagotchiControleur {
         // Logique pour créer une nouvelle partie
         Tamagotchi tama = choisirTamagotchi(n, t);
         partie = new Partie(tama);
-        System.out.println("Chargement de l'image : " + partie.getTamagotchi().getImage());
+
+        // Gestion de l'EcranDeveloppeur qui doit forcement etre crée quand la partie !=
+        // null pour sauvegarder la valeur du curseur dans la sauvegarde (attribut de
+        // partie)
+        int tmpVitesse = 1;
+        if (partie != null) {
+            partie.getVitesseTimerDecrement();
+        }
+        panDev = new EcranDeveloppeur(tmpVitesse, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Récupération de la vitesse du timer depuis l'écran ModeDéveloppeur, par
+                // défault sinon
+                partie.setVitesseTimerDecrement(panDev.getVitesseTimer());
+
+                changerEcran(getPanelActif()); // Rappelle le dernier écran actif
+            }
+        });
 
         changerEcran("foret");
         demarrerTimers(); // Va démarrer tous les timers et l'initialisation de tous les attributs et
@@ -110,7 +115,7 @@ public class TamagotchiControleur {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Logique pour décrémenter les attributs du Tamagotchi
-                partie.getTamagotchi().actualisationDecrementationConstantes(vitesseTimerDecr);
+                partie.getTamagotchi().actualisationDecrementationConstantes(partie.getVitesseTimerDecrement());
             }
         });
 

@@ -7,17 +7,18 @@ import java.awt.event.ActionListener;
 public class EcranDeveloppeur extends JPanel {
 
     private JSlider sliderTimer;
-    private JButton boutonValider;
+    private BoutonColore boutonValider;
 
     public EcranDeveloppeur(int valeurParDefaut, ActionListener validerListener) {
         this.setLayout(new BorderLayout());
 
-        sliderTimer = new JSlider(1, 100, valeurParDefaut); // Ajoutez la valeur par défaut
-        sliderTimer.setMajorTickSpacing(10);
+        sliderTimer = new JSlider(1, 100, valeurParDefaut); // curseur actif à cette valeur
+
+        sliderTimer.setMajorTickSpacing(49);
         sliderTimer.setPaintTicks(true);
         sliderTimer.setPaintLabels(true);
 
-        boutonValider = new JButton("Valider");
+        boutonValider = new BoutonColore("Valider");
         boutonValider.addActionListener(validerListener);
 
         JPanel panelSlider = new JPanel(new BorderLayout());

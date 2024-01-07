@@ -35,7 +35,6 @@ public class Sauvegarde {
                 // Me permet de voir le contenu de partie en debug pour voir si tout est
                 // fonctionnel
                 Partie partie = (Partie) obj;
-                System.out.println("Chargement de l'image : " + partie.getTamagotchi().getImage());
 
                 String cheminImage = (String) ois.readObject();
                 partie.getTamagotchi().setImage(new ImageIcon(cheminImage).getImage());

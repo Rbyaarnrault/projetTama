@@ -21,6 +21,7 @@ public class BoutonTriangle extends JButton {
                 // Gérer l'action du bouton triangle ici, si nécessaire
             }
         });
+
     }
 
     @Override
