@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import controlleur.TamagotchiControleur;
 import util.EcranActualisable;
@@ -24,6 +26,12 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         this.controleur = controleur;
         this.setLayout(null);
 
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         initialiserPanels();
     }
 
@@ -66,8 +74,8 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         btnBlague = new JButton("Blague");
 
         // Créer les boutons triangles de navigation intersalles
-        boutonGauche = new BoutonTriangle(BoutonTriangle.Direction.GAUCHE);
-        boutonDroite = new BoutonTriangle(BoutonTriangle.Direction.DROITE);
+        boutonGauche = new BoutonTriangle(BoutonTriangle.Direction.HAUT);
+        boutonDroite = new BoutonTriangle(BoutonTriangle.Direction.BAS);
 
         // -----Gestion des écouteurs-----
         // Aller au mode développeur

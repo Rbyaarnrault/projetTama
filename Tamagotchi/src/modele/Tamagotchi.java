@@ -78,6 +78,9 @@ public abstract class Tamagotchi implements Serializable {
             // entre 1 et 100 fois plus vite
             double tempsEcouleMillis = dureeEcoulee.toMillis() * vitesseTimerDecr;
 
+            // Methode qui va adapter la strategie selon la météo
+            // checkConditionMeteo();
+
             // 6h = 21600000ms : On veut faire mourir le tama en 6h, 6h = 100%
             // donc 1% = 21600000/100 = 216000
             faim -= ((tempsEcouleMillis / 216000) * strategie.DEC_FAIM);

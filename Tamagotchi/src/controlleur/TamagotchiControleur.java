@@ -90,21 +90,18 @@ public class TamagotchiControleur {
     }
 
     private void demarrerTimers() {
-
-        actualiserEcrans();
-        partie.getMeteo().obtenirNouvelleConditionMeteo();
-        // Actualise les ecrans instantanément puis selon les
-        // timers (évite d'attendre
-        // le timer pour commencer à actualiser)
-
         // Création des timer avec une action à effectuer à chaque intervalle
+
+        // Obtenir une condition météo sans attendre le delai du timer
+        partie.getMeteo().obtenirNouvelleConditionMeteo();
 
         // timer qui va actualiser toutes les secondes les barres d'attributs
         timerActualisation = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 actualiserEcrans(); // Actualise les ecrans toutes les secondes
-                partie.getTamagotchi().calculDureeVie();
+                partie.getTamagotchi().calculDureeVie(); // Recalcule l'attribut vie en fonction de l'évolution des
+                                                         // autres attributs
             }
         });
 
@@ -145,22 +142,15 @@ public class TamagotchiControleur {
     public void sauvergarderPartie() {
         // Logique pour sauvegarder une partie en cours
         partie.sauvergarder();
-        // Arret des timers
-        timerActualisation.stop();
-        timerDecrementation.stop();
-        timerMeteo.stop();
-        JOptionPane.showMessageDialog(new JFrame(), "La sauvegarde a bien été effectuée !");
 
-        // Permet de libérer la mémoire en supprimant l'instance de Partie et éviter des
-        // conflits
-        partie = null;
+        JOptionPane.showMessageDialog(new JFrame(),
+                "La sauvegarde a bien été effectuée ! \n Vous allez revenir à l'accueil");
 
-        panForet = null;
-        panRiviere = null;
-        panFeu = null;
-        panTente = null;
-        // remettre accueil
-        changerEcran("accueil");
+        try {
+            relancerApplication();
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
     }
 
     public void chargerPartie(String nomFichier) {
@@ -264,18 +254,20 @@ public class TamagotchiControleur {
             // Si c'est durant la partie
             if (partie != null) {
 
-                // Si le tama est mort, plus aucune action possible
+                // Si le tama est vivant, changement d'écran possible
                 if (partie.getTamagotchi().estMort() == false) {
                     fenetre.actualiser(pan);
+                    actualiserEcrans();
 
-                } else {
+                } else { // Si le tama est mort, plus aucune action possible
+
                     // Afficher un message informant de la mort et redémarrer l'application
                     int res = JOptionPane.showOptionDialog(new JFrame(),
                             "Votre Tamagotchi est mort. Game Over. \n    L'application va redémarrer",
                             "Game Over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
                             new Object[] { "OK" },
                             "OK");
-                    if (res == JOptionPane.YES_OPTION) {
+                    if ((res == JOptionPane.YES_OPTION) || (res == JOptionPane.CLOSED_OPTION)) {
                         try {
                             relancerApplication();
                         } catch (Exception e) {
@@ -321,7 +313,7 @@ public class TamagotchiControleur {
                     "Game Over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
                     new Object[] { "OK" },
                     "OK");
-            if (choix == JOptionPane.YES_OPTION) {
+            if ((choix == JOptionPane.YES_OPTION) || (choix == JOptionPane.CLOSED_OPTION)) {
                 try {
                     relancerApplication();
                 } catch (Exception e) {
