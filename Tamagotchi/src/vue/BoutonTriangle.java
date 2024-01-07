@@ -9,6 +9,12 @@ public class BoutonTriangle extends JButton {
 
     private Direction direction;
 
+    // Définition d'une couleur en hexadécimal
+    String hexColor2 = "#5E271E"; // marron foncé
+    String hexColor = "#C2794C"; // marron clair
+    Color clair = Color.decode(hexColor);
+    Color fonce = Color.decode(hexColor2);
+
     public BoutonTriangle(Direction direction) {
         this.direction = direction;
         setContentAreaFilled(false);
@@ -21,14 +27,21 @@ public class BoutonTriangle extends JButton {
                 // Gérer l'action du bouton triangle ici, si nécessaire
             }
         });
+
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setColor(getBackground());
+        g2d.setColor(fonce);
         g2d.fillPolygon(createTriangle());
+
+        // Ajout du contour marron clair
+        g2d.setColor(clair);
+        g2d.setStroke(new BasicStroke(6));
+        g2d.drawPolygon(createTriangle());
+
         g2d.dispose();
     }
 

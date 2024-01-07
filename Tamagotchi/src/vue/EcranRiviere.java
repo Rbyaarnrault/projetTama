@@ -29,6 +29,8 @@ public class EcranRiviere extends EcranJeu {
         this.add(btnLaver);
         btnJouer.setBounds(580, 280, 80, 30);
         this.add(btnJouer);
+        boutonBas.setBounds(330, 400, 50, 50);
+        this.add(boutonBas);
     }
 
     @Override

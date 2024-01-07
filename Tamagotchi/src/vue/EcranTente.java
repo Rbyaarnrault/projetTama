@@ -27,6 +27,8 @@ public class EcranTente extends EcranJeu {
         // BTN Actions
         btnDormir.setBounds(580, 255, 80, 30);
         this.add(btnDormir);
+        boutonHaut.setBounds(330, 250, 50, 50);
+        this.add(boutonHaut);
     }
 
     @Override

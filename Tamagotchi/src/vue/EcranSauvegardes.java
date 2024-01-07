@@ -28,13 +28,14 @@ public class EcranSauvegardes extends JPanel {
         // Récupérez la liste des fichiers de sauvegarde dans le répertoire
         File repertoire = new File(repertoireSauvegardes);
         fichiersSauvegarde = repertoire.listFiles();
-
     }
 
     public void initialiserSauvegardes() {
 
         this.setLayout(new BorderLayout());
         Box verticalBox = Box.createVerticalBox();
+
+        JButton retourMenu = new JButton("Retour");
 
         // Parcourez chaque fichier et créez un bouton pour chaque sauvegarde existante
         verticalBox.add(Box.createVerticalStrut(40));
@@ -63,6 +64,15 @@ public class EcranSauvegardes extends JPanel {
         }
 
         verticalBox.add(Box.createVerticalStrut(40));
+        verticalBox.add(retourMenu);
+
+        retourMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controleur.changerEcran("accueil");
+            }
+        });
+
     }
 
     private BoutonSauvegarde creerSauvegardeButton(File fichier) {

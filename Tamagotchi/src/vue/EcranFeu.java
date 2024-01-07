@@ -27,6 +27,10 @@ public class EcranFeu extends EcranJeu {
         // BTN Actions
         btnManger.setBounds(580, 255, 80, 30);
         this.add(btnManger);
+        boutonHaut.setBounds(330, 220, 50, 50);
+        this.add(boutonHaut);
+        boutonDroite.setBounds(440, 320, 50, 50);
+        this.add(boutonDroite);
     }
 
     @Override

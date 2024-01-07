@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import java.awt.*;
 
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -19,8 +20,14 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     private PanelProgressBar panBarres;
     private PanelInfos panInfos;
     protected JButton btnDeveloppeur, btnQuitter, btnManger, btnLaver, btnJouer,
-            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague, boutonGauche, boutonDroite;
+            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague, boutonDroite, boutonHaut, boutonBas;
     private PanelImgTama panTama;
+
+    // Définition d'une couleur en hexadécimal
+    String hexColor = "#C2794C"; // marron clair
+    String hexColor2 = "#5E271E"; // marron foncé
+    Color clair = Color.decode(hexColor);
+    Color fonce = Color.decode(hexColor2);
 
     public EcranJeu(TamagotchiControleur controleur) {
         this.controleur = controleur;
@@ -28,10 +35,13 @@ public class EcranJeu extends JPanel implements EcranActualisable {
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.put("Button.background", clair);
+            UIManager.put("Button.foreground", fonce);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
                 | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
         initialiserPanels();
     }
 
@@ -74,8 +84,10 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         btnBlague = new JButton("Blague");
 
         // Créer les boutons triangles de navigation intersalles
-        boutonGauche = new BoutonTriangle(BoutonTriangle.Direction.HAUT);
-        boutonDroite = new BoutonTriangle(BoutonTriangle.Direction.BAS);
+        boutonDroite = new BoutonTriangle(BoutonTriangle.Direction.DROITE);
+        // Créer les boutons triangles de navigation intersalles
+        boutonHaut = new BoutonTriangle(BoutonTriangle.Direction.HAUT);
+        boutonBas = new BoutonTriangle(BoutonTriangle.Direction.BAS);
 
         // -----Gestion des écouteurs-----
         // Aller au mode développeur
@@ -97,7 +109,7 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         // Lieux
 
         // AJout des listeners sur les boutons triangles (de Direction)
-        boutonGauche.addActionListener(new ActionListener() {
+        boutonHaut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Permet de faire l'action seulement si une salle est accessible à gauche
@@ -119,11 +131,16 @@ public class EcranJeu extends JPanel implements EcranActualisable {
             }
         });
 
-        // Place et ajoute les boutons triangles à votre écran
-        boutonGauche.setBounds(330, 400, 50, 50);
-        boutonDroite.setBounds(410, 400, 50, 50);
-        this.add(boutonGauche);
-        this.add(boutonDroite);
+        boutonBas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Permet de faire l'action seulement si une salle est accessible à droite
+                if (controleur.getPartie().getSalleActuelle().getSalleDroite() != null) {
+                    // Déplacer vers la salle de gauche
+                    controleur.deplacerVersLaDroite();
+                }
+            }
+        });
 
         // Liste de mes boutons Actions
         List<JButton> boutonsActions = new ArrayList<JButton>();

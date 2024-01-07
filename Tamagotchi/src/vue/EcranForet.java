@@ -26,6 +26,10 @@ public class EcranForet extends EcranJeu {
         // BTN Actions
         btnJouer.setBounds(580, 255, 80, 30);
         this.add(btnJouer);
+        boutonHaut.setBounds(330, 280, 50, 50);
+        this.add(boutonHaut);
+        boutonBas.setBounds(330, 400, 50, 50);
+        this.add(boutonBas);
     }
 
     @Override
