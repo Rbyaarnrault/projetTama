@@ -22,7 +22,7 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     private PanelInfos panInfos;
     protected BoutonColore btnDeveloppeur, btnQuitter, btnManger, btnLaver, btnJouer,
             btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague;
-    protected JButton boutonGauche, boutonDroite;
+    protected JButton boutonGauche, boutonDroite, boutonHaut, boutonBas;
 
     private PanelImgTama panTama;
 
