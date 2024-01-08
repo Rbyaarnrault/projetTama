@@ -309,17 +309,6 @@ public class TamagotchiControleur {
     // AJOUTER LES METHODES SPECIFIQUE DU ROBOT
 
     // Robot
-
-    public void recyclerRobot() {
-        // Logique pour la gestion du mode recyclage du robot
-        if (partie.getTamagotchi() instanceof Robot) {
-            ((Robot) partie.getTamagotchi()).recycler();
-        } else {
-            // METTRE UN JOPTION PANE ?
-            System.out.println("Ce type de tamagotchi ne peut pas se recycler.");
-        }
-    }
-
     public void rechargerRobot() {
         // Logique pour la gestion de la recharge du robot
         if (partie.getTamagotchi() instanceof Robot) {
@@ -330,13 +319,13 @@ public class TamagotchiControleur {
         }
     }
 
-    public void majRobot() {
+    public void libererMemoireRobot() {
         // Logique pour la gestion des mises à jour du robot
         if (partie.getTamagotchi() instanceof Robot) {
-            ((Robot) partie.getTamagotchi()).maj();
+            ((Robot) partie.getTamagotchi()).libererMemoire();
         } else {
             // METTRE UN JOPTION PANE ?
-            System.out.println("Ce type de tamagotchi ne peut pas se mettre à jour.");
+            System.out.println("Ce type de tamagotchi ne peut pas libérer de la mémoire.");
         }
     }
 

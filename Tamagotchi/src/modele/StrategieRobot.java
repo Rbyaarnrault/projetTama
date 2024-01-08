@@ -8,18 +8,21 @@ public class StrategieRobot extends StrategieConstantes {
         // Constantes pour les valeurs limites
         MIN_VIE = 0; // Recharge
         MAX_VIE = 100;
-        MIN_HYGIENE = 0; // Surchauffe
-        MAX_HYGIENE = 100;
-        MIN_SOMMEIL = 0;
-        MAX_SOMMEIL = 60; // HUMEUR
+        MIN_BATTERIE = 0;
+        MAX_BATTERIE = 100;
+        MIN_PROCESSEUR = 0; // Surchauffe
+        MAX_PROCESSEUR = 100;
+        MIN_HUMEUR = 0;
+        MAX_HUMEUR = 60; // HUMEUR
 
         // Constantes pour les incrémentation et decrémentations de chaque attribut pour
         // un robot
-        DEC_HYGIENE = 2;
-        INC_HYGIENE = 100;
-        DEC_FAIM = 3;
-        INC_FAIM = 1;
-        DEC_SOMMEIL = 3;
-        INC_SOMMEIL = 40;
+        DEC_VIE = 1; // Pas de INC car usure irreversible
+        DEC_BATTERIE = 1;
+        INC_BATTERIE = 3;
+        DEC_PROCESSEUR = 3;
+        INC_PROCESSEUR = 1;
+        DEC_HUMEUR = 3;
+        INC_HUMEUR = 40;
     }
 }

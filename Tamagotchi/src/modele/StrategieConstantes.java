@@ -16,4 +16,13 @@ public abstract class StrategieConstantes implements Serializable {
     protected int DEC_SOMMEIL, INC_SOMMEIL;
     protected int DEC_LOISIR, INC_LOISIR;
 
+    // Constantes pour le robot
+    protected int MIN_BATTERIE, MAX_BATTERIE;
+    protected int MIN_PROCESSEUR, MAX_PROCESSEUR;
+    protected int MIN_HUMEUR, MAX_HUMEUR;
+    protected int DEC_VIE;
+    protected int DEC_BATTERIE, INC_BATTERIE;
+    protected int DEC_PROCESSEUR, INC_PROCESSEUR;
+    protected int DEC_HUMEUR, INC_HUMEUR;
+
 }

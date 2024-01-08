@@ -5,34 +5,34 @@ import javax.swing.ImageIcon;
 public class Robot extends Tamagotchi {
 
     // Créer nouvelles variables
+    private double batterie, processeur, humeur;
 
     public Robot(String name) {
         super(name);
         // A MODIFIER POUR BONNE IMAGE
         cheminImage = "Tamagotchi/src/ressources/img/Robot.png";
         setImage(new ImageIcon(cheminImage).getImage());
+
+        strategie = new StrategieRobot();
+        this.batterie = strategie.MAX_BATTERIE;
+        this.processeur = strategie.MAX_PROCESSEUR;
+        this.humeur = strategie.MAX_HUMEUR;
     }
 
     // -----Etat Tamagotchi-----
 
     public void recharger() {
-        // Incrémentation de l'attribut faim par la constante INC_
-        // faim = incrementerValeur(faim, strategie.getInc_Faim(),
-        // strategie.getMax_Faim());
+        batterie += strategie.INC_BATTERIE;
+        batterie = Math.min(batterie, strategie.MAX_BATTERIE); // Permet de ne pas dépasse la borne max
     }
 
-    public void recycler() {
-        // Incrémentation de l'attribut sommeil par la constante INC_SOMMEIL
-        // sommeil = incrementerValeur(sommeil, strategie.getInc_Sommeil(),
-        // strategie.getMax_Sommeil());
-        // return sommeil;
+    public void libererMemoire() {
+        processeur -= strategie.DEC_PROCESSEUR;
+        processeur = Math.min(processeur, strategie.MAX_PROCESSEUR);
     }
 
-    public void maj() {
-        // Incrémentation de l'attribut hygiene par la constante INC_HYGIENE
-        // hygiene = incrementerValeur(hygiene, strategie.getInc_Hygiene(),
-        // strategie.getMax_Hygiene());
-        // return hygiene;
+    public void userVie() {
+        vie -= strategie.DEC_VIE;
     }
 
     public void blaguer() {
@@ -44,24 +44,14 @@ public class Robot extends Tamagotchi {
     }
 
     // -----Getters----
+    public int getBatterie() {
+        return (int) batterie;
+    }
 
-    /*
-     * public int getMaj() {
-     * // return hygiene;
-     * }
-     * 
-     * public int getRecharge() {
-     * // return faim;
-     * }
-     * 
-     * public int getRecycler() {
-     * // return sommeil;
-     * }
-     * 
-     * public int getBlague() {
-     * // return loisir;
-     * }
-     */
+    public int getProcesseur() {
+        return (int) processeur;
+    }
+
     // Créer des setters différents ou reprendre ceux de Tamagotchi.java ?
 
     @Override

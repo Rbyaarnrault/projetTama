@@ -14,7 +14,7 @@ public abstract class Tamagotchi implements Serializable {
     // Atributs
     protected String nom;
     protected StrategieConstantes strategie; // Instancié dans les sous classes
-    protected double vie, hygiene, faim, sommeil, loisir;
+    protected double vie, hygiene, faim, sommeil, loisir, batterie, processeur, humeur;
     protected Boolean estMort;
     protected transient Image imageTamagotchi;
     protected String cheminImage;

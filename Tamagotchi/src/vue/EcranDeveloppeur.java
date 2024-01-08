@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 public class EcranDeveloppeur extends JPanel {
 
     private JSlider sliderTimer;
-    private BoutonColore boutonValider;
 
     public EcranDeveloppeur(TamagotchiControleur contr) {
         this.setLayout(new BorderLayout());
@@ -25,6 +24,7 @@ public class EcranDeveloppeur extends JPanel {
         if (contr.getPartie() != null) {
             sliderTimer.setValue(contr.getPartie().getVitesseTimerDecrement());
         }
+        BoutonColore boutonValider;
         boutonValider = new BoutonColore("Valider");
         boutonValider.addActionListener(new ActionListener() {
             @Override

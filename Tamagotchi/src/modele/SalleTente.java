@@ -15,6 +15,8 @@ public class SalleTente extends Salle {
         List<String> actions = new ArrayList<>();
         actions.add("Dormir");
         actions.add("Mourir");
+        actions.add("Blaguer");
+        actions.add("Recharger");
         return actions;
     }
 
@@ -29,6 +31,13 @@ public class SalleTente extends Salle {
             case "Mourir":
                 tamagotchi.mourir();
                 return "Le Tamagotchi est mort dans la tente.";
+            case "Blaguer":
+                // (Tamagotchi.Robot) tamagotchi.blaguer();
+                return "Le Tamagotchi est mort dans la tente.";
+            case "Recharger":
+                // (Robot)tamagotchi.recharger();
+                return "Le Tamagotchi est mort dans la tente.";
+
             default:
                 return "Action impossible ici/inconnue.";
         }
