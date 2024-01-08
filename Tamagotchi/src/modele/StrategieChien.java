@@ -20,13 +20,13 @@ public class StrategieChien extends StrategieConstantes {
 
         // Constantes pour les incrémentation et decrémentations de chaque attribut pour
         // un chien
-        DEC_HYGIENE = 2;
+        DEC_HYGIENE = 4;
         INC_HYGIENE = 100;
-        DEC_FAIM = 3;
+        DEC_FAIM = 4;
         INC_FAIM = 30;
-        DEC_SOMMEIL = 1;
+        DEC_SOMMEIL = 3;
         INC_SOMMEIL = 60;
-        DEC_LOISIR = 2;
+        DEC_LOISIR = 3;
         INC_LOISIR = 50;
 
     }

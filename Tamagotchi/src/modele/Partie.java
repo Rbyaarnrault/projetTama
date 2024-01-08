@@ -26,6 +26,7 @@ public class Partie implements Serializable {
         this.tamagotchi = tamagotchi;
         this.meteo = new Meteo();
         sauvegarde = new Sauvegarde();
+        vitesseTimerDecrement = 1;
 
         creerSalles();
         setSalleActuelle("foret"); // On commence toujours une nouvelle Partie dans la foret

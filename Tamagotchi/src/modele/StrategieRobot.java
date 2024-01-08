@@ -6,26 +6,20 @@ public class StrategieRobot extends StrategieConstantes {
     public StrategieRobot() {
         // Initialisation des constantes spécifiques au robot
         // Constantes pour les valeurs limites
-        MIN_VIE = 0;
-        MAX_VIE = 300;
-        MIN_HYGIENE = 0;
-        MAX_HYGIENE = 200;
-        MIN_FAIM = 0;
-        MAX_FAIM = 200; // REMPLACER PAR UN AUTRE NOM ???
+        MIN_VIE = 0; // Recharge
+        MAX_VIE = 100;
+        MIN_HYGIENE = 0; // Surchauffe
+        MAX_HYGIENE = 100;
         MIN_SOMMEIL = 0;
-        MAX_SOMMEIL = 60; // VEILLE ?
-        MIN_LOISIR = 0;
-        MAX_LOISIR = 40; // ENLEVER CETTE CONSTANTE ?? FAIRE DE SON HUMEUR UNE EXAGERATION ??
+        MAX_SOMMEIL = 60; // HUMEUR
 
         // Constantes pour les incrémentation et decrémentations de chaque attribut pour
         // un robot
-        DEC_HYGIENE = 1;
-        INC_HYGIENE = 50;
+        DEC_HYGIENE = 2;
+        INC_HYGIENE = 100;
         DEC_FAIM = 3;
-        INC_FAIM = 25;
-        DEC_SOMMEIL = 1;
+        INC_FAIM = 1;
+        DEC_SOMMEIL = 3;
         INC_SOMMEIL = 40;
-        DEC_LOISIR = 2;
-        INC_LOISIR = 40;
     }
 }

@@ -88,13 +88,17 @@ public class PanelInfos extends JPanel {
     }
 
     public void actualiserInfos(Partie partie) {
-        // Met les barres aux valeurs des attributs du tamagotchi
-        setLabelNom(partie.getTamagotchi().getNom());
-        setLabelDuree(actualiserDuree(partie.getTamagotchi().getDureeVie()));
+        // Met les infos aux valeurs des attributs du tamagotchi
+        // Essai d'optimisation pour économiser du calcul
+        if (nom.getText() == "") {
+            setLabelNom(partie.getTamagotchi().getNom());
+        }
+        setLabelDuree(actualiserDuree((int) partie.getTamagotchi().getDureeVie()));
         setLabelPhysique("?"); // A DEFINIR DANS TAMA
         setLabelMoral("?");
         setLabelMeteo(partie.getMeteo().getConditionActuelle());
-        this.revalidate();
+        this.validate();
+        this.repaint();
     }
 
     public String actualiserDuree(long durationInSeconds) {
@@ -123,5 +127,9 @@ public class PanelInfos extends JPanel {
 
     public void setLabelMeteo(String s) {
         meteo.setText(s);
+    }
+
+    public String getLabelNom() {
+        return nom.getText();
     }
 }

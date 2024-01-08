@@ -2,8 +2,6 @@ package vue;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class BoutonTriangle extends JButton {
 
@@ -20,14 +18,6 @@ public class BoutonTriangle extends JButton {
         setContentAreaFilled(false);
         setFocusPainted(false);
         setBorderPainted(false);
-
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Gérer l'action du bouton triangle ici, si nécessaire
-            }
-        });
-
     }
 
     @Override

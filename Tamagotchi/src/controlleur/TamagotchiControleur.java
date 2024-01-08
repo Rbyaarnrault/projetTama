@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import modele.Chat;
 import modele.Chien;
@@ -45,6 +46,8 @@ public class TamagotchiControleur {
         ecrans.add(panRiviere);
         ecrans.add(panTente);
 
+        panDev = new EcranDeveloppeur(this);
+
         changerEcran("accueil"); // Initialisation du panel d'accueil
         fenetre.afficher();
     }
@@ -53,24 +56,6 @@ public class TamagotchiControleur {
         // Logique pour créer une nouvelle partie
         Tamagotchi tama = choisirTamagotchi(n, t);
         partie = new Partie(tama);
-
-        // Gestion de l'EcranDeveloppeur qui doit forcement etre crée quand la partie !=
-        // null pour sauvegarder la valeur du curseur dans la sauvegarde (attribut de
-        // partie)
-        int tmpVitesse = 1;
-        if (partie != null) {
-            partie.getVitesseTimerDecrement();
-        }
-        panDev = new EcranDeveloppeur(tmpVitesse, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Récupération de la vitesse du timer depuis l'écran ModeDéveloppeur, par
-                // défault sinon
-                partie.setVitesseTimerDecrement(panDev.getVitesseTimer());
-
-                changerEcran(getPanelActif()); // Rappelle le dernier écran actif
-            }
-        });
 
         changerEcran("foret");
         demarrerTimers(); // Va démarrer tous les timers et l'initialisation de tous les attributs et
@@ -100,6 +85,14 @@ public class TamagotchiControleur {
         // Obtenir une condition météo sans attendre le delai du timer
         partie.getMeteo().obtenirNouvelleConditionMeteo();
 
+        // timer qui va actualiser les attributs du tamagotchi
+        timerDecrementation = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Logique pour décrémenter les attributs du Tamagotchi
+                partie.getTamagotchi().actualisationDecrementationConstantes(partie.getVitesseTimerDecrement());
+            }
+        });
         // timer qui va actualiser toutes les secondes les barres d'attributs
         timerActualisation = new Timer(1000, new ActionListener() {
             @Override
@@ -107,15 +100,7 @@ public class TamagotchiControleur {
                 actualiserEcrans(); // Actualise les ecrans toutes les secondes
                 partie.getTamagotchi().calculDureeVie(); // Recalcule l'attribut vie en fonction de l'évolution des
                                                          // autres attributs
-            }
-        });
 
-        // timer qui va actualiser les attributs du tamagotchi
-        timerDecrementation = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Logique pour décrémenter les attributs du Tamagotchi
-                partie.getTamagotchi().actualisationDecrementationConstantes(partie.getVitesseTimerDecrement());
             }
         });
 
@@ -128,9 +113,10 @@ public class TamagotchiControleur {
             }
         });
 
-        // Démarrez les timers
-        timerActualisation.start();
+        // Démarrez les timers dont les 2 derniers avec un léger décalage pour éviter
+        // les conflits
         timerDecrementation.start();
+        timerActualisation.start();
         timerMeteo.start();
     }
 
@@ -165,20 +151,13 @@ public class TamagotchiControleur {
         if (partie != null) {
             System.out.println("Sauvegarde " + nomFichier + " chargée !");
 
-            // Réinstanciation des Ecrans au cas où l'appli n'aurait pas été fermée (le
-            // controleur conserverait donc son instance)
-            panForet = new EcranForet(this);
-            panRiviere = new EcranRiviere(this);
-            panFeu = new EcranFeu(this);
-            panTente = new EcranTente(this);
-            ecrans = new ArrayList<>();
-            ecrans.add(panFeu); // Ces 4 écrans serons actualisés fréquemment
-            ecrans.add(panForet);
-            ecrans.add(panRiviere);
-            ecrans.add(panTente);
+            // Récupération de VitesseTimerDecrement
+            panDev.getSlider().setValue(partie.getVitesseTimerDecrement());
 
+            // Arrivée dans la foret comme pour la création d'une nouvelle partie
+            demarrerTimers(); // redémarrage de tous les timers
             changerEcran("foret");
-            demarrerTimers();
+
         }
     }
 
@@ -262,7 +241,6 @@ public class TamagotchiControleur {
                 // Si le tama est vivant, changement d'écran possible
                 if (partie.getTamagotchi().estMort() == false) {
                     fenetre.actualiser(pan);
-                    actualiserEcrans();
 
                 } else { // Si le tama est mort, plus aucune action possible
 

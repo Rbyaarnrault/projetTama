@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import java.awt.*;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -49,7 +50,7 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     }
 
     protected void initialiserPanels() {
-        // Initialisation des barres d'attributs
+        // Initialisation de l'affichage des attributs
 
         panBarres = new PanelProgressBar();
         panInfos = new PanelInfos();
@@ -59,11 +60,10 @@ public class EcranJeu extends JPanel implements EcranActualisable {
 
         this.add(panBarres);
         this.add(panInfos);
-
     }
 
     protected void initialiserPanelTamagotchi() {
-
+        // Panel qui affiche l'image du tamagotchi
         panTama = new PanelImgTama(controleur);
         this.add(panTama);
     }
@@ -140,7 +140,9 @@ public class EcranJeu extends JPanel implements EcranActualisable {
                 // Permet de faire l'action seulement si une salle est accessible à droite
                 if (controleur.getPartie().getSalleActuelle().getSalleDroite() != null) {
                     // Déplacer vers la salle de gauche
-                    controleur.deplacerVersLaDroite();
+                    controleur.deplacerVersLaDroite(); // C'est juste un nom de méthode, ça ne définit pas le
+                                                       // comportement qui ici définit la prochaine parmi une des deux
+                                                       // salles adjacentes
                 }
             }
         });

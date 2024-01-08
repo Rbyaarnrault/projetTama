@@ -7,7 +7,7 @@ public class StrategieChat extends StrategieConstantes {
         // Initialisation des constantes spécifiques au chat
         // Constantes pour les valeurs limites
         MIN_VIE = 0;
-        MAX_VIE = 200;
+        MAX_VIE = 100;
         MIN_HYGIENE = 0;
         MAX_HYGIENE = 100;
         MIN_FAIM = 0;
@@ -23,7 +23,7 @@ public class StrategieChat extends StrategieConstantes {
         INC_HYGIENE = 70;
         DEC_FAIM = 3;
         INC_FAIM = 50;
-        DEC_SOMMEIL = 1;
+        DEC_SOMMEIL = 2;
         INC_SOMMEIL = 70;
         DEC_LOISIR = 2;
         INC_LOISIR = 50;
