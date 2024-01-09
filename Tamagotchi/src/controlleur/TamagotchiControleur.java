@@ -158,6 +158,11 @@ public class TamagotchiControleur {
             // Récupération de VitesseTimerDecrement
             panDev.getSlider().setValue(partie.getVitesseTimerDecrement());
 
+            // Choix et placement des boutons/Actions selon le tama
+            for (EcranActualisable ecran : ecrans) {
+                ecran.initialiserComposants();
+            }
+
             // Arrivée dans la foret comme pour la création d'une nouvelle partie
             demarrerTimers(); // redémarrage de tous les timers
             changerEcran("foret");

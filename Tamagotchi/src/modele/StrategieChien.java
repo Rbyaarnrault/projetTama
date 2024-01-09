@@ -8,7 +8,7 @@ public class StrategieChien extends StrategieConstantes {
         // Initialisation des constantes spécifiques au chien
         // Constantes pour les valeurs limites
         MIN_VIE = 0;
-        MAX_VIE = 100.0;
+        MAX_VIE = 100;
         MIN_HYGIENE = 0;
         MAX_HYGIENE = 100;
         MIN_FAIM = 0;

@@ -13,7 +13,7 @@ public class StrategieRobot extends StrategieConstantes {
         MIN_PROCESSEUR = 0; // Surchauffe
         MAX_PROCESSEUR = 100;
         MIN_HUMEUR = 0;
-        MAX_HUMEUR = 60; // HUMEUR
+        MAX_HUMEUR = 100; // HUMEUR
 
         // Constantes pour les incrémentation et decrémentations de chaque attribut pour
         // un robot

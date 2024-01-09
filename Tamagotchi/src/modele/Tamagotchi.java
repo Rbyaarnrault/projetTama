@@ -18,15 +18,14 @@ public abstract class Tamagotchi implements Serializable {
     protected Boolean estMort;
     protected transient Image imageTamagotchi;
     protected String cheminImage;
-    private Instant debutVie, derniereActualisation;
+    protected Instant debutVie, derniereActualisation;
     protected long dureeVie;
 
     public Tamagotchi(String name) { // Instancie un objet tamagotchi par son nom
         this.nom = name;
         debutVie = Instant.now(); // Fixe l'instant de la création du tamagotchi
         derniereActualisation = debutVie;
-        this.strategie = new StrategieConstantes() {
-        };
+        this.strategie = initialiserStrategie();
 
         this.estMort = false;
         this.dureeVie = 0; // Départ du compteur de durée de vie
@@ -86,9 +85,9 @@ public abstract class Tamagotchi implements Serializable {
             // decrement
             // ici 216000 = 6h
             faim -= ((tempsEcouleMillis / 216000.0) * strategie.DEC_FAIM);
-            sommeil -= ((tempsEcouleMillis / 216000) * strategie.DEC_SOMMEIL);
-            hygiene -= ((tempsEcouleMillis / 216000) * strategie.DEC_HYGIENE);
-            loisir -= ((tempsEcouleMillis / 216000) * strategie.DEC_LOISIR);
+            sommeil -= ((tempsEcouleMillis / 216000.0) * strategie.DEC_SOMMEIL);
+            hygiene -= ((tempsEcouleMillis / 216000.0) * strategie.DEC_HYGIENE);
+            loisir -= ((tempsEcouleMillis / 216000.0) * strategie.DEC_LOISIR);
 
             // Affectation du temps fixé pour situer la dernière actualisation
             derniereActualisation = maintenant;
@@ -159,7 +158,7 @@ public abstract class Tamagotchi implements Serializable {
 
     public int getVie() {
         int tmp;
-        tmp = Math.max((int) strategie.MIN_VIE, (int) vie); // Sert conserver les valeurs au dessus du min (ou égal)
+        tmp = Math.max(strategie.MIN_VIE, (int) vie); // Sert conserver les valeurs au dessus du min (ou égal)
         return tmp;
     }
 
