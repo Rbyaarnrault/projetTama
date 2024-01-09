@@ -16,7 +16,6 @@ public class EcranRiviere extends EcranJeu {
         super(contr);
         this.setLayout(null);
         this.img = new ImageIcon("Tamagotchi/src/ressources/img/imgR1.jpg").getImage();
-        super.initialiserPanels();
     }
 
     protected void placerComposants() {

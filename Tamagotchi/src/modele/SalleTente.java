@@ -17,6 +17,7 @@ public class SalleTente extends Salle {
         actions.add("Mourir");
         actions.add("Blaguer");
         actions.add("Recharger");
+        actions.add("Libérer de la mémoire");
         return actions;
     }
 
@@ -32,11 +33,11 @@ public class SalleTente extends Salle {
                 tamagotchi.mourir();
                 return "Le Tamagotchi est mort dans la tente.";
             case "Blaguer":
-                // (Tamagotchi.Robot) tamagotchi.blaguer();
-                return "Le Tamagotchi est mort dans la tente.";
+                tamagotchi.blaguer();
+                return "Le Tamagotchi fait des blagues dans la tente.";
             case "Recharger":
-                // (Robot)tamagotchi.recharger();
-                return "Le Tamagotchi est mort dans la tente.";
+                tamagotchi.recharger();
+                return "Le Tamagotchi se recharge dans la tente.";
 
             default:
                 return "Action impossible ici/inconnue.";

@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import modele.Tamagotchi;
+import modele.Robot;
 
 import java.awt.*;
 
@@ -13,6 +14,7 @@ import java.awt.*;
 public class PanelProgressBar extends JPanel {
 
     private JProgressBar barreVie, barreNourriture, barreSommeil, barreHygiene, barreLoisir;
+    private JProgressBar barreBatterie, barreProcesseur, barreHumeur;
 
     // Définition d'une couleur en hexadécimal
     String hexColor = "#C2794C"; // marron clair
@@ -20,67 +22,129 @@ public class PanelProgressBar extends JPanel {
     Color maCouleur = Color.decode(hexColor);
     Color texte = Color.decode(hexColor2);
 
-    public PanelProgressBar() {
+    public PanelProgressBar(Tamagotchi tama) {
 
-        JLabel lab1 = new JLabel("Vie");
-        barreVie = new JProgressBar();
+        // tamagotchi n'est pas un robot
+        if (!(tama instanceof Robot)) {
+            JLabel lab1 = new JLabel("Vie");
+            barreVie = new JProgressBar();
 
-        JLabel lab2 = new JLabel("Nourriture");
-        barreNourriture = new JProgressBar();
+            JLabel lab2 = new JLabel("Nourriture");
+            barreNourriture = new JProgressBar();
 
-        JLabel lab3 = new JLabel("Sommeil");
-        barreSommeil = new JProgressBar();
+            JLabel lab3 = new JLabel("Sommeil");
+            barreSommeil = new JProgressBar();
 
-        JLabel lab4 = new JLabel("Hygiène");
-        barreHygiene = new JProgressBar();
+            JLabel lab4 = new JLabel("Hygiène");
+            barreHygiene = new JProgressBar();
 
-        JLabel lab5 = new JLabel("Loisir");
-        barreLoisir = new JProgressBar();
+            JLabel lab5 = new JLabel("Loisir");
+            barreLoisir = new JProgressBar();
 
-        // Afficher le pourcentage des JProgressBar
-        barreVie.setStringPainted(true);
-        barreNourriture.setStringPainted(true);
-        barreSommeil.setStringPainted(true);
-        barreHygiene.setStringPainted(true);
-        barreLoisir.setStringPainted(true);
+            // Afficher le pourcentage des JProgressBar
+            barreVie.setStringPainted(true);
+            barreNourriture.setStringPainted(true);
+            barreSommeil.setStringPainted(true);
+            barreHygiene.setStringPainted(true);
+            barreLoisir.setStringPainted(true);
 
-        // Ajout à l'écran
-        this.add(lab1);
-        lab1.setForeground(texte);
-        this.add(barreVie);
-        barreVie.setForeground(texte);
-        this.add(lab2);
-        lab2.setForeground(texte);
-        this.add(barreNourriture);
-        barreNourriture.setForeground(texte);
-        this.add(lab3);
-        lab3.setForeground(texte);
-        this.add(barreSommeil);
-        barreSommeil.setForeground(texte);
-        this.add(lab4);
-        lab4.setForeground(texte);
-        this.add(barreHygiene);
-        barreHygiene.setForeground(texte);
-        this.add(lab5);
-        lab5.setForeground(texte);
-        this.add(barreLoisir);
-        barreLoisir.setForeground(texte);
+            // Ajout à l'écran
+            this.add(lab1);
+            lab1.setForeground(texte);
+            this.add(barreVie);
+            barreVie.setForeground(texte);
+            this.add(lab2);
+            lab2.setForeground(texte);
+            this.add(barreNourriture);
+            barreNourriture.setForeground(texte);
+            this.add(lab3);
+            lab3.setForeground(texte);
+            this.add(barreSommeil);
+            barreSommeil.setForeground(texte);
+            this.add(lab4);
+            lab4.setForeground(texte);
+            this.add(barreHygiene);
+            barreHygiene.setForeground(texte);
+            this.add(lab5);
+            lab5.setForeground(texte);
+            this.add(barreLoisir);
+            barreLoisir.setForeground(texte);
 
-        // Arrangement en grille (col, lig, hgap, vgap)
-        this.setBackground(maCouleur);
-        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            // Arrangement en grille (col, lig, hgap, vgap)
+            this.setBackground(maCouleur);
+            this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        this.setLayout(new GridLayout(5, 2, 10, 10));
-        this.setBounds(500, 10, 180, 120);
+            this.setLayout(new GridLayout(5, 2, 10, 10));
+            this.setBounds(500, 10, 180, 120);
+
+        } else {
+            // Si c'est un robot
+            JLabel lab1 = new JLabel("Vie");
+            barreVie = new JProgressBar();
+
+            JLabel lab2 = new JLabel("Batterie");
+            barreBatterie = new JProgressBar();
+
+            JLabel lab3 = new JLabel("Processeur");
+            barreProcesseur = new JProgressBar();
+
+            JLabel lab4 = new JLabel("Humeur");
+            barreHumeur = new JProgressBar();
+
+            // Afficher le pourcentage des JProgressBar
+            barreVie.setStringPainted(true);
+            barreBatterie.setStringPainted(true);
+            barreProcesseur.setStringPainted(true);
+            barreHumeur.setStringPainted(true);
+
+            // Ajout à l'écran
+            this.add(lab1);
+            lab1.setForeground(texte);
+            this.add(barreVie);
+            barreVie.setForeground(texte);
+            this.add(lab2);
+            lab2.setForeground(texte);
+            this.add(barreBatterie);
+            barreBatterie.setForeground(texte);
+            this.add(lab3);
+            lab3.setForeground(texte);
+            this.add(barreProcesseur);
+            barreProcesseur.setForeground(texte);
+            this.add(lab4);
+            lab4.setForeground(texte);
+            this.add(barreHumeur);
+            barreHumeur.setForeground(texte);
+
+            // Arrangement en grille (col, lig, hgap, vgap)
+            this.setBackground(maCouleur);
+            this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+            this.setLayout(new GridLayout(5, 2, 10, 10));
+            this.setBounds(500, 10, 180, 120);
+
+        }
     }
 
     public void actualiserBarresSelonConstantes(Tamagotchi tama) {
         // Met les barres aux valeurs des attributs du tamagotchi
+
+        // Commun à tous les tama
         setValueBarreVie(tama.getVie());
-        setValueBarreNourriture(tama.getFaim());
-        setValueBarreSommeil(tama.getSommeil());
-        setValueBarreHygiene(tama.getHygiene());
-        setValueBarreLoisir(tama.getLoisir());
+
+        // SI ce n'est pas un robot
+        if (!(tama instanceof Robot)) {
+
+            setValueBarreNourriture(tama.getFaim());
+            setValueBarreSommeil(tama.getSommeil());
+            setValueBarreHygiene(tama.getHygiene());
+            setValueBarreLoisir(tama.getLoisir());
+
+        } else {
+            // SI c'est un robot
+            setValueBarreBatterie(((Robot) tama).getBatterie());
+            setValueBarreProcesseur(((Robot) tama).getProcesseur());
+            setValueBarreHumeur(((Robot) tama).getHumeur());
+        }
         this.revalidate();
     }
 
@@ -105,6 +169,18 @@ public class PanelProgressBar extends JPanel {
         return barreLoisir;
     }
 
+    public JProgressBar getBarreBatterie() {
+        return barreBatterie;
+    }
+
+    public JProgressBar getBarreProcesseur() {
+        return barreProcesseur;
+    }
+
+    public JProgressBar getBarreHumeur() {
+        return barreHumeur;
+    }
+
     // setters des JprogressBar
 
     public void setValueBarreVie(int i) {
@@ -125,5 +201,17 @@ public class PanelProgressBar extends JPanel {
 
     public void setValueBarreLoisir(int i) {
         barreLoisir.setValue(i);
+    }
+
+    public void setValueBarreBatterie(int i) {
+        barreBatterie.setValue(i);
+    }
+
+    public void setValueBarreProcesseur(int i) {
+        barreProcesseur.setValue(i);
+    }
+
+    public void setValueBarreHumeur(int i) {
+        barreHumeur.setValue(i);
     }
 }

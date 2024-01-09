@@ -7,16 +7,18 @@ import java.awt.Image;
 import java.awt.image.ImageObserver;
 
 import controlleur.TamagotchiControleur;
+import modele.Robot;
 
 public class EcranFeu extends EcranJeu {
 
     private Image img;
+    private TamagotchiControleur contr;
 
     public EcranFeu(TamagotchiControleur contr) {
         super(contr);
+        this.contr = contr;
         this.setLayout(null);
         this.img = new ImageIcon("Tamagotchi/src/ressources/img/imgFe3.jpg").getImage();
-        super.initialiserPanels();
     }
 
     protected void placerComposants() {
@@ -25,8 +27,19 @@ public class EcranFeu extends EcranJeu {
         btnQuitter.setBounds(560, 400, 120, 30);
         this.add(btnQuitter);
         // BTN Actions
-        btnManger.setBounds(580, 255, 80, 30);
-        this.add(btnManger);
+        if (!(contr.getPartie().getTamagotchi() instanceof Robot)) {
+            // Actions pour un tama différent du robot
+            btnManger.setBounds(580, 255, 80, 30);
+            this.add(btnManger);
+
+        } else {
+            // Si robot
+            btnBlague.setBounds(580, 255, 80, 30);
+            this.add(btnBlague);
+            btnLibererMemoire.setBounds(580, 280, 80, 30);
+            this.add(btnLibererMemoire);
+        }
+        // Déplacement
         boutonHaut.setBounds(330, 220, 50, 50);
         this.add(boutonHaut);
         boutonDroite.setBounds(440, 320, 50, 50);

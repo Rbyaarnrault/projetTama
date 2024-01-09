@@ -10,7 +10,6 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import modele.Chat;
 import modele.Chien;
@@ -56,6 +55,11 @@ public class TamagotchiControleur {
         // Logique pour créer une nouvelle partie
         Tamagotchi tama = choisirTamagotchi(n, t);
         partie = new Partie(tama);
+
+        // Choix et placement des boutons/Actions selon le tama
+        for (EcranActualisable ecran : ecrans) {
+            ecran.initialiserComposants();
+        }
 
         changerEcran("foret");
         demarrerTimers(); // Va démarrer tous les timers et l'initialisation de tous les attributs et
@@ -272,7 +276,17 @@ public class TamagotchiControleur {
     // récupérant son nom qui est paramètre de la fonction setSalleActuelle
     public void deplacerVersLaGauche() {
         String s = partie.getSalleActuelle().getSalleGauche().getNomSalle();
-        partie.setSalleActuelle(s);
+        if (!(partie.getTamagotchi() instanceof Robot)) { // SI pas un robot
+            partie.setSalleActuelle(s);
+        } else {
+            if (s.equals("riviere")) { // Le robot ne peut pas aller dans la rivière.
+                JOptionPane.showMessageDialog(new JFrame("Avertissement"),
+                        "Le robot ne peut pas aller dans la rivière.");
+            } else {
+                partie.setSalleActuelle(s);
+            }
+        }
+
         changerEcran(s);
     }
 

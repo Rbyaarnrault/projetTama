@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import java.awt.*;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -22,7 +21,7 @@ public class EcranJeu extends JPanel implements EcranActualisable {
     private PanelProgressBar panBarres;
     private PanelInfos panInfos;
     protected BoutonColore btnDeveloppeur, btnQuitter, btnManger, btnLaver, btnJouer,
-            btnDormir, btnRecycler, btnRecharger, btnMaj, btnBlague;
+            btnDormir, btnRecharger, btnLibererMemoire, btnBlague;
     protected JButton boutonGauche, boutonDroite, boutonHaut, boutonBas;
 
     private PanelImgTama panTama;
@@ -45,14 +44,12 @@ public class EcranJeu extends JPanel implements EcranActualisable {
                 | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
-        initialiserPanels();
     }
 
     protected void initialiserPanels() {
         // Initialisation de l'affichage des attributs
 
-        panBarres = new PanelProgressBar();
+        panBarres = new PanelProgressBar(controleur.getPartie().getTamagotchi());
         panInfos = new PanelInfos();
 
         creerPanelComposants();
@@ -81,10 +78,9 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         btnJouer = new BoutonColore("Jouer");
 
         // Boutons du robot
-        btnRecycler = new BoutonColore("Recycler");
         btnRecharger = new BoutonColore("Recharger");
-        btnMaj = new BoutonColore("Mise à jour");
-        btnBlague = new BoutonColore("Blague");
+        btnLibererMemoire = new BoutonColore("Libérer de la mémoire");
+        btnBlague = new BoutonColore("Blaguer");
 
         // Créer les boutons triangles de navigation intersalles
         boutonDroite = new BoutonTriangle(BoutonTriangle.Direction.DROITE);
@@ -153,6 +149,9 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         boutonsActions.add(btnDormir);
         boutonsActions.add(btnJouer);
         boutonsActions.add(btnLaver);
+        boutonsActions.add(btnRecharger);
+        boutonsActions.add(btnBlague);
+        boutonsActions.add(btnLibererMemoire);
 
         for (BoutonColore bouton : boutonsActions) {
             bouton.addActionListener(new ActionListener() {
@@ -195,6 +194,11 @@ public class EcranJeu extends JPanel implements EcranActualisable {
         panBarres.actualiserBarresSelonConstantes(controleur.getPartie().getTamagotchi());
         initialiserPanelTamagotchi();
         panTama.actualiserImageTama();
+    }
+
+    @Override
+    public void initialiserComposants() {
+        initialiserPanels();
     }
 
 }

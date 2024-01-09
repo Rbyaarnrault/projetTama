@@ -15,6 +15,8 @@ public class SalleForet extends Salle {
         List<String> actions = new ArrayList<>();
         actions.add("Jouer");
         actions.add("Mourir");
+        actions.add("Libérer de la mémoire");
+        actions.add("Blaguer");
         return actions;
     }
 
@@ -29,6 +31,12 @@ public class SalleForet extends Salle {
             case "Mourir":
                 tamagotchi.mourir();
                 return "Le Tamagotchi est mort dans la forêt.";
+            case "Blaguer":
+                tamagotchi.blaguer();
+                return "Le Tamagotchi fait des blagues dans la forêt.";
+            case "Libérer de la mémoire":
+                tamagotchi.libererMemoire();
+                return "Le Tamagotchi libère de la mémoire dans la forêt.";
 
             default:
                 return "Action impossible ici/inconnue.";

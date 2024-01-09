@@ -14,7 +14,7 @@ public abstract class Tamagotchi implements Serializable {
     // Atributs
     protected String nom;
     protected StrategieConstantes strategie; // Instancié dans les sous classes
-    protected double vie, hygiene, faim, sommeil, loisir, batterie, processeur, humeur;
+    protected double vie, hygiene, faim, sommeil, loisir;
     protected Boolean estMort;
     protected transient Image imageTamagotchi;
     protected String cheminImage;
@@ -25,7 +25,8 @@ public abstract class Tamagotchi implements Serializable {
         this.nom = name;
         debutVie = Instant.now(); // Fixe l'instant de la création du tamagotchi
         derniereActualisation = debutVie;
-        this.strategie = initialiserStrategie();
+        this.strategie = new StrategieConstantes() {
+        };
 
         this.estMort = false;
         this.dureeVie = 0; // Départ du compteur de durée de vie
@@ -73,7 +74,6 @@ public abstract class Tamagotchi implements Serializable {
             // Calcul de la décrémentation depuis la dernière actualisation
             Instant maintenant = Instant.now(); // Fixe l'instant ou j'actualise
             Duration dureeEcoulee = Duration.between(derniereActualisation, maintenant);
-            System.out.println(maintenant);
 
             // vitesseTimerDecr permet de faire varier la vitesse d'écoulement du temps
             // entre 1 et 100 fois plus vite
@@ -159,7 +159,7 @@ public abstract class Tamagotchi implements Serializable {
 
     public int getVie() {
         int tmp;
-        tmp = Math.max(strategie.MIN_VIE, (int) vie); // Sert conserver les valeurs au dessus du min (ou égal)
+        tmp = Math.max((int) strategie.MIN_VIE, (int) vie); // Sert conserver les valeurs au dessus du min (ou égal)
         return tmp;
     }
 
@@ -201,5 +201,19 @@ public abstract class Tamagotchi implements Serializable {
 
     public String getCheminImage() {
         return cheminImage;
+    }
+
+    // ---méthodes robot---
+    // Redéfinit dans la sousclasse Robot
+    public void recharger() {
+    }
+
+    public void libererMemoire() {
+    }
+
+    public void userVie() {
+    }
+
+    public void blaguer() {
     }
 }

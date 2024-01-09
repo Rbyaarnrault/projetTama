@@ -6,16 +6,19 @@ import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 
 import controlleur.TamagotchiControleur;
+import modele.Robot;
 
 public class EcranForet extends EcranJeu {
 
     private Image img;
+    private TamagotchiControleur contr;
 
     public EcranForet(TamagotchiControleur contr) {
         super(contr);
+        this.contr = contr;
         this.setLayout(null);
         this.img = new ImageIcon("Tamagotchi/src/ressources/img/imgF1.jpg").getImage();
-        super.initialiserPanels();
+        // super.initialiserPanels();
     }
 
     protected void placerComposants() {
@@ -24,9 +27,19 @@ public class EcranForet extends EcranJeu {
         btnQuitter.setBounds(560, 400, 120, 30);
         this.add(btnQuitter);
         // BTN Actions
-        btnJouer.setBounds(580, 255, 80, 30);
-        this.add(btnJouer);
-        boutonHaut.setBounds(330, 280, 50, 50);
+        if (!(contr.getPartie().getTamagotchi() instanceof Robot)) {
+            // Actions pour un tama différent du robot
+            btnJouer.setBounds(580, 255, 80, 30);
+            this.add(btnJouer);
+            boutonHaut.setBounds(330, 280, 50, 50);
+        } else {
+            // Si robot
+            btnBlague.setBounds(580, 255, 80, 30);
+            this.add(btnBlague);
+            btnLibererMemoire.setBounds(580, 255, 80, 30);
+            this.add(btnLibererMemoire);
+        }
+        // Déplacements
         this.add(boutonHaut);
         boutonBas.setBounds(330, 400, 50, 50);
         this.add(boutonBas);

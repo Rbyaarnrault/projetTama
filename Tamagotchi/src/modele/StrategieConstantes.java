@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public abstract class StrategieConstantes implements Serializable {
     // Constantes pour les valeurs limites maximales
-    protected int MIN_VIE, MAX_VIE;
+    protected double MIN_VIE, MAX_VIE;
     protected int MIN_HYGIENE, MAX_HYGIENE;
     protected int MIN_FAIM, MAX_FAIM;
     protected int MIN_SOMMEIL, MAX_SOMMEIL;
