@@ -4,8 +4,7 @@ Bienvenue dans l'application de RetroEgg Interactive Game Studio!
 Cette application est le fruit du travail de l'équipe RetroEgg Interactive Game Studio, composée de Chloé Défossé et Ryan Barrault. 
 C'est un jeu vidéo du type Tamagotchi Like pour les ordinateurs sous Windows et Linux.
 
-Adoptez et occupez vous d'un animal virtuel trop mignon dans la forêt de Lanta ! 
-De nouvelles fonctionnalités innovantes vont voir le jour régulièrement... Restez connecté !  
+Adoptez et occupez vous d'un animal virtuel trop mignon dans la forêt de Lanta !   
 
 ## Fonctionnalités
 
