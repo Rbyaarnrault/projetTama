@@ -6,6 +6,10 @@ C'est un jeu vidéo du type Tamagotchi Like pour les ordinateurs sous Windows et
 
 Adoptez et occupez vous d'un animal virtuel trop mignon dans la forêt de Lanta !   
 
+![Tamagotchi](tamagotchi.png)
+
+
+
 ## Fonctionnalités
 
 - Créer une partie en choisissant le type d'animal de son Tamagotchi, lui donner un prénom personnalisé.
